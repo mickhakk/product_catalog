@@ -1,0 +1,31 @@
+.header {
+  background-color: #000;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &Wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &LeftSide {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &RightSide {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  &Logo {
+    color: white
+  }
+}
