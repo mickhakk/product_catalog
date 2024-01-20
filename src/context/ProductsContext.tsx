@@ -73,7 +73,8 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     favourites,
     toogleSelectFavorite,
     toogleSelectCart,
-  }), [products, favourites, toogleSelectFavorite, toogleSelectCart]);
+  }), [products, favourites, 
+    toogleSelectFavorite, toogleSelectCart]);
 
   return (
     <ProductsContext.Provider value={value}>
