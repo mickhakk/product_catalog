@@ -1,0 +1,74 @@
+@mixin typographyH1 {
+  font-family: 'MontBold';
+  font-size: 32px;
+  line-height: 41px;
+  letter-spacing: -0.01em;
+
+  @include onTablet {
+    font-size: 48px;
+    line-height: 56px;
+  }
+}
+
+@mixin typographyH2 {
+  font-family: 'MontBold';
+  font-size: 22px;
+  line-height: 31px;
+  
+  @include onTablet {
+    font-size: 32px;
+    line-height: 41px;
+    letter-spacing: -0.01em;
+  }
+}
+
+@mixin typographyH3 {
+  font-family: 'MontBold'; 
+  font-size: 20px;
+  line-height: 26px;
+
+  @include onTablet {
+    font-size: 22px;
+    line-height: 31px;
+  }
+}
+
+@mixin typographyH4 {
+  font-family: 'MontSemiBold';
+  font-size: 16px;
+  line-height: 20px;
+
+  @include onTablet {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
+@mixin typographyUpperCase {
+  font-family: 'MontBold';
+  font-size: 12px;
+  line-height: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@mixin typographyButtons {
+  font-family: 'MontBold';
+  font-size: 12px;
+  line-height: 11px;
+  letter-spacing: 0.04em; 
+}
+
+@mixin typographyBodyText {
+  font-family: 'MontRegular';
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0;
+}
+
+@mixin typographySmallText {
+  font-family: 'MontSemiBold';
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0;
+}
