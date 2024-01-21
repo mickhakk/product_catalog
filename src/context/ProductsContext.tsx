@@ -15,6 +15,7 @@ interface ProductsContextType {
   favourites: Product[],
   toogleSelectFavorite: (product: Product) => void;
   toogleSelectCart: (product: Product) => void;
+  cartProducts: Product[];
 
 }
 const ProductsContext = createContext<ProductsContextType>({
@@ -22,6 +23,7 @@ const ProductsContext = createContext<ProductsContextType>({
   favourites: [],
   toogleSelectFavorite: () => {},
   toogleSelectCart: () => {},
+  cartProducts: [],
 });
 
 export const useContextProvider = () => useContext(ProductsContext);
@@ -47,7 +49,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
       return;
     }
 
-    setCartProducts([...cartProducts, product]);
+    setCartProducts(currentProducts => ([...currentProducts, product]));
   }, [cartProducts]);
 
   const toogleSelectFavorite = useCallback((product: Product) => {
@@ -60,7 +62,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
       return;
     }
 
-    setFavoriets([...favourites, product]);
+    setFavoriets(currentProducts => ([...currentProducts, product]));
   }, [favourites]);
 
   useEffect(() => {
@@ -73,8 +75,9 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     favourites,
     toogleSelectFavorite,
     toogleSelectCart,
-  }), [products, favourites, 
-    toogleSelectFavorite, toogleSelectCart]);
+    cartProducts,
+  }), [products, favourites,
+    toogleSelectFavorite, toogleSelectCart, cartProducts]);
 
   return (
     <ProductsContext.Provider value={value}>
