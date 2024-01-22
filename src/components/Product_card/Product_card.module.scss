@@ -1,0 +1,240 @@
+@import "../../mixins/typography.scss";
+$primary-color: #313237; // gray-primary
+$secondary-color: #89939a; // gray-secondary
+$elements-color: #e2e6e9; // gray-elements
+$icons-placeholders: #b4bdc3; //gray-icons-placeholders
+$selected-button: #27ae60; //green-selected-button
+$gray-white: #fff; // just white
+$card-width: 208px;
+
+@font-face {
+  font-family: "MontBold";
+  src: url("../../../public/fonts/Mont-Bold.otf");
+}
+
+@font-face {
+  font-family: "Mont";
+  src: url("../../../public/fonts/Mont-Regular.otf");
+}
+
+@font-face {
+  font-family: "Mont-SemiBold";
+  src: url("../../../public/fonts/Mont-SemiBold.otf");
+}
+
+button {
+  all: initial;
+}
+
+input {
+  all: initial;
+}
+
+* {
+  margin: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: $card-width;
+  height: 442px;
+  padding: 32px;
+  background-color: $gray-white;
+  border: 1px solid $elements-color;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.18);
+  }
+
+  &__image_wrapper {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: $card-width;
+    height: 196px;
+    margin-bottom: 24px;
+  }
+
+  &__product_image {
+    height: 190px;
+  }
+
+  &__product_name {
+    font-family: "Mont";
+    color: $primary-color;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 8px;
+    line-height: 21px;
+  }
+
+  &__price {
+    font-family: "MontBold";
+    font-size: 22px;
+    color: $primary-color;
+    font-weight: 800;
+
+    @media (min-width: 640px) {
+      font-size: 32px;
+      line-height: 41px;
+      letter-spacing: -0.01em;
+    }
+  }
+
+  &__old_price {
+    color: $secondary-color;
+    text-decoration-line: line-through;
+    text-decoration-thickness: 1px;
+    font-family: "Mont";
+    font-size: 22px;
+    font-weight: 300;
+    margin-left: 8px;
+
+    @media (min-width: 640px) {
+      font-size: 32px;
+      line-height: 41px;
+      letter-spacing: -0.01em;
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  &__price_wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 8px;
+  }
+
+  &__break_line {
+    border: 1px solid $elements-color;
+    width: $card-width;
+    margin-bottom: 8px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: $card-width;
+    height: 76px;
+    margin-bottom: 8px;
+  }
+
+  &__option_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__option {
+    color: $secondary-color;
+    font-family: "Mont";
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  &__option_value {
+    color: $primary-color;
+    font-family: "Mont-SemiBold";
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  &__buttons_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: $card-width;
+  }
+
+  &__button {
+    &_add {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 160px;
+      color: $gray-white;
+      background-color: $primary-color;
+      font-family: "Mont-Semibold";
+      font-weight: 700;
+      transition: border-radius 0.5s ease;
+      
+      cursor: pointer;
+      -moz-user-select: -moz-none;
+      -o-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+
+      &:hover {
+        box-shadow: 0px 3px 13px 0px #17203133;
+        border-radius: 8px;
+      }
+    }
+
+    &_add_done {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $gray-white;
+      height: 40px;
+      width: 160px;
+      color: $selected-button;
+      border: 1px solid $elements-color;
+      font-family: "Mont-Semibold";
+      font-weight: 700;
+      transition: border-radius 0.5s ease;
+      
+      cursor: pointer;
+      -moz-user-select: -moz-none;
+      -o-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+
+      &:hover {
+        box-shadow: 0px 3px 13px 0px #17203133;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  &__checkbox_favorite {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    border: 1px solid $icons-placeholders;
+
+    &:hover {
+      border: 1px solid $primary-color;
+    }
+  }
+
+  &__checkbox {
+    cursor: pointer;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url(../icons/heart-black-boudaries-16x16.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+
+  &__checkbox_selected {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url(../icons/heart-red-16x16.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+}

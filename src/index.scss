@@ -13,4 +13,5 @@
   src: url('../public/fonts/Mont-Regular.otf');
 }
 
-@import './styles//normalize';
+@import './styles/_normalize';
+@import './mixins/typography.scss';
