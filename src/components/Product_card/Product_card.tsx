@@ -1,66 +1,97 @@
+import React, { useState } from 'react';
+import cn from 'classnames';
 import style from './Product_card.module.scss';
-import image from './00.jpg';
+import { Product } from '../../Types/Product';
 
-export const ProductCard = () => (
-  <div className={style.card}>
-    <div className={style.card__image_wrapper}>
-      <img
-        className={style.card__product_image}
-        alt="catalog name"
-        src={image}
-      />
-    </div>
-    <h3
-      className={style.card__product_name}
-    >
-      Apple iPhone 14 Pro 128GB Silver
-      {' '}
-      <br />
-      {' '}
-      (MQ023)
-    </h3>
+interface Props {
+  phone: Product,
+}
 
-    <div className={style.card__price_wrapper}>
-      <p className={style.card__price}>$799</p>
-      <p className={style.card__old_price}>$999</p>
-      {/* Old price not allways exists, it is optional */}
-    </div>
+const ADDED = 'Added';
+const NOT_ADDED = 'Add to cart';
 
-    <div className={style.card__break_line} />
+export const ProductCard: React.FC<Props> = ({ phone }) => {
+  const {
+    image,
+    name,
+    fullPrice,
+    price,
+    screen,
+    capacity,
+    ram,
+  } = phone;
 
-    <div className={style.card__info}>
-      <div className={style.card__option_wrapper}>
-        <p className={style.card__option}>Screen</p>
-        <p className={style.card__option_value}>6.1” OLED</p>
-      </div>
-      <div className={style.card__option_wrapper}>
-        <p className={style.card__option}>Capacity</p>
-        <p className={style.card__option_value}>128 GB</p>
-      </div>
-      <div className={style.card__option_wrapper}>
-        <p className={style.card__option}>RAM</p>
-        <p className={style.card__option_value}>6 GB</p>
-      </div>
-    </div>
+  const hasLowPrice = price && fullPrice;
+  const [isSelected, setIsSelected] = useState(false);
+  const [isDone, setIsDone] = useState(false);
 
-    <div className={style.card__buttons_wrapper}>
-      <button
-        type="button"
-        className={style.card__button_add}
-        // if already in cart add class: style.card__button_add_done
-        // change text to 'Added'
-      >
-        Add to cart
-        {/* Added */}
-      </button>
-      <label className={style.card__checkbox_favorite}>
-        <input
-          className={style.card__checkbox}
-          // selected: style.card__checkbox_selected
-          type="checkbox"
+  return (
+    <div className={style.card}>
+      <div className={style.card__image_wrapper}>
+        <img
+          className={style.card__product_image}
+          alt="catalog name"
+          src={`product_catalog/${image}`}
         />
-      </label>
-    </div>
+      </div>
+      <h3
+        className={style.card__product_name}
+      >
+        {name}
+      </h3>
 
-  </div>
-);
+      <div className={style.card__price_wrapper}>
+        {hasLowPrice
+          ? (
+            <>
+              <p className={style.card__price}>{price}</p>
+              <p className={style.card__old_price}>{fullPrice}</p>
+            </>
+          )
+          : (
+            <p className={style.card__price}>{fullPrice}</p>
+          )}
+      </div>
+
+      <div className={style.card__break_line} />
+
+      <div className={style.card__info}>
+        <div className={style.card__option_wrapper}>
+          <p className={style.card__option}>Screen</p>
+          <p className={style.card__option_value}>{screen}</p>
+        </div>
+        <div className={style.card__option_wrapper}>
+          <p className={style.card__option}>Capacity</p>
+          <p className={style.card__option_value}>{capacity}</p>
+        </div>
+        <div className={style.card__option_wrapper}>
+          <p className={style.card__option}>RAM</p>
+          <p className={style.card__option_value}>{ram}</p>
+        </div>
+      </div>
+
+      <div className={style.card__buttons_wrapper}>
+        <button
+          type="button"
+          onClick={() => setIsDone(!isDone)}
+          className={cn(style.card__button_add, {
+            [style.card__button_add_done]: isDone,
+          })}
+        >
+          {isDone ? ADDED : NOT_ADDED}
+        </button>
+        <label className={style.card__checkbox_favorite}>
+          <input
+            onChange={() => setIsSelected(!isSelected)}
+            className={cn(style.card__checkbox, {
+              [style.card__checkbox_selected]: isSelected,
+            })}
+            type="checkbox"
+            checked={isSelected}
+          />
+        </label>
+      </div>
+
+    </div>
+  );
+};
