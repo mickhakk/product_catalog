@@ -1,0 +1,94 @@
+@import "./../../../styles";
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+  background-color: $gray-white;
+  height: $header-height-mobile;
+  border-bottom: 1px solid $elements-color;
+
+  @include onDesktop {
+    height: $header-height-desktop;
+  }
+
+  &__left_side {
+    display: flex;
+    gap: 16px;
+
+    @include onDesktop {
+      gap: 24px;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    padding-inline: 16px;
+
+    @include onDesktop {
+      padding-inline: 24px;
+    }
+  }
+
+  &__nav {
+    display: none;
+    flex-grow: 1;
+
+    @include onTablet {
+      display: block;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    width: $header-height-mobile;
+    border-left: 1px solid $elements-color;
+
+    @include hover(background-color, #00000010);
+
+    @include onDesktop {
+      width: $header-height-desktop;
+    }
+
+    &--menu {
+      @include onTablet {
+        display: none;
+      }
+    }
+
+    &--favourites, &--cart {
+      display: none;
+
+      @include onTablet {
+        display: flex;
+      }
+    }
+
+    &--active {
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+
+        display: block;
+        height: 3px;
+        width: 100%;
+        background-color: $primary-color;
+      }
+    }
+  }
+}

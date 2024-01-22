@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import { AppHeader } from './components/Header/appHeader/appHeader';
-import { AppFooter } from './components/Footer/appFooter/appFooter';
+import { Footer, Header } from './components';
+import styles from './App.module.scss';
 
 export const App = () => (
-  <div className="wrap">
+  <div className={styles.app}>
     <header className="header">
-      <AppHeader />
+      <Header />
     </header>
 
     <main className="main">
@@ -13,7 +13,7 @@ export const App = () => (
     </main>
 
     <footer className="footer">
-      <AppFooter />
+      <Footer />
     </footer>
   </div>
 );

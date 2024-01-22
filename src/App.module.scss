@@ -1,0 +1,10 @@
+@import './styles';
+
+.app {
+  padding-top: $header-height-mobile;
+  scroll-behavior: smooth;
+
+  @include onDesktop {
+    padding-top: $header-height-desktop;
+  }
+}

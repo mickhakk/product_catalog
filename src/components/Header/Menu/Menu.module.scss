@@ -1,0 +1,93 @@
+@import './../../../styles';
+
+.menu {
+  position: absolute;
+  top: $header-height-mobile + 1;
+  bottom: 0;
+
+  display: grid;
+  align-content: space-between;
+  justify-items: center;
+  width: 100%;
+  background-color: #fff;
+
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+
+  &--active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  &__nav {
+    padding-top: 24px;
+    @include typographyUpperCase;
+    color: $secondary-color;
+  }
+
+  &__list {
+    display: grid;
+    row-gap: 16px;
+  }
+
+  &__list_item {
+    display: flex;
+    justify-content: center;
+    height: 27px;
+  }
+
+  &__link {
+    position: relative;
+    line-height: 27px;
+
+    &--active {
+      color: $primary-color;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+
+        display: block;
+        height: 2px;
+        width: 100%;
+        background-color: $primary-color;
+      }
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    height: 64px;
+    width: 100%;
+    border-top: 1px solid $elements-color;
+
+    &>:first-child {
+      border-right: 1px solid $elements-color;
+    }
+  }
+
+  &__button {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--active {
+      color: $primary-color;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+
+        display: block;
+        height: 2px;
+        width: 100%;
+        background-color: $primary-color;
+      }
+    }
+  }
+}
