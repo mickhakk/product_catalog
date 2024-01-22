@@ -32,7 +32,10 @@ export const Topbar: React.FC<Props> = (props) => {
             className={styles.topbar__logo}
             onClick={hideMenu}
           >
-            <img src="product_catalog/img/logo.svg" alt="Nice Gadgets logo" />
+            <img
+              src="./img/logo.svg"
+              alt="Nice Gadgets logo"
+            />
           </Link>
 
           <div className={styles.topbar__nav}>
