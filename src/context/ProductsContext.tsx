@@ -7,8 +7,8 @@ import {
   useMemo,
   useState,
 } from 'react';
-import axios from 'axios';
-import { Product } from '../types/Product';
+import { GetParams, Product } from '../types/Product';
+import { getProducts } from '../api/products';
 
 interface ProductsContextType {
   products: Product[],
@@ -31,8 +31,6 @@ export const useContextProvider = () => useContext(ProductsContext);
 type Props = {
   children: React.ReactNode;
 };
-
-const apiURL = 'https://product-catalog-api-r8lb.onrender.com/products/';
 
 export const ProductsContextProvider: FC<Props> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -65,10 +63,17 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     setFavoriets(currentProducts => ([...currentProducts, product]));
   }, [favourites]);
 
+  const defaultValue:GetParams = useMemo(() => ({
+    page: 0,
+    limit: 16,
+    column: 'year',
+    direction: 'desc',
+  }), []);
+
   useEffect(() => {
-    axios.get(apiURL)
-      .then(response => setProducts(response.data));
-  }, []);
+    getProducts(defaultValue)
+      .then(setProducts);
+  }, [defaultValue]);
 
   const value: ProductsContextType = useMemo(() => ({
     products,
