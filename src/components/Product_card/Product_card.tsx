@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import style from './Product_card.module.scss';
-import { Product } from '../../Types/Product';
+import { Product } from '../../types/Product';
 
 interface Props {
   phone: Product,

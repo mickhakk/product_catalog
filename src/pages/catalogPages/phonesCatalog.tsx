@@ -1,4 +1,4 @@
-import { Product } from '../../Types/Product';
+import { Product } from '../../types/Product';
 import { ProductCard } from '../../components/Product_card/Product_card';
 
 const phone: Product = {

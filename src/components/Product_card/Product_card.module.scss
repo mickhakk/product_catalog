@@ -1,25 +1,25 @@
-@import '../../mixins/typography.scss';
-$primary-color: #313237;  // gray-primary
-$secondary-color: #89939A; // gray-secondary
-$elements-color: #E2E6E9; // gray-elements
-$icons-placeholders: #B4BDC3; //gray-icons-placeholders
-$selected-button:#27AE60; //green-selected-button
-$gray-white: #FFF; // just white
+@import "../../mixins/typography.scss";
+$primary-color: #313237; // gray-primary
+$secondary-color: #89939a; // gray-secondary
+$elements-color: #e2e6e9; // gray-elements
+$icons-placeholders: #b4bdc3; //gray-icons-placeholders
+$selected-button: #27ae60; //green-selected-button
+$gray-white: #fff; // just white
 $card-width: 208px;
 
 @font-face {
-  font-family: 'MontBold';
-  src: url('../../../public/fonts/Mont-Bold.otf');
+  font-family: "MontBold";
+  src: url("../../../public/fonts/Mont-Bold.otf");
 }
 
 @font-face {
-  font-family: 'Mont';
-  src: url('../../../public/fonts/Mont-Regular.otf');
+  font-family: "Mont";
+  src: url("../../../public/fonts/Mont-Regular.otf");
 }
 
 @font-face {
-  font-family: 'Mont-SemiBold';
-  src: url('../../../public/fonts/Mont-SemiBold.otf');
+  font-family: "Mont-SemiBold";
+  src: url("../../../public/fonts/Mont-SemiBold.otf");
 }
 
 button {
@@ -64,7 +64,7 @@ input {
   }
 
   &__product_name {
-    font-family: 'Mont';
+    font-family: "Mont";
     color: $primary-color;
     font-weight: 600;
     font-size: 12px;
@@ -73,11 +73,11 @@ input {
   }
 
   &__price {
-    font-family: 'MontBold';
+    font-family: "MontBold";
     font-size: 22px;
     color: $primary-color;
     font-weight: 800;
-    
+
     @media (min-width: 640px) {
       font-size: 32px;
       line-height: 41px;
@@ -89,7 +89,7 @@ input {
     color: $secondary-color;
     text-decoration-line: line-through;
     text-decoration-thickness: 1px;
-    font-family: 'Mont';
+    font-family: "Mont";
     font-size: 22px;
     font-weight: 300;
     margin-left: 8px;
@@ -131,14 +131,14 @@ input {
 
   &__option {
     color: $secondary-color;
-    font-family: 'Mont';
+    font-family: "Mont";
     font-size: 12px;
     font-weight: 700;
   }
 
   &__option_value {
     color: $primary-color;
-    font-family: 'Mont-SemiBold';
+    font-family: "Mont-SemiBold";
     font-size: 12px;
     font-weight: 700;
   }
@@ -150,44 +150,61 @@ input {
     width: $card-width;
   }
 
-  &__button_add {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 160px;
-    color: $gray-white;
-    background-color: $primary-color;
-    font-family: 'Mont-Semibold';
-    font-weight: 700;
-    transition: border-radius 0.5s ease;
+  &__button {
+    &_add {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 160px;
+      color: $gray-white;
+      background-color: $primary-color;
+      font-family: "Mont-Semibold";
+      font-weight: 700;
+      transition: border-radius 0.5s ease;
+      
+      cursor: pointer;
+      -moz-user-select: -moz-none;
+      -o-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
 
-    &:hover {
-      box-shadow: 0px 3px 13px 0px #17203133;
-      border-radius: 8px;
+      &:hover {
+        box-shadow: 0px 3px 13px 0px #17203133;
+        border-radius: 8px;
+      }
     }
-  }
 
-  &__button_add_done {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $gray-white;
-    height: 40px;
-    width: 160px;
-    color: $selected-button;
-    border: 1px solid $elements-color;
-    font-family: 'Mont-Semibold';
-    font-weight: 700;
-    transition: border-radius 0.5s ease;
+    &_add_done {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $gray-white;
+      height: 40px;
+      width: 160px;
+      color: $selected-button;
+      border: 1px solid $elements-color;
+      font-family: "Mont-Semibold";
+      font-weight: 700;
+      transition: border-radius 0.5s ease;
+      
+      cursor: pointer;
+      -moz-user-select: -moz-none;
+      -o-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
 
-    &:hover {
-      box-shadow: 0px 3px 13px 0px #17203133;
-      border-radius: 8px;
+      &:hover {
+        box-shadow: 0px 3px 13px 0px #17203133;
+        border-radius: 8px;
+      }
     }
   }
 
   &__checkbox_favorite {
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -201,6 +218,7 @@ input {
   }
 
   &__checkbox {
+    cursor: pointer;
     display: block;
     width: 16px;
     height: 16px;
@@ -208,9 +226,8 @@ input {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    
   }
-  
+
   &__checkbox_selected {
     display: block;
     width: 16px;
@@ -219,5 +236,5 @@ input {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-  }  
+  }
 }
