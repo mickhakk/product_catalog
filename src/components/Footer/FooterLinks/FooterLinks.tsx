@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import styles from './appFooterLinks.module.scss';
+import styles from './FooterLinks.module.scss';
 
-export const AppFooterLinks = () => (
+export const FooterLinks = () => (
   <ul className={styles.links}>
     <li className={styles.linksItem}>
       <Link
