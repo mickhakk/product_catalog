@@ -18,5 +18,5 @@ export interface GetParams {
   page: number,
   limit: number,
   order: 'year' | 'price',
-  direction: 'asc' | 'desc'
+  direction: 'ASC' | 'DESC'
 }

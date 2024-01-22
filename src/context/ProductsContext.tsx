@@ -64,10 +64,11 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   }, [favourites]);
 
   const defaultValue:GetParams = useMemo(() => ({
-    page: 2,
-    limit: 32,
-    order: 'year',
-    direction: 'desc',
+    type: 'tablets',
+    page: 0,
+    limit: 16,
+    order: 'price',
+    direction: 'DESC',
   }), []);
 
   useEffect(() => {
