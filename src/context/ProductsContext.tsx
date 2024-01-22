@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 import axios from 'axios';
-import { Product } from '../types/Product';
+import { Product } from '../Types/Product';
 
 interface ProductsContextType {
   products: Product[],
