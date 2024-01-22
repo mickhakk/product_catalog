@@ -1,0 +1,13 @@
+@import '../variables.scss/devicesWidth.scss';
+
+@mixin onTablet {
+  @media (min-width: $min-tablet-width) {
+    @content;
+  }
+}
+
+@mixin onDesktop {
+  @media (min-width: $min-desktop-width) {
+    @content;
+  }
+}

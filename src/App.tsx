@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { AppHeader } from './components/Header/appHeader/appHeader';
 import { AppFooter } from './components/Footer/appFooter/appFooter';
+import { Container } from './components/Container/Container';
 
 export const App = () => (
   <div className="wrap">
@@ -9,7 +10,9 @@ export const App = () => (
     </header>
 
     <main className="main">
-      <Outlet />
+      <Container>
+        <Outlet />
+      </Container>
     </main>
 
     <footer className="footer">
