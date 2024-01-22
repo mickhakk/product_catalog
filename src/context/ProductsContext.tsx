@@ -64,9 +64,9 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   }, [favourites]);
 
   const defaultValue:GetParams = useMemo(() => ({
-    page: 0,
-    limit: 16,
-    column: 'year',
+    page: 2,
+    limit: 32,
+    order: 'year',
     direction: 'desc',
   }), []);
 

@@ -17,6 +17,6 @@ export interface GetParams {
   type?: 'phones' | 'tablets' | 'accessories',
   page: number,
   limit: number,
-  column: 'year' | 'price',
+  order: 'year' | 'price',
   direction: 'asc' | 'desc'
 }
