@@ -1,0 +1,23 @@
+@import './../../styles';
+
+.pagination-container {
+  display: flex;
+  list-style-type: none;
+  gap: 10px;
+  box-sizing: border-box;
+
+  .pagination-item {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    border: 1px solid $elements-color;
+    justify-content: center;
+    align-items: center;
+    color: $primary-color;
+    
+  }
+
+   .arrow {
+    fill: $primary-color;
+   }
+}
