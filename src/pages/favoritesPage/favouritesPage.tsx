@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import style from './favoritesPage.module.scss';
 import { useContextProvider } from '../../context/ProductsContext';
 import { ProductCard } from '../../components/Product_card/Product_card';
@@ -8,17 +8,15 @@ export const FavouritesPage = () => {
   const favouritesCount = favourites.length;
   const isPlural = favouritesCount !== 1;
 
-  const navigate = useNavigate();
-
   return (
     <div className={style.favorites}>
       <section className={style.favorites__page_info_wrapper}>
         <div className={style.favorites__current_location_wrapper}>
           <label htmlFor="home_link">
-            <a
+            <Link
               id="home_link"
               className={style.favorites__icon_home}
-              href={`${() => navigate('/')}`}
+              to="/"
               aria-label="go home icon"
             />
           </label>
