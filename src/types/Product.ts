@@ -20,3 +20,8 @@ export interface GetParams {
   order: 'year' | 'price',
   direction: 'ASC' | 'DESC'
 }
+
+export interface DataFromServer {
+  count:number;
+  rows:Product[]
+}

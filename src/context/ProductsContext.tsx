@@ -7,11 +7,11 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { GetParams, Product } from '../types/Product';
+import { DataFromServer, GetParams, Product } from '../types/Product';
 import { getProducts } from '../api/products';
 
 interface ProductsContextType {
-  products: Product[],
+  products: DataFromServer | null,
   favourites: Product[],
   toogleSelectFavorite: (product: Product) => void;
   toogleSelectCart: (product: Product) => void;
@@ -19,7 +19,7 @@ interface ProductsContextType {
 
 }
 const ProductsContext = createContext<ProductsContextType>({
-  products: [],
+  products: { count: 0, rows: [] },
   favourites: [],
   toogleSelectFavorite: () => {},
   toogleSelectCart: () => {},
@@ -33,7 +33,7 @@ type Props = {
 };
 
 export const ProductsContextProvider: FC<Props> = ({ children }) => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<DataFromServer | null>(null);
   const [favourites, setFavoriets] = useState<Product[]>([]);
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
 
@@ -64,7 +64,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   }, [favourites]);
 
   const defaultValue:GetParams = useMemo(() => ({
-    type: 'tablets',
+    type: 'phones',
     page: 0,
     limit: 16,
     order: 'price',
