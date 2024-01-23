@@ -4,7 +4,7 @@ import { Product } from '../../types/Product';
 import { useContextProvider } from '../../context/ProductsContext';
 
 interface Props {
-  phone: Product,
+  product: Product,
 }
 
 const ADDED = 'Added';
@@ -14,7 +14,7 @@ const containsProduct = (products: Product[], productId: number): boolean => {
   return products.some((product) => product.id === productId);
 };
 
-export const ProductCard: React.FC<Props> = ({ phone }) => {
+export const ProductCard: React.FC<Props> = ({ product }) => {
   const {
     id,
     image,
@@ -24,7 +24,7 @@ export const ProductCard: React.FC<Props> = ({ phone }) => {
     screen,
     capacity,
     ram,
-  } = phone;
+  } = product;
 
   const {
     toogleSelectCart,
@@ -42,7 +42,7 @@ export const ProductCard: React.FC<Props> = ({ phone }) => {
       <div className={style.card__image_wrapper}>
         <img
           className={style.card__product_image}
-          alt="catalog name"
+          alt={`${name}`}
           src={`${image}`}
         />
       </div>
@@ -88,7 +88,7 @@ export const ProductCard: React.FC<Props> = ({ phone }) => {
       <div className={style.card__buttons_wrapper}>
         <button
           type="button"
-          onClick={() => toogleSelectCart(phone)}
+          onClick={() => toogleSelectCart(product)}
           className={cn(style.card__button_add, {
             [style.card__button_add_done]: isInCart,
           })}
@@ -98,7 +98,7 @@ export const ProductCard: React.FC<Props> = ({ phone }) => {
 
         <label className={style.card__checkbox_favorite}>
           <input
-            onChange={() => toogleSelectFavorite(phone)}
+            onChange={() => toogleSelectFavorite(product)}
             className={cn(style.card__checkbox, {
               [style.card__checkbox_selected]: isInFavorites,
             })}
