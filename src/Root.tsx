@@ -1,6 +1,6 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { App } from './App';
-import { HomePage } from './pages/homePage';
+import { HomePage } from './pages/homePage/homePage';
 import { PhonesCatalog } from './pages/catalogPages/phonesCatalog';
 import { PageNotFound } from './pages/pageNotFound';
 import { TabletsCatalog } from './pages/catalogPages/tabletsCatalog';

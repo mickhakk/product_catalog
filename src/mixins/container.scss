@@ -4,17 +4,17 @@
 
 @mixin contentPaddingInline() {
   padding-inline: $mobile-inline-padding;
-  max-width: 320px;
+  min-width: 320px;
   margin-inline: auto;
 
   @include onTablet() {
-    max-width: 592px;
+    min-width: 640px;
     margin-inline: auto;
     padding-inline: $tablet-inline-padding;
   }
 
   @include onDesktop() {
-    max-width: 1136px;
+    max-width: 1200px;
     margin-inline: auto;
     padding-inline: $pc-inline-padding;
   }

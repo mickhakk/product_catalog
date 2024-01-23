@@ -1,5 +1,5 @@
-@import '../mixins/container';
-@import '../variables.scss/devicesWidth.scss';
+@import '../../mixins/container.scss';
+@import '../../variables.scss/devicesWidth.scss';
 
 .mainTitle {
   grid-column: span 4;
