@@ -1,4 +1,19 @@
-.links {
-  display: flex;
-  gap: 20px;
+@import './../../../styles';
+
+.footer_links {
+  display: grid;
+  row-gap: 16px;
+
+  @include typographyUpperCase;
+  color: $secondary-color;
+
+  @include onTablet {
+    display: flex;
+    gap: 13.5px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
 }

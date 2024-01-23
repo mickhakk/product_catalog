@@ -1,5 +1,4 @@
-@import '../../styles/variables/colors';
-@import '../../styles/mixins/typography';
+@import '../../styles';
 
 $font-weight-semibold: 600;
 $max-width-large: 512px;
@@ -13,22 +12,18 @@ $margin-top-button: 20px;
 $transition-duration: 0.15s;
 $transition-style: ease-in-out;
 $button-hover-sh-color: #17203166;
-
 .text {
   @include typographyBodyText;
 }
-
 .max-w-screen-xl {
   margin: 0 auto;
   display: flex;
   align-items: center;
   height: 80vh;
-
   @media (min-width: $media-breakpoint-md) {
     padding: 32px;
   }
 }
-
 .max-w-lg {
   max-width: $max-width-large;
   margin: 0 auto;
@@ -37,7 +32,6 @@ $button-hover-sh-color: #17203166;
   flex-direction: column;
   gap: 12px;
 }
-
 @keyframes blink {
   0%,
   80% {
@@ -47,54 +41,58 @@ $button-hover-sh-color: #17203166;
     opacity: 0.3;
   }
 }
-
 .text-primary-600 {
   color: $primary-color;
   @include typographyH1;
   animation: blink 2s linear infinite;
+  margin-block: 48px;
 }
 
 .font-semibold {
   font-weight: $font-weight-semibold;
 }
-
 .text-gray-800 {
   color: $primary-color;
 }
 
 .text-4xl {
   @include typographyH1;
+  margin-block: 60px;
 
   @media (min-width: $min-width-tablet) {
     font-size: $font-size-xl;
   }
 }
-
 .text-gray-600 {
   color: $secondary-color;
   @include typographyH4;
+  margin-block: 20px;
 }
 
 .button {
   display: inline-block;
+  box-sizing: border-box;
   margin-top: $margin-top-button;
+
   font-weight: $font-weight-semibold;
   @include typographyButtons;
-  border: 0px;
+
   transition:
     background-color $transition-duration $transition-style,
     border-color $transition-duration $transition-style;
   cursor: pointer;
 
   &--primary {
-    color: $gray-white;
     height: $primary-button-height;
     width: $primary-button-width;
     background-color: $primary-color;
+    color: $gray-white;
+
     &:hover {
       background-color: $primary-color;
       box-shadow: 0px 3px 13px 0px $button-hover-sh-color;
     }
+
     &:active {
       color: $selected-button;
       background-color: $gray-white;

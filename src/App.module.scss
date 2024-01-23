@@ -1,10 +1,13 @@
 @import './styles';
 
 .app {
-  padding-top: $header-height-mobile;
-  scroll-behavior: smooth;
+  &__main {
+    box-sizing: border-box;
+    padding-top: $header-height-mobile;
+    min-height: 100vh;
 
-  @include onDesktop {
-    padding-top: $header-height-desktop;
+    @include onDesktop {
+      padding-top: $header-height-desktop;
+    }
   }
 }
