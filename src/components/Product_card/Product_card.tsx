@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
 import cn from 'classnames';
 import style from './Product_card.module.scss';
-import { Product } from '../../types/Product';
+import { Product } from '../../Types/Product';
+import { useContextProvider } from '../../context/ProductsContext';
 
 interface Props {
   phone: Product,
@@ -10,8 +10,13 @@ interface Props {
 const ADDED = 'Added';
 const NOT_ADDED = 'Add to cart';
 
+const containsProduct = (products: Product[], productId: number): boolean => {
+  return products.some((product) => product.id === productId);
+};
+
 export const ProductCard: React.FC<Props> = ({ phone }) => {
   const {
+    id,
     image,
     name,
     fullPrice,
@@ -21,9 +26,16 @@ export const ProductCard: React.FC<Props> = ({ phone }) => {
     ram,
   } = phone;
 
+  const {
+    toogleSelectCart,
+    toogleSelectFavorite,
+    favourites,
+    cartProducts,
+  } = useContextProvider();
+
   const hasLowPrice = price && fullPrice;
-  const [isSelected, setIsSelected] = useState(false);
-  const [isDone, setIsDone] = useState(false);
+  const isInFavorites = containsProduct(favourites, id);
+  const isInCart = containsProduct(cartProducts, id);
 
   return (
     <div className={style.card}>
@@ -34,6 +46,7 @@ export const ProductCard: React.FC<Props> = ({ phone }) => {
           src={`product_catalog/${image}`}
         />
       </div>
+
       <h3
         className={style.card__product_name}
       >
@@ -60,10 +73,12 @@ export const ProductCard: React.FC<Props> = ({ phone }) => {
           <p className={style.card__option}>Screen</p>
           <p className={style.card__option_value}>{screen}</p>
         </div>
+
         <div className={style.card__option_wrapper}>
           <p className={style.card__option}>Capacity</p>
           <p className={style.card__option_value}>{capacity}</p>
         </div>
+
         <div className={style.card__option_wrapper}>
           <p className={style.card__option}>RAM</p>
           <p className={style.card__option_value}>{ram}</p>
@@ -73,25 +88,25 @@ export const ProductCard: React.FC<Props> = ({ phone }) => {
       <div className={style.card__buttons_wrapper}>
         <button
           type="button"
-          onClick={() => setIsDone(!isDone)}
+          onClick={() => toogleSelectCart(phone)}
           className={cn(style.card__button_add, {
-            [style.card__button_add_done]: isDone,
+            [style.card__button_add_done]: isInCart,
           })}
         >
-          {isDone ? ADDED : NOT_ADDED}
+          {isInCart ? ADDED : NOT_ADDED}
         </button>
+
         <label className={style.card__checkbox_favorite}>
           <input
-            onChange={() => setIsSelected(!isSelected)}
+            onChange={() => toogleSelectFavorite(phone)}
             className={cn(style.card__checkbox, {
-              [style.card__checkbox_selected]: isSelected,
+              [style.card__checkbox_selected]: isInFavorites,
             })}
             type="checkbox"
-            checked={isSelected}
+            checked={isInFavorites}
           />
         </label>
       </div>
-
     </div>
   );
 };

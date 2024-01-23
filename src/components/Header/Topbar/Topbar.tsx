@@ -4,7 +4,7 @@ import cn from 'classnames';
 import styles from './Topbar.module.scss';
 import { Navigation } from '../Navigation/Navigation';
 import { Icon } from '../../Icon';
-import { IconType } from '../../../types/IconType';
+import { IconType } from '../../../Types/IconType';
 
 function getButtonClass(type: string) {
   return ({ isActive }: { isActive: boolean }) => cn(

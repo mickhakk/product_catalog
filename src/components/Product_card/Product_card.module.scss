@@ -77,12 +77,6 @@ input {
     font-size: 22px;
     color: $primary-color;
     font-weight: 800;
-
-    @media (min-width: 640px) {
-      font-size: 32px;
-      line-height: 41px;
-      letter-spacing: -0.01em;
-    }
   }
 
   &__old_price {
@@ -93,13 +87,6 @@ input {
     font-size: 22px;
     font-weight: 300;
     margin-left: 8px;
-
-    @media (min-width: 640px) {
-      font-size: 32px;
-      line-height: 41px;
-      letter-spacing: -0.01em;
-      text-decoration-thickness: 2px;
-    }
   }
 
   &__price_wrapper {
@@ -222,7 +209,7 @@ input {
     display: block;
     width: 16px;
     height: 16px;
-    background-image: url(../icons/heart-black-boudaries-16x16.svg);
+    background-image: url(../Icon/icons/icon-heart.svg);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -232,7 +219,7 @@ input {
     display: block;
     width: 16px;
     height: 16px;
-    background-image: url(../icons/heart-red-16x16.svg);
+    background-image: url(../Icon/icons/icon-heart-red.svg);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
