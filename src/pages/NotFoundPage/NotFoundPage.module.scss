@@ -12,22 +12,18 @@ $margin-top-button: 20px;
 $transition-duration: 0.15s;
 $transition-style: ease-in-out;
 $button-hover-sh-color: #17203166;
-
 .text {
   @include typographyBodyText;
 }
-
 .max-w-screen-xl {
   margin: 0 auto;
   display: flex;
   align-items: center;
   height: 80vh;
-
   @media (min-width: $media-breakpoint-md) {
     padding: 32px;
   }
 }
-
 .max-w-lg {
   max-width: $max-width-large;
   margin: 0 auto;
@@ -36,7 +32,6 @@ $button-hover-sh-color: #17203166;
   flex-direction: column;
   gap: 12px;
 }
-
 @keyframes blink {
   0%,
   80% {
@@ -46,7 +41,6 @@ $button-hover-sh-color: #17203166;
     opacity: 0.3;
   }
 }
-
 .text-primary-600 {
   color: $primary-color;
   @include typographyH1;
@@ -57,7 +51,6 @@ $button-hover-sh-color: #17203166;
 .font-semibold {
   font-weight: $font-weight-semibold;
 }
-
 .text-gray-800 {
   color: $primary-color;
 }
@@ -70,7 +63,6 @@ $button-hover-sh-color: #17203166;
     font-size: $font-size-xl;
   }
 }
-
 .text-gray-600 {
   color: $secondary-color;
   @include typographyH4;
