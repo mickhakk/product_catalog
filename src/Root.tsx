@@ -4,7 +4,7 @@ import { HomePage } from './pages/homePage';
 import { PhonesCatalog } from './pages/catalogPages/phonesCatalog';
 import { TabletsCatalog } from './pages/catalogPages/tabletsCatalog';
 import { AccessoriesCatalog } from './pages/catalogPages/accessoriesCatalog';
-import { FavouritesPage } from './pages/favouritesPage';
+import { FavouritesPage } from './pages/favoritesPage/favouritesPage';
 import { CartPage } from './pages/cartPage';
 import { ProductsContextProvider } from './context/ProductsContext';
 import { PageNotFound } from './pages/pageNotFound';

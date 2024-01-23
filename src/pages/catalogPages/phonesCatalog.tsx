@@ -1,7 +1,7 @@
 import { Product } from '../../Types/Product';
 import { ProductCard } from '../../components/Product_card/Product_card';
 
-const phone: Product = {
+const product: Product = {
   id: 1,
   category: 'phones',
   itemId: 'apple-iphone-11-pro-max-256gb-silver',
@@ -19,6 +19,6 @@ const phone: Product = {
 export const PhonesCatalog = () => (
   <>
     <h1>Phones Catalog Page</h1>
-    <ProductCard phone={phone} />
+    <ProductCard product={product} />
   </>
 );
