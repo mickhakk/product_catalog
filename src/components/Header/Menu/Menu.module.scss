@@ -4,6 +4,7 @@
   position: absolute;
   top: $header-height-mobile + 1;
   bottom: 0;
+  z-index: 1000;
 
   display: grid;
   align-content: space-between;
