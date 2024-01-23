@@ -12,3 +12,15 @@ export interface Product {
   year: number,
   image: string,
 }
+export interface GetParams {
+  type?: 'phones' | 'tablets' | 'accessories',
+  page: number,
+  limit: number,
+  order: 'year' | 'price',
+  direction: 'ASC' | 'DESC'
+}
+
+export interface DataFromServer {
+  count:number;
+  rows:Product[]
+}

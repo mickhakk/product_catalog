@@ -7,7 +7,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { DataFromServer, GetParams, Product } from '../types/Product';
+import { DataFromServer, GetParams, Product } from '../types/asdasd';
 import { getProducts } from '../api/products';
 
 interface ProductsContextType {
