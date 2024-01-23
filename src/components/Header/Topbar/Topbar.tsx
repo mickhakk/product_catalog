@@ -33,7 +33,7 @@ export const Topbar: React.FC<Props> = (props) => {
             onClick={hideMenu}
           >
             <img
-              src="product_catalog/img/Logo.svg"
+              src="img/Logo.svg"
               alt="Nice Gadgets logo"
             />
           </Link>
