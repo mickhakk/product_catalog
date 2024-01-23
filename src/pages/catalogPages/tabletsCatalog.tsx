@@ -7,6 +7,6 @@ export const TabletsCatalog = () => {
   return (
   <>
     <h1>Tablets Catalog Page</h1>
-    <Pagination totalCount={98} pageSize={16} siblingCount={1} currentPage={1}/>
+    <Pagination totalCount={50} pageSize={16} siblingCount={1} currentPage={1}/>
   </>
 )};
