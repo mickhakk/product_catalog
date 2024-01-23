@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DataFromServer, GetParams } from '../types/asdasd';
+import { DataFromServer, GetParams } from '../types/Product';
 
 const apiURL = 'https://product-catalog-api-r8lb.onrender.com/products/';
 

@@ -19,6 +19,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "include": ["src", "src/types/asdasd.ts"],
+  "include": ["src", "src/types/Product.ts"],
   "plugins": [{ "name": "typescript-plugin-css-modules" }]
 }

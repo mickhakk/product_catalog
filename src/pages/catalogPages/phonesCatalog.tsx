@@ -1,4 +1,4 @@
-import { Product } from '../../types/asdasd';
+import { Product } from '../../types/Product';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 
 const product: Product = {
