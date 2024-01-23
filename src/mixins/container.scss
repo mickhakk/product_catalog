@@ -1,0 +1,22 @@
+@import './mixinLayout';
+@import '../variables.scss/devicesWidth.scss';
+@import '../variables.scss/devicesPadding.scss';
+
+@mixin contentPaddingInline() {
+  padding-inline: $mobile-inline-padding;
+  min-width: 320px;
+  margin-inline: auto;
+
+  @include onTablet() {
+    min-width: 640px;
+    margin-inline: auto;
+    padding-inline: $tablet-inline-padding;
+  }
+
+  @include onDesktop() {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: $pc-inline-padding;
+  }
+}
+

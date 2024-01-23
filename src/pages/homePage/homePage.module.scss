@@ -1,0 +1,64 @@
+@import '../../mixins/container.scss';
+@import '../../variables.scss/devicesWidth.scss';
+
+.mainTitle {
+  grid-column: span 4;
+
+  @include onTablet {
+    grid-column: span 12;
+  }
+
+  @include onDesktop {
+    grid-column: span 24;
+  }
+}
+
+.secondaryTitle {
+  grid-column: span 2;
+
+  @include onTablet {
+    grid-column: span 12;
+  }
+
+  @include onDesktop {
+    grid-column: span 24;
+  }
+}
+
+.carouselPlaceholder {
+  grid-column: span 4;
+  height: 320px;
+  width: 100%px;
+
+  background-color: #1b1b1b;
+  color: white;
+
+  @include onTablet {
+    grid-column: span 12;
+    width: 100%;
+    height: 221px;
+  }
+  @include onDesktop {
+    grid-column: 2/24;
+    height: 221px;
+  }
+}
+
+.productCard {
+  grid-column: span 3;
+  height: 439px;
+  width: 100%;
+
+  background-color: #1b1b1b;
+  color: white;
+
+  @include onTablet {
+    grid-column: span 5;
+    width: 100%;
+    height: 512px;
+  }
+  @include onDesktop {
+    grid-column: span 6;
+    height: 506px;
+  }
+}

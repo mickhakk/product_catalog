@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Footer, Header } from './components';
+import { Container } from './components/Container/Container';
 import styles from './App.module.scss';
 
 export const App = () => (
@@ -7,7 +8,9 @@ export const App = () => (
     <Header />
 
     <main className={styles.app__main}>
-      <Outlet />
+      <Container>
+        <Outlet />
+      </Container>
     </main>
 
     <Footer />
