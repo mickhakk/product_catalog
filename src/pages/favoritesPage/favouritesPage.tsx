@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import style from './favoritesPage.module.scss';
 import { useContextProvider } from '../../context/ProductsContext';
-
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 
 export const FavouritesPage = () => {
