@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconType } from '../../Types/IconType';
+import { IconType } from '../../types/IconType';
 import styles from './Icon.module.scss';
 
 interface Props {

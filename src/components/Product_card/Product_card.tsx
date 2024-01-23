@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import style from './Product_card.module.scss';
-import { Product } from '../../Types/Product';
+import { Product } from '../../types/Product';
 import { useContextProvider } from '../../context/ProductsContext';
 
 interface Props {

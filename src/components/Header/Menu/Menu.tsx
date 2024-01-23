@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import styles from './Menu.module.scss';
 import { Icon } from '../../Icon/Icon';
-import { IconType } from '../../../Types/IconType';
+import { IconType } from '../../../types/IconType';
 
 function getLinkClass({ isActive }: { isActive: boolean }): string {
   return cn(styles.menu__link, { [styles['menu__link--active']]: isActive });

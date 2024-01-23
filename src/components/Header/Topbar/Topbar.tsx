@@ -4,7 +4,7 @@ import cn from 'classnames';
 import styles from './Topbar.module.scss';
 import { Navigation } from '../Navigation/Navigation';
 import { Icon } from '../../Icon';
-import { IconType } from '../../../Types/IconType';
+import { IconType } from '../../../types/IconType';
 
 function getButtonClass(type: string) {
   return ({ isActive }: { isActive: boolean }) => cn(
@@ -33,7 +33,7 @@ export const Topbar: React.FC<Props> = (props) => {
             onClick={hideMenu}
           >
             <img
-              src="./img/Logo.svg"
+              src="product_catalog/img/Logo.svg"
               alt="Nice Gadgets logo"
             />
           </Link>
