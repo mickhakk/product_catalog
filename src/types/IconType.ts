@@ -3,4 +3,5 @@ export enum IconType {
   menu = 'menu',
   close = 'close',
   cart = 'cart',
+  arrowUp = 'arrow_up',
 }

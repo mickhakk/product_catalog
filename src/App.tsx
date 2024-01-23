@@ -4,16 +4,12 @@ import styles from './App.module.scss';
 
 export const App = () => (
   <div className={styles.app}>
-    <header className="header">
-      <Header />
-    </header>
+    <Header />
 
-    <main className="main">
+    <main className={styles.app__main}>
       <Outlet />
     </main>
 
-    <footer className="footer">
-      <Footer />
-    </footer>
+    <Footer />
   </div>
 );

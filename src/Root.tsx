@@ -7,7 +7,7 @@ import { AccessoriesCatalog } from './pages/catalogPages/accessoriesCatalog';
 import { FavouritesPage } from './pages/favouritesPage';
 import { CartPage } from './pages/cartPage';
 import { ProductsContextProvider } from './context/ProductsContext';
-import { PageNotFound } from './pages/pageNotFound';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export const Root = () => (
   <ProductsContextProvider>
@@ -25,9 +25,8 @@ export const Root = () => (
 
           <Route path="favourites" element={<FavouritesPage />} />
           <Route path="cart" element={<CartPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
-
-        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </Router>
   </ProductsContextProvider>

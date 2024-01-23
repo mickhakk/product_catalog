@@ -1,5 +1,4 @@
-@import '../../styles/variables/colors';
-@import '../../styles/mixins/typography';
+@import '../../styles';
 
 $font-weight-semibold: 600;
 $max-width-large: 512px;
@@ -52,6 +51,7 @@ $button-hover-sh-color: #17203166;
   color: $primary-color;
   @include typographyH1;
   animation: blink 2s linear infinite;
+  margin-block: 48px;
 }
 
 .font-semibold {
@@ -64,6 +64,7 @@ $button-hover-sh-color: #17203166;
 
 .text-4xl {
   @include typographyH1;
+  margin-block: 60px;
 
   @media (min-width: $min-width-tablet) {
     font-size: $font-size-xl;
@@ -73,28 +74,33 @@ $button-hover-sh-color: #17203166;
 .text-gray-600 {
   color: $secondary-color;
   @include typographyH4;
+  margin-block: 20px;
 }
 
 .button {
   display: inline-block;
+  box-sizing: border-box;
   margin-top: $margin-top-button;
+
   font-weight: $font-weight-semibold;
   @include typographyButtons;
-  border: 0px;
+
   transition:
     background-color $transition-duration $transition-style,
     border-color $transition-duration $transition-style;
   cursor: pointer;
 
   &--primary {
-    color: $gray-white;
     height: $primary-button-height;
     width: $primary-button-width;
     background-color: $primary-color;
+    color: $gray-white;
+
     &:hover {
       background-color: $primary-color;
       box-shadow: 0px 3px 13px 0px $button-hover-sh-color;
     }
+
     &:active {
       color: $selected-button;
       background-color: $gray-white;

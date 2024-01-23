@@ -1,5 +1,5 @@
 import { Product } from '../../types/Product';
-import { ProductCard } from '../../components/Product_card/Product_card';
+import { ProductCard } from '../../components/ProductCard/ProductCard';
 
 const phone: Product = {
   id: 1,
