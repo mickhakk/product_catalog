@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './pageNotFound.module.scss';
+import styles from './NotFoundPage.module.scss';
 
-export const PageNotFound: React.FC = () => {
+export const NotFoundPage: React.FC = () => {
   return (
     <main>
       <div className={styles['max-w-screen-xl']}>
