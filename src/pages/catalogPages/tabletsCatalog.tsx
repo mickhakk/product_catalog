@@ -5,10 +5,9 @@ export const TabletsCatalog = () => {
     <>
       <h1>Tablets Catalog Page</h1>
       <Pagination
-        totalCount={17}
+        totalCount={100}
         pageSize={16}
         siblingCount={1}
-        currentPage={1}
       />
     </>
   );

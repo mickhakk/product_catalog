@@ -22,10 +22,9 @@ export const PhonesCatalog = () => (
     <h1>Phones Catalog Page</h1>
     <ProductCard phone={phone} />
     <Pagination
-      totalCount={17}
+      totalCount={200}
       pageSize={16}
       siblingCount={1}
-      currentPage={1}
     />
   </>
 );

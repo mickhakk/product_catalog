@@ -1,26 +1,28 @@
 import { FC } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import cn from 'classnames';
-import { usePagination } from '../../CustomHooks/UsePagination';
+import { DOTS, usePagination } from '../../CustomHooks/UsePagination';
 import styles from './pagination.module.scss';
 
 interface Props {
   totalCount: number,
   pageSize: number,
   siblingCount: number,
-  currentPage: number,
 }
 export const Pagination: FC<Props> = (props) => {
+  // const [currentPage, setCurrentPate] = useState(1);
   const { productId } = useParams();
   const location = useLocation();
   const { pathname } = location;
   const partOfUrl = pathname.split('/');
-  const id = Number(productId?.slice(-1));
+  const productIdArray = productId?.split('=');
+  const currentPage = productIdArray?.length
+    ? +productIdArray[productIdArray?.length - 1] : 1;
+
   const {
     totalCount,
     pageSize,
     siblingCount = 1,
-    currentPage,
   } = props;
 
   const paginationRange = usePagination({
@@ -30,24 +32,31 @@ export const Pagination: FC<Props> = (props) => {
     currentPage,
   });
 
-  const pages: number[] = paginationRange.map(page => Number(page));
-  const lastPage = Math.max(...pages);
-  const firstPage = Math.min(...pages);
+  const firstPage = paginationRange[0];
+  const lastPage = paginationRange[paginationRange.length - 1];
 
   const onNext = () => {
-    if (id === lastPage) {
-      return id;
+    if (currentPage === lastPage) {
+      return currentPage;
     }
 
-    return id + 1;
+    if (!currentPage) {
+      return null;
+    }
+
+    return currentPage + 1;
   };
 
   const onPrevious = () => {
-    if (id === firstPage) {
-      return id;
+    if (currentPage === firstPage) {
+      return currentPage;
     }
 
-    return id - 1;
+    if (!currentPage) {
+      return null;
+    }
+
+    return currentPage - 1;
   };
 
   return (
@@ -55,14 +64,14 @@ export const Pagination: FC<Props> = (props) => {
     <ul className={styles['pagination-container']}>
       <li>
         <Link
-          className={cn(styles['pagination-arrow'], {
-            [`${styles['pagianation-arrow--disabled']}`]: id === firstPage,
+          className={cn(styles['pagination-container__arrow'], {
+            [`${styles['pagination-container__arrow--disabled']}`]: currentPage === firstPage,
           })}
           to={`/${partOfUrl[1]}/page=${onPrevious()}`}
         >
           <svg
             className={cn(styles.arrow, {
-              [`${styles['arrow--disabled']}`]: id === firstPage,
+              [`${styles['arrow--disabled']}`]: currentPage === firstPage,
             })}
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -85,28 +94,40 @@ export const Pagination: FC<Props> = (props) => {
           </svg>
         </Link>
       </li>
-      {paginationRange.map(currenNumber => (
-        <li key={currenNumber}>
-          <Link
-            className={cn(styles['pagination-item'], {
-              [`${styles['pagination-item--is-active']}`]: id === currenNumber,
-            })}
-            to={`/${partOfUrl[1]}/page=${currenNumber}`}
-          >
-            {currenNumber}
-          </Link>
-        </li>
-      ))}
+      {paginationRange.map(currenNumber => {
+        if (currenNumber === DOTS) {
+          return (
+            <li
+              className={styles['pagination-container__item--dots']}
+            >
+              &#8230;
+            </li>
+          );
+        }
+
+        return (
+          <li key={currenNumber}>
+            <Link
+              className={cn(styles['pagination-container__item'], {
+                [`${styles['pagination-container__item--is-active']}`]: currentPage === currenNumber,
+              })}
+              to={`/${partOfUrl[1]}/page=${currenNumber}`}
+            >
+              {currenNumber}
+            </Link>
+          </li>
+        );
+      })}
       <li>
         <Link
-          className={cn(styles['pagination-arrow'], {
-            [`${styles['pagianation-arrow--disabled']}`]: id === lastPage,
+          className={cn(styles['pagination-container__arrow'], {
+            [`${styles['pagination-container__arrow--disabled']}`]: currentPage === lastPage,
           })}
           to={`/${partOfUrl[1]}/page=${onNext()}`}
         >
           <svg
             className={cn(styles.arrow, {
-              [`${styles['arrow--disabled']}`]: id === lastPage,
+              [`${styles['arrow--disabled']}`]: currentPage === lastPage,
             })}
             xmlns="http://www.w3.org/2000/svg"
             width="16"
