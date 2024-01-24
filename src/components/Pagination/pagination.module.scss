@@ -6,6 +6,18 @@
   gap: 8px;
   box-sizing: border-box;
 
+  @include onTablet() {
+    li {
+      &:first-child {
+        margin-right: 8px;
+      }
+
+      &:last-child {
+        margin-left: 8px;
+      }
+    }
+  }
+  
   &__item {
     display: flex;
     width: 32px;
@@ -15,6 +27,7 @@
     align-items: center;
     color: $primary-color;
     box-sizing: border-box;
+    @include typographyBodyText;
 
     &--is-active {
       background-color: $primary-color;
@@ -27,9 +40,7 @@
       border: none;
     }
 
-    &:hover {
-      border: 1px solid $primary-color;
-    }
+    @include hover(border, 1px solid $primary-color)
    
     
   }
@@ -42,6 +53,8 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+
+    @include hover(border, 1px solid $primary-color);
 
     &--disabled {
       border: 1px solid $elements-color;
