@@ -39,6 +39,12 @@
     cursor: pointer;
     @include typographySmallText;
     color: $secondary-color;
+
+    @include hover(color, $primary-color);
+
+    &:hover * {
+      border-color: $primary-color;
+    }
   }
 
   &__arrow_button {
@@ -50,5 +56,6 @@
     border: 1px solid $icons-placeholders;
     width: 32px;
     height: 32px;
+    transition: border-color 0.3s;
   }
 }
