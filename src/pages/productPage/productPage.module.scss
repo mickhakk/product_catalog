@@ -1,5 +1,8 @@
-@import '../../mixins/container.scss';
-@import '../../variables.scss/devicesWidth.scss';
+@import './../../styles';
+
+.product_page {
+  @include pageGrid;
+}
 
 .fw {
   grid-column: span 4;

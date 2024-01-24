@@ -7,7 +7,7 @@ import styles from './productPage.module.scss';
 
 export const ProductPage = () => {
   return (
-    <>
+    <div className={styles.product_page}>
       <h1 className={styles.fw}>Product Page</h1>
 
       <Photos />
@@ -19,6 +19,6 @@ export const ProductPage = () => {
       <TechSpecs />
 
       <RecommendedGoods />
-    </>
+    </div>
   );
 };
