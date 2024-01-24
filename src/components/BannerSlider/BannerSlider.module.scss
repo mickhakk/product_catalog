@@ -1,0 +1,15 @@
+@import './../../styles';
+
+.banner_slider {
+  height: 352px;
+  width: 100%;
+  background-color: #1b1b1b;
+  color: white;
+
+  @include onTablet {
+    height: 221px;
+  }
+  @include onDesktop {
+    height: 432px;
+  }
+}
