@@ -1,0 +1,204 @@
+@import 'src/styles/variables/sizes';
+@import 'src/styles/variables/colors';
+@import 'src/styles/mixins/_typography';
+
+.productDetails {
+  display: grid;
+  grid-gap: 24px;
+  max-width: 320px;
+}
+
+.headColors {
+  margin-bottom: -20px;
+}
+
+.id {
+  font-family: 'Mont';
+  position: absolute;
+  font-weight: 600;
+  font-size: 12px;
+  color: $secondary-color;
+  text-align: right;
+  padding-left: 222px;
+
+  
+  @include onTablet {
+    padding-left: 222px;
+  }
+
+  @include onDesktop {
+    padding-left: 455px;
+  }
+}
+
+.headColors,
+.headCapacity {
+  @include typographySmallText;
+  color: $secondary-color;
+  padding-bottom: 8px;
+}
+
+.capacity,
+.colors {
+  border-bottom: 1px solid $elements-color;
+  padding-bottom: 24px;
+}
+
+.capacityButton {
+  @include typographyBodyText;
+  text-align: center;
+  padding: 8px;
+  min-width: 55px;
+  margin-right: 8px;
+  border: 1px solid $icons-placeholders;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+
+  &:hover {
+    background-color: $primary-color;
+    border: 1px solid $primary-color;
+    color: $gray-white;
+  }
+
+  &.selectedCapacity {
+    background-color: $primary-color;
+    border: 1px solid $primary-color;
+    color: $gray-white;
+  }
+}
+
+.price {
+  .salePrice {
+    @include typographyButtons;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 41px;
+  }
+
+  .originalPrice {
+    padding-left: 8px;
+    @include typographyBodyText;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: normal;
+    color: $secondary-color;
+    text-decoration: line-through;
+  }
+}
+
+.specs {
+  font-family: 'Mont';
+  display: table;
+  width: 100%;
+}
+
+.spec {
+  display: table-row;
+}
+
+.specName,
+.specValue {
+  display: table-cell;
+  padding-bottom: 8px;
+}
+
+.specName {
+  @include typographySmallText;
+  color: $secondary-color;
+  text-align: left;
+}
+
+.specValue {
+  @include typographySmallText;
+  font-weight: 700;
+  text-align: right;
+}
+
+.visuallyHidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+  background-color: $icons-placeholders;
+  box-shadow: 0 0 0 1px $icons-placeholders;
+  border: 2px solid $gray-white;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: 0 0 0 2px $icons-placeholders;
+  }
+}
+
+.button.selected {
+  box-shadow: 0 0 0 1px $primary-color;
+
+  &:hover {
+    box-shadow: 0 0 0 1px $primary-color;
+  }
+}
+
+.head {
+  position: absolute;
+  margin-top: -460px;
+  @include typographyH2;
+  width: 288px;
+
+  @include onTablet {
+    max-width: 1199px;
+    margin-left: -420px;
+    margin-top: -50px;
+    width: 592px;
+  }
+
+  @include onDesktop {
+    width: 1136px;
+    @include typographyH1;
+    margin-left: -600px;
+    margin-top: -80px;
+  }
+}
+
+.container_buttons {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  cursor: pointer;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-image: url(../../../../components/Icon/icons/icon-heart.svg);
+
+  &__favorite {
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    width: 48px;
+    margin-left: 8px;
+    border: 1px solid $icons-placeholders;
+
+    &:hover {
+      border: 1px solid $primary-color;
+    }
+  }
+
+  &__selected {
+    background-image: url(../../../../components/Icon/icons/icon-heart-red.svg);
+  }
+}
