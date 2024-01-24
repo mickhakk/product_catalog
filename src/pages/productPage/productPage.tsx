@@ -7,6 +7,7 @@ import { TechSpecs } from './components/TechSpecs';
 import { VariantsActionsBlock } from './components/VariantsActionsBlock';
 import styles from './productPage.module.scss';
 import { PhoneData } from './phoneTypes';
+import { getProduct } from '../../api/products';
 
 export const ProductPage = () => {
   const [phoneData, setPhoneData] = useState<PhoneData | null>(null);
@@ -14,11 +15,7 @@ export const ProductPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/phones.json');
-        const data = await response.json();
-        const firstPhone = data[0];
-
-        setPhoneData(firstPhone);
+        await getProduct().then(setPhoneData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
