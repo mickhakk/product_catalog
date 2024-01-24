@@ -1,0 +1,26 @@
+@import '../../mixins/container.scss';
+@import '../../variables.scss/devicesWidth.scss';
+
+.fw {
+  grid-column: span 4;
+
+  @include onTablet {
+    grid-column: span 12;
+  }
+
+  @include onDesktop {
+    grid-column: span 24;
+  }
+}
+
+.hw {
+  grid-column: span 4;
+
+  @include onTablet {
+    grid-column: span 12;
+  }
+
+  @include onDesktop {
+    grid-column: span 12;
+  }
+}
