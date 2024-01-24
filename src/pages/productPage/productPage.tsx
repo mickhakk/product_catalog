@@ -30,7 +30,7 @@ export const ProductPage = () => {
   console.log(phoneData);
 
   return (
-    <>
+    <div className={styles.product_page}>
       <h1 className={styles.fw}>Product Page</h1>
       <div className={`${styles.hw}`}>
         <Photos />
@@ -45,6 +45,6 @@ export const ProductPage = () => {
       <TechSpecs />
 
       <RecommendedGoods />
-    </>
+    </div>
   );
 };
