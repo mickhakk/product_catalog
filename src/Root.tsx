@@ -16,16 +16,20 @@ export const Root = () => (
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
 
-          <Route path="phones/:productId?" element={<PhonesCatalog />} />
+          <Route path="phones/:productId?">
+            <Route index element={<PhonesCatalog />} />
+            <Route path=":productId" element={<PhonesCatalog />} />
+          </Route>
           <Route path="tablets/:productId?">
-            <Route index element={<TabletsCatalog />}/>
-            <Route path=':productId' element={<TabletsCatalog />}/>
+            <Route index element={<TabletsCatalog />} />
+            <Route path=":productId" element={<TabletsCatalog />} />
           </Route>
           <Route
             path="accessories/:productId?"
-            element={<AccessoriesCatalog />}
-          />
-
+          >
+            <Route index element={<AccessoriesCatalog />} />
+            <Route path=":productId" element={<AccessoriesCatalog />} />
+          </Route>
           <Route path="favourites" element={<FavouritesPage />} />
           <Route path="cart" element={<CartPage />} />
         </Route>

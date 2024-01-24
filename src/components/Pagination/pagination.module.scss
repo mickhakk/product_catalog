@@ -3,7 +3,7 @@
 .pagination-container {
   display: flex;
   list-style-type: none;
-  gap: 10px;
+  gap: 8px;
   box-sizing: border-box;
 
   .pagination-item {
@@ -27,12 +27,24 @@
    
     
   }
+   .pagination-arrow {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    border: 1px solid $elements-color;
+    justify-content: center;
+    align-items: center;
 
+    &--disabled {
+      border: 1px solid $elements-color;
+      pointer-events: none;
+    }
+   }
    .arrow {
     fill: $primary-color;
 
-    // &--disabled {
-
-    // }
+    &--disabled {
+      fill: $icons-placeholders;
+    }
    }
 }
