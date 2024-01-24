@@ -1,0 +1,13 @@
+.products_slider {
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  &__products {
+    background-color: black;
+    color: white;
+    height: 439px;
+  }
+}
