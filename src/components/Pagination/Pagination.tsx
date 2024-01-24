@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
 import { DOTS, usePagination } from '../../CustomHooks/UsePagination';
 import styles from './pagination.module.scss';
+import { getSearchWith } from '../../utils/searchHelper';
 
 interface Props {
   totalCount: number,
@@ -10,14 +11,18 @@ interface Props {
   siblingCount: number,
 }
 export const Pagination: FC<Props> = (props) => {
-  // const [currentPage, setCurrentPate] = useState(1);
-  const { productId } = useParams();
-  const location = useLocation();
-  const { pathname } = location;
-  const partOfUrl = pathname.split('/');
-  const productIdArray = productId?.split('=');
-  const currentPage = productIdArray?.length
-    ? +productIdArray[productIdArray?.length - 1] : 1;
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get('page') || '';
+  const currentPage = Number(page);
+
+  const setSearchPage = (param: number | string) => {
+    const searchPage = param.toString();
+
+    return {
+      search: getSearchWith(searchParams,
+        { page: searchPage }),
+    };
+  };
 
   const {
     totalCount,
@@ -36,26 +41,10 @@ export const Pagination: FC<Props> = (props) => {
   const lastPage = paginationRange[paginationRange.length - 1];
 
   const onNext = () => {
-    if (currentPage === lastPage) {
-      return currentPage;
-    }
-
-    if (!currentPage) {
-      return null;
-    }
-
     return currentPage + 1;
   };
 
   const onPrevious = () => {
-    if (currentPage === firstPage) {
-      return currentPage;
-    }
-
-    if (!currentPage) {
-      return null;
-    }
-
     return currentPage - 1;
   };
 
@@ -67,7 +56,7 @@ export const Pagination: FC<Props> = (props) => {
           className={cn(styles['pagination-container__arrow'], {
             [`${styles['pagination-container__arrow--disabled']}`]: currentPage === firstPage,
           })}
-          to={`/${partOfUrl[1]}/page=${onPrevious()}`}
+          to={setSearchPage(onPrevious())}
         >
           <svg
             className={cn(styles.arrow, {
@@ -99,6 +88,7 @@ export const Pagination: FC<Props> = (props) => {
           return (
             <li
               className={styles['pagination-container__item--dots']}
+              key={currenNumber}
             >
               &#8230;
             </li>
@@ -111,7 +101,7 @@ export const Pagination: FC<Props> = (props) => {
               className={cn(styles['pagination-container__item'], {
                 [`${styles['pagination-container__item--is-active']}`]: currentPage === currenNumber,
               })}
-              to={`/${partOfUrl[1]}/page=${currenNumber}`}
+              to={setSearchPage(currenNumber)}
             >
               {currenNumber}
             </Link>
@@ -123,7 +113,7 @@ export const Pagination: FC<Props> = (props) => {
           className={cn(styles['pagination-container__arrow'], {
             [`${styles['pagination-container__arrow--disabled']}`]: currentPage === lastPage,
           })}
-          to={`/${partOfUrl[1]}/page=${onNext()}`}
+          to={setSearchPage(onNext())}
         >
           <svg
             className={cn(styles.arrow, {

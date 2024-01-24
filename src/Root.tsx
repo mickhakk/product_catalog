@@ -20,7 +20,7 @@ export const Root = () => (
             <Route index element={<PhonesCatalog />} />
             <Route path=":productId" element={<PhonesCatalog />} />
           </Route>
-          <Route path="tablets/:productId?">
+          <Route path="tablets/:pageId?:productId?">
             <Route index element={<TabletsCatalog />} />
             <Route path=":productId" element={<TabletsCatalog />} />
           </Route>
