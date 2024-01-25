@@ -1,0 +1,102 @@
+@import '../../mixins/typography';
+@import '../../mixins/mixinLayout';
+@import '../../mixins/grid';
+@import '../../variables.scss/colors.scss';
+
+.title {
+  @include typographyH1;
+}
+
+.wrapper {
+  margin-top: 32px;
+  @include pageGrid;
+}
+
+.cartItemList {
+  display: grid;
+  gap: 16px;
+  grid-column: span 4;
+
+  @include onTablet {
+    grid-column: span 12;
+  }
+
+  @include onDesktop {
+    grid-column: span 16;
+  }
+}
+
+.totalPrice {
+  display: flex;
+  grid-column: span 4;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+
+  border: 1px solid $elements-color;
+  height: fit-content;
+
+  @include onTablet {
+    grid-column: span 12;
+  }
+
+  @include onDesktop {
+    grid-column: 17/24;
+  }
+
+  &TextWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+
+    &Value {
+      @include typographyH2;
+      color: $primary-color;
+    }
+
+    &Info {
+      position: relative;
+
+      @include typograhyBodyText;
+      color: $secondary-color;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: $elements-color;
+
+      margin-top: 16px;
+    }
+  }
+
+
+
+  &Button {
+    display: flex;
+    height: 48px;
+    margin-top: 16px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+
+    background-color: $primary-color;
+    color: $gray-white;
+    cursor: pointer;
+
+    @include typograhyBodyText;
+
+    &:disabled {
+      background-color: $elements-color;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.emptyTitle {
+  @include typograhyH3;
+}

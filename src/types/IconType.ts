@@ -4,4 +4,6 @@ export enum IconType {
   close = 'close',
   cart = 'cart',
   arrowUp = 'arrow_up',
+  plus = 'plus',
+  minus = 'minus',
 }

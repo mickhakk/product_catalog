@@ -5,7 +5,7 @@ import { PhonesCatalog } from './pages/catalogPages/phonesCatalog';
 import { TabletsCatalog } from './pages/catalogPages/tabletsCatalog';
 import { AccessoriesCatalog } from './pages/catalogPages/accessoriesCatalog';
 import { FavouritesPage } from './pages/favoritesPage/favouritesPage';
-import { CartPage } from './pages/cartPage';
+import { CartPage } from './pages/cartPage/cartPage';
 import { ProductsContextProvider } from './context/ProductsContext';
 import { NotFoundPage } from './pages/NotFoundPage';
 
