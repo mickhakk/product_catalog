@@ -9,7 +9,10 @@ export type PhoneData = {
   colorsAvailable: string[];
   color: string;
   images: string[];
-  description: { title: string; text: string[] }[];
+  description: {
+    text: string[];
+    title: string;
+  }[];
   screen: string;
   resolution: string;
   processor: string;
