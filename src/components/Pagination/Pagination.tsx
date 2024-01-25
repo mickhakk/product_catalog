@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { DOTS, usePagination } from '../../CustomHooks/UsePagination';
 import styles from './pagination.module.scss';
@@ -9,10 +9,20 @@ interface Props {
   totalCount: number,
   pageSize: number,
   siblingCount: number,
+  page: string,
+  searchParams: URLSearchParams,
 }
 export const Pagination: FC<Props> = (props) => {
-  const [searchParams] = useSearchParams();
-  const page = searchParams.get('page') || '';
+  // const [searchParams] = useSearchParams();
+  // const page = searchParams.get('page') || '';
+
+  const {
+    totalCount,
+    pageSize,
+    siblingCount = 1,
+    page,
+    searchParams,
+  } = props;
   const currentPage = Number(page);
 
   const setSearchPage = (param: number | string) => {
@@ -23,12 +33,6 @@ export const Pagination: FC<Props> = (props) => {
         { page: searchPage }),
     };
   };
-
-  const {
-    totalCount,
-    pageSize,
-    siblingCount = 1,
-  } = props;
 
   const paginationRange = usePagination({
     totalCount,
@@ -88,7 +92,6 @@ export const Pagination: FC<Props> = (props) => {
           return (
             <li
               className={styles['pagination-container__item--dots']}
-              key={currenNumber}
             >
               &#8230;
             </li>
@@ -96,7 +99,7 @@ export const Pagination: FC<Props> = (props) => {
         }
 
         return (
-          <li key={currenNumber}>
+          <li>
             <Link
               className={cn(styles['pagination-container__item'], {
                 [`${styles['pagination-container__item--is-active']}`]: currentPage === currenNumber,

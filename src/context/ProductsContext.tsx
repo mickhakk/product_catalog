@@ -16,6 +16,8 @@ interface ProductsContextType {
   toogleSelectFavorite: (product: Product) => void;
   toogleSelectCart: (product: Product) => void;
   cartProducts: Product[];
+  params: GetParams;
+  setParams: React.Dispatch<React.SetStateAction<GetParams>>;
 
 }
 const ProductsContext = createContext<ProductsContextType>({
@@ -24,6 +26,14 @@ const ProductsContext = createContext<ProductsContextType>({
   toogleSelectFavorite: () => {},
   toogleSelectCart: () => {},
   cartProducts: [],
+  params: {
+    type: 'phones',
+    page: 0,
+    limit: 'all',
+    order: 'price',
+    direction: 'DESC',
+  },
+  setParams: () => {},
 });
 
 export const useContextProvider = () => useContext(ProductsContext);
@@ -32,10 +42,19 @@ type Props = {
   children: React.ReactNode;
 };
 
+const defaultValue:GetParams = {
+  type: 'phones',
+  page: 0,
+  limit: 'All',
+  order: 'price',
+  direction: 'DESC',
+};
+
 export const ProductsContextProvider: FC<Props> = ({ children }) => {
   const [products, setProducts] = useState<DataFromServer | null>(null);
   const [favourites, setFavoriets] = useState<Product[]>([]);
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const [params, setParams] = useState<GetParams>(defaultValue);
 
   const toogleSelectCart = useCallback((product:Product) => {
     const cartIds = cartProducts.map(({ id }) => id);
@@ -63,18 +82,12 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     setFavoriets(currentProducts => ([...currentProducts, product]));
   }, [favourites]);
 
-  const defaultValue:GetParams = useMemo(() => ({
-    type: 'phones',
-    page: 0,
-    limit: 16,
-    order: 'price',
-    direction: 'DESC',
-  }), []);
-
   useEffect(() => {
-    getProducts(defaultValue)
-      .then(setProducts);
-  }, [defaultValue]);
+    getProducts(params)
+      .then(data => {
+        setProducts(data);
+      });
+  }, [params]);
 
   const value: ProductsContextType = useMemo(() => ({
     products,
@@ -82,8 +95,11 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     toogleSelectFavorite,
     toogleSelectCart,
     cartProducts,
+    params,
+    setParams,
   }), [products, favourites,
-    toogleSelectFavorite, toogleSelectCart, cartProducts]);
+    toogleSelectFavorite, toogleSelectCart,
+    cartProducts, params]);
 
   return (
     <ProductsContext.Provider value={value}>
