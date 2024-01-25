@@ -1,0 +1,29 @@
+@import './../../styles';
+
+.homepage {
+  display: grid;
+  row-gap: 56px;
+  margin-bottom: 64px;
+
+  @include onTablet {
+    row-gap: 64px;
+  }
+
+  @include onDesktop {
+    row-gap: 80px;
+    margin-bottom: 80px;
+  }
+
+  &__title {
+    padding-block: 24px;
+    @include typographyH1;
+
+    @include onTablet {
+      padding-block: 32px;
+    }
+
+    @include onDesktop {
+      padding-block: 56px;
+    }
+  }
+}

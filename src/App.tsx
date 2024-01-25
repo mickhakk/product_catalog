@@ -1,19 +1,18 @@
 import { Outlet } from 'react-router-dom';
 import { Footer, Header } from './components';
+import { Container } from './components/Container/Container';
 import styles from './App.module.scss';
 
 export const App = () => (
   <div className={styles.app}>
-    <header className="header">
-      <Header />
-    </header>
+    <Header />
 
-    <main className="main">
-      <Outlet />
+    <main className={styles.app__main}>
+      <Container>
+        <Outlet />
+      </Container>
     </main>
 
-    <footer className="footer">
-      <Footer />
-    </footer>
+    <Footer />
   </div>
 );

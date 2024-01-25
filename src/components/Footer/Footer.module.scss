@@ -1,4 +1,61 @@
-.Footer {
+@import './../../styles';
+
+.footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  border-top: 1px solid $elements-color;
+
+  &__content {
+    display: grid;
+    row-gap: 32px;
+    justify-items: start;
+
+    width: 100%;
+    padding-block: 32px;
+    padding-inline: 16px;
+
+    @include onTablet {
+      display: flex;
+      justify-content: space-between;
+      padding-inline: 32px;
+    }
+
+    @include onDesktop {
+      max-width: 1136px;
+    }
+  }
+
+  &__logo_image {
+    width: 89px;
+    height: 32px;
+  }
+
+  &__go_top {
+    justify-self: center;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    cursor: pointer;
+    @include typographySmallText;
+    color: $secondary-color;
+
+    @include hover(color, $primary-color);
+
+    &:hover * {
+      border-color: $primary-color;
+    }
+  }
+
+  &__arrow_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    border: 1px solid $icons-placeholders;
+    width: 32px;
+    height: 32px;
+    transition: border-color 0.3s;
+  }
 }

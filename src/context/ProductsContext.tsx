@@ -7,11 +7,11 @@ import {
   useMemo,
   useState,
 } from 'react';
-import axios from 'axios';
-import { Product } from '../types/Product';
+import { DataFromServer, GetParams, Product } from '../types/Product';
+import { getProducts } from '../api/products';
 
 interface ProductsContextType {
-  products: Product[],
+  products: DataFromServer | null,
   favourites: Product[],
   toogleSelectFavorite: (product: Product) => void;
   toogleSelectCart: (product: Product) => void;
@@ -19,7 +19,7 @@ interface ProductsContextType {
 
 }
 const ProductsContext = createContext<ProductsContextType>({
-  products: [],
+  products: { count: 0, rows: [] },
   favourites: [],
   toogleSelectFavorite: () => {},
   toogleSelectCart: () => {},
@@ -32,10 +32,8 @@ type Props = {
   children: React.ReactNode;
 };
 
-const apiURL = 'https://product-catalog-api-r8lb.onrender.com/products/';
-
 export const ProductsContextProvider: FC<Props> = ({ children }) => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<DataFromServer | null>(null);
   const [favourites, setFavoriets] = useState<Product[]>([]);
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
 
@@ -65,10 +63,18 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     setFavoriets(currentProducts => ([...currentProducts, product]));
   }, [favourites]);
 
+  const defaultValue:GetParams = useMemo(() => ({
+    type: 'phones',
+    page: 0,
+    limit: 16,
+    order: 'price',
+    direction: 'DESC',
+  }), []);
+
   useEffect(() => {
-    axios.get(apiURL)
-      .then(response => setProducts(response.data));
-  }, []);
+    getProducts(defaultValue)
+      .then(setProducts);
+  }, [defaultValue]);
 
   const value: ProductsContextType = useMemo(() => ({
     products,

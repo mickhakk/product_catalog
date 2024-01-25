@@ -1,8 +1,8 @@
 import { Product } from '../../types/Product';
-import { ProductCard } from '../../components/Product_card/Product_card';
+import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { Pagination } from '../../components/Pagination/Pagination';
 
-const phone: Product = {
+const product: Product = {
   id: 1,
   category: 'phones',
   itemId: 'apple-iphone-11-pro-max-256gb-silver',
@@ -20,7 +20,8 @@ const phone: Product = {
 export const PhonesCatalog = () => (
   <>
     <h1>Phones Catalog Page</h1>
-    <ProductCard phone={phone} />
+    <ProductCard product={product} />
+
     <Pagination
       totalCount={200}
       pageSize={16}

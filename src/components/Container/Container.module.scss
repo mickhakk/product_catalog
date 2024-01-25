@@ -1,0 +1,6 @@
+@import '../../mixins/container';
+@import '../../mixins/grid';
+
+.container {
+  @include contentPaddingInline;
+}
