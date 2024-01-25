@@ -26,11 +26,11 @@ export const CartItem: React.FC<Props> = ({
   return (
     <div className={styles.cartItem}>
       <div className={styles.cartItemFirstRow}>
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label  */}
         <button
           type="button"
           className={styles.cartItemFirstRowDeleteItemButton}
           onClick={() => deleteProduct(id)}
+          aria-label="delete product"
         >
           <Icon type={IconType.close} />
         </button>
