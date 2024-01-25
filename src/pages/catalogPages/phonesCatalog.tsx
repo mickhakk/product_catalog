@@ -1,5 +1,6 @@
 import { Product } from '../../types/Product';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
+import { Pagination } from '../../components/Pagination/Pagination';
 
 const product: Product = {
   id: 1,
@@ -20,5 +21,11 @@ export const PhonesCatalog = () => (
   <>
     <h1>Phones Catalog Page</h1>
     <ProductCard product={product} />
+
+    <Pagination
+      totalCount={200}
+      pageSize={16}
+      siblingCount={1}
+    />
   </>
 );
