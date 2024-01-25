@@ -5,6 +5,7 @@ import { useContextProvider } from '../../context/ProductsContext';
 
 interface Props {
   product: Product,
+  simpleHoverEffect?: boolean,
 }
 
 const ADDED = 'Added';
@@ -14,7 +15,9 @@ const containsProduct = (products: Product[], productId: number): boolean => {
   return products.some((product) => product.id === productId);
 };
 
-export const ProductCard: React.FC<Props> = ({ product }) => {
+export const ProductCard: React.FC<Props> = (props) => {
+  const { product, simpleHoverEffect = false } = props;
+
   const {
     id,
     image,
@@ -38,7 +41,12 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   const isInCart = containsProduct(cartProducts, id);
 
   return (
-    <div className={style.card}>
+    <div className={cn(style.card,
+      {
+        [style.card__simple_hover]: simpleHoverEffect,
+        [style.card__default_hover]: !simpleHoverEffect,
+      })}
+    >
       <div className={style.card__image_wrapper}>
         <img
           className={style.card__product_image}
