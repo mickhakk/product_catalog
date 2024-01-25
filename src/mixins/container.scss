@@ -3,6 +3,7 @@
 @import '../variables.scss/devicesPadding.scss';
 
 @mixin contentPaddingInline() {
+  box-sizing: border-box;
   padding-inline: $mobile-inline-padding;
   min-width: 320px;
   margin-inline: auto;
