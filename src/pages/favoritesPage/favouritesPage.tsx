@@ -1,18 +1,12 @@
 import { Link } from 'react-router-dom';
 import style from './favoritesPage.module.scss';
-// import { useContextProvider } from '../../context/ProductsContext';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
-import { useLocalFavoritesStorage } from '../../CustomHooks/useLocalFavorites';
+import { useContextProvider } from '../../context/ProductsContext';
 
 export const FavouritesPage = () => {
-  const [favorites] = useLocalFavoritesStorage('favorits', []);
-  // const { favourites } = useContextProvider();
-  const favouritesCount = favorites.length;
+  const { favourites } = useContextProvider();
+  const favouritesCount = favourites.length;
   const isPlural = favouritesCount !== 1;
-
-  // const favoritsFromLocal = localStorage.getItem('favorits');
-
-  // console.log(`favoritsFromLocal: ${JSON.parse(favoritsFromLocal)}`);
 
   return (
     <div className={style.favorites}>
@@ -38,13 +32,9 @@ export const FavouritesPage = () => {
       </section>
 
       <section className={style.favorites__products_container}>
-        {favorites.map((product) => {
-          // console.log(`id:${product.id}`);
-
-          return (
-            <ProductCard key={product.id} product={product} />
-          );
-        })}
+        {favourites.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </section>
     </div>
   );
