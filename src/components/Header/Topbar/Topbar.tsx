@@ -51,7 +51,7 @@ export const Topbar: React.FC<Props> = (props) => {
           >
             {isMenuActive
               ? <Icon iconType="Close" color="#313237" />
-              : <Icon iconType="Cart" color="#313237" />}
+              : <Icon iconType="BurgerMenu" color="#313237" />}
           </button>
 
           <NavLink to="favourites" className={getButtonClass('favourites')}>
