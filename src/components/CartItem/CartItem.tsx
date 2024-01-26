@@ -2,7 +2,6 @@ import React from 'react';
 // import { Product } from '../../types/Product';
 import styles from './CartItem.module.scss';
 import { Icon } from '../Icon';
-import { IconType } from '../../types/IconType';
 import { SquareButton } from '../SquareButton/SquareButton';
 
 interface Props {
@@ -37,7 +36,7 @@ export const CartItem: React.FC<Props> = ({
           className={styles.cartItemFirstRowDeleteItemButton}
           onClick={() => deleteProduct(id)}
         >
-          <Icon type={IconType.close} />
+          <Icon type="Close" color="Main" />
         </button>
         <img
           src={`${image}`}
@@ -58,8 +57,8 @@ export const CartItem: React.FC<Props> = ({
           >
             {
               quantity === 1
-                ? <Icon type={IconType.minusDisabled} />
-                : <Icon type={IconType.minus} />
+                ? <Icon type="Minus" color="Disabled" />
+                : <Icon type="Minus" color="Main" />
             }
             {/* <Icon type={IconType.minus} /> */}
 
@@ -81,7 +80,7 @@ export const CartItem: React.FC<Props> = ({
           <SquareButton
             handleClick={() => increaseQuantity(id)}
           >
-            <Icon type={IconType.plus} />
+            <Icon type="Plus" color="Main" />
           </SquareButton>
         </div>
         <div

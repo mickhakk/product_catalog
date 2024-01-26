@@ -5,7 +5,6 @@ import { useContext } from 'react';
 import styles from './Topbar.module.scss';
 import { Navigation } from '../Navigation/Navigation';
 import { Icon } from '../../Icon';
-import { IconType } from '../../../types/IconType';
 import { ProductsCounter } from '../ProductsCounter/ProductsCounter';
 import { ProductsContext } from '../../../context/ProductsContext';
 
@@ -58,18 +57,18 @@ export const Topbar: React.FC<Props> = (props) => {
             onClick={toggleMenu}
           >
             {isMenuActive
-              ? <Icon type={IconType.close} />
-              : <Icon type={IconType.menu} />}
+              ? <Icon type="Close" color="Main" />
+              : <Icon type="BurgerMenu" color="Main" />}
           </button>
 
           <NavLink to="favourites" className={getButtonClass('favourites')}>
-            <Icon type={IconType.heart} />
+            <Icon type="Heart" color="Main" />
             {!!favouritesProductsQuantity
               && <ProductsCounter quantity={favouritesProductsQuantity} />}
           </NavLink>
 
           <NavLink to="cart" className={getButtonClass('cart')}>
-            <Icon type={IconType.cart} />
+            <Icon type="Cart" color="Main" />
             {!!cartProductsQuantity
               && <ProductsCounter quantity={cartProductsQuantity} />}
           </NavLink>

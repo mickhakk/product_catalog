@@ -3,7 +3,6 @@ import cn from 'classnames';
 
 import { useContext } from 'react';
 import { Icon } from '../../Icon/Icon';
-import { IconType } from '../../../types/IconType';
 import { ProductsCounter } from '../ProductsCounter/ProductsCounter';
 import { ProductsContext } from '../../../context/ProductsContext';
 import styles from './Menu.module.scss';
@@ -83,7 +82,7 @@ export const Menu: React.FC<Props> = ({ onHide, show }) => {
           className={getButtonClass}
           onClick={onHide}
         >
-          <Icon type={IconType.heart} />
+          <Icon type="Heart" color="Main" />
           {!!favouritesProductsQuantity
             && <ProductsCounter quantity={favouritesProductsQuantity} />}
         </NavLink>
@@ -93,7 +92,7 @@ export const Menu: React.FC<Props> = ({ onHide, show }) => {
           className={getButtonClass}
           onClick={onHide}
         >
-          <Icon type={IconType.cart} />
+          <Icon type="Cart" color="Main" />
           {!!cartProductsQuantity
             && <ProductsCounter quantity={cartProductsQuantity} />}
         </NavLink>

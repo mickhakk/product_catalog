@@ -1,15 +1,22 @@
 import React from 'react';
-import { IconType } from '../../types/IconType';
-import styles from './Icon.module.scss';
+import { IconPaths } from './IconPaths';
+import { IconColor } from './IconColor';
 
 interface Props {
-  type: IconType,
+  type: keyof typeof IconPaths,
+  color: keyof typeof IconColor,
 }
 
-export const Icon: React.FC<Props> = ({ type }) => {
-  const modifier = styles[`icon--${type}`];
-
+export const Icon: React.FC<Props> = ({ type, color }) => {
   return (
-    <div className={`${styles.icon} ${modifier}`} />
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      xmlns="http://www.w3.org/2000/svg"
+      fill={IconColor[color]}
+    >
+      <path {...IconPaths[type]} />
+    </svg>
   );
 };
