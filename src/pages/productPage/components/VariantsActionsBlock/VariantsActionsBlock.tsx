@@ -1,26 +1,25 @@
 /* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import cn from 'classnames';
 import styles from './VariantsActionsBlock.module.scss';
 import { Button } from '../../../../components/Button';
 import { Product } from '../../../../types/Product';
 import { useContextProvider } from '../../../../context/ProductsContext';
-import { PhoneData } from '../../phoneTypes';
 import { allColors } from './allColors';
 
 interface Props {
-  phoneData: PhoneData;
+  productData: Product;
 }
 
 const ADDED = 'Added';
 const NOT_ADDED = 'Add to cart';
 
-const containsProduct = (products: Product[], productId: number): boolean => {
+const containsProduct = (products: Product[], productId: string): boolean => {
   return products.some((product) => product.id === productId);
 };
 
-export const VariantsActionsBlock: React.FC<Props> = ({ phoneData }) => {
+export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
   const {
     capacityAvailable,
     colorsAvailable,
@@ -28,7 +27,9 @@ export const VariantsActionsBlock: React.FC<Props> = ({ phoneData }) => {
     resolution,
     processor,
     ram,
-  } = phoneData;
+    namespaceId,
+    id,
+  } = productData;
 
   const specifications = {
     screen,
@@ -53,52 +54,7 @@ export const VariantsActionsBlock: React.FC<Props> = ({ phoneData }) => {
     cartProducts,
   } = useContextProvider();
 
-  const findProductById = async (productId: string):
-  Promise<Product | undefined> => {
-    const productsFilePath = '/api/products.json';
-
-    try {
-      const response = await fetch(productsFilePath);
-      const productsData = await response.json();
-
-      return productsData
-        .find((product: Product) => product.itemId === productId);
-    } catch (error) {
-      console.error('Error fetching product data:', error);
-
-      return undefined;
-    }
-  };
-
-  const [productId, setProductId] = useState<number | undefined>(undefined);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const result = await findProductById(phoneData.id);
-
-      if (result) {
-        setProductId(result.id);
-      }
-    };
-
-    fetchProduct();
-  }, [phoneData.id]);
-
-  const handleAddToCart = async () => {
-    const productToAdd = await findProductById(phoneData.id);
-
-    if (productToAdd) {
-      toogleSelectCart(productToAdd);
-    }
-  };
-
-  const handleAddToFavorites = async () => {
-    const productToAdd = await findProductById(phoneData.id);
-
-    if (productToAdd) {
-      toogleSelectFavorite(productToAdd);
-    }
-  };
+  const [productId] = useState<string | undefined>(id);
 
   const isInFavorites = productId !== undefined
     && containsProduct(favourites, productId);
@@ -108,7 +64,7 @@ export const VariantsActionsBlock: React.FC<Props> = ({ phoneData }) => {
   return (
     <>
       <div className={styles.productDetails}>
-        <h3 className={styles.id}>{`ID: ${productId}`}</h3>
+        <h3 className={styles.id}>{`ID: ${namespaceId}`}</h3>
         <h3 className={styles.headColors}>Available colors</h3>
         <section className={styles.colors}>
           <div className={styles.colorOptions}>
@@ -130,7 +86,7 @@ export const VariantsActionsBlock: React.FC<Props> = ({ phoneData }) => {
                     colorKey.charAt(0).toUpperCase() + colorKey.slice(1)
                   } color`}
                   onClick={() => handleColorClick(colorKey)}
-                  disabled={colorKey === phoneData.color}
+                  disabled={colorKey === productData.color}
                 >
                   <span className={styles.visuallyHidden}>
                     {`${
@@ -161,24 +117,24 @@ export const VariantsActionsBlock: React.FC<Props> = ({ phoneData }) => {
           <div className={styles.price}>
             <span className={styles.salePrice}>
               $
-              {phoneData.priceDiscount}
+              {productData.priceDiscount}
             </span>
-            <span className={styles.originalPrice} data-text={`$${phoneData.priceRegular}`}>
+            <span className={styles.originalPrice} data-text={`$${productData.priceRegular}`}>
               $
-              {phoneData.priceRegular}
+              {productData.priceRegular}
             </span>
           </div>
 
           <div className={styles.container_buttons}>
             <Button
               text={isInCart ? ADDED : NOT_ADDED}
-              callback={handleAddToCart}
+              callback={() => toogleSelectCart(productData)}
               isActive={isInCart}
             />
 
             <label className={styles.checkbox__favorite}>
               <input
-                onChange={handleAddToFavorites}
+                onChange={() => toogleSelectFavorite(productData)}
                 className={cn(styles.checkbox, {
                   [styles.checkbox__selected]: isInFavorites,
                 })}

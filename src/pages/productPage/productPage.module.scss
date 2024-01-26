@@ -16,6 +16,18 @@
   }
 }
 
+.mw {
+  grid-column: span 4;
+
+  @include onTablet {
+    grid-column: span 12;
+  }
+
+  @include onDesktop {
+    grid-column: span 12;
+  }
+}
+
 .hw {
   grid-column: span 4;
 
@@ -44,5 +56,66 @@
     display: grid;
     grid-template-columns: repeat(24, 1fr);
     grid-gap: 16px;
+  }
+}
+
+.about {
+  font-family: Mont;
+
+  &_header {
+    border-bottom: 1px solid rgb(230, 227, 223);
+    margin-bottom: 48px;
+    font-weight: 800;
+  }
+
+  &_name {
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  &_value {
+    color: #89939A;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+  }
+
+  &_section:not(:last-child) {
+    margin-bottom: 32px;
+  }
+}
+
+.tech {
+  font-family: Mont;
+
+  &_name {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+    color: #89939A;
+  }
+
+  &_value {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 21px;
+  }
+
+  &_header {
+    border-bottom: 1px solid rgb(230, 227, 223);
+    margin-bottom: 40px;
+  }
+
+  &_section {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+
   }
 }
