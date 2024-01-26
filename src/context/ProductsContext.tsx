@@ -22,7 +22,7 @@ interface ProductsContextType {
   cartProducts: Product[];
 
 }
-const ProductsContext = createContext<ProductsContextType>({
+export const ProductsContext = createContext<ProductsContextType>({
   products: { count: 0, rows: [] },
   favourites: [],
   toogleSelectFavorite: () => {},
