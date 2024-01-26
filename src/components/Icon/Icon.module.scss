@@ -22,4 +22,20 @@
   &--arrow_up {
     background-image: url('./icons/icon-arrow-up.svg');
   }
+
+  &--arrow_left {
+    background-image: url('./icons/icon-arrow-left.svg');
+  }
+
+  &--minus {
+    background-image: url('./icons/icon-minus.svg');
+  }
+
+  &--minus_disabled {
+    background-image: url('./icons/icon-minus-disabled.svg');
+  }
+
+  &--plus {
+    background-image: url('./icons/icon-plus.svg');
+  }
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './CartItem.module.scss';
 import { Icon } from '../Icon';
 import { IconType } from '../../types/IconType';
+import { SquareButton } from '../SquareButton/SquareButton';
 
 interface Props {
   id: number,
@@ -11,7 +12,9 @@ interface Props {
   quantity: number,
   image: string,
   deleteProduct: (id: number) => void,
-  changeQuantity: (id: number, type: '-' | '+') => void;
+  // changeQuantity: (id: number, type: '-' | '+') => void;
+  increaseQuantity: (id: number) => void,
+  decreaseQuantity: (id: number) => void,
 }
 
 export const CartItem: React.FC<Props> = ({
@@ -21,16 +24,18 @@ export const CartItem: React.FC<Props> = ({
   quantity,
   image,
   deleteProduct,
-  changeQuantity,
+  // changeQuantity,
+  increaseQuantity,
+  decreaseQuantity,
 }) => {
   return (
     <div className={styles.cartItem}>
       <div className={styles.cartItemFirstRow}>
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label  */}
         <button
           type="button"
           className={styles.cartItemFirstRowDeleteItemButton}
           onClick={() => deleteProduct(id)}
-          aria-label="delete product"
         >
           <Icon type={IconType.close} />
         </button>
@@ -47,30 +52,37 @@ export const CartItem: React.FC<Props> = ({
         <div
           className={styles.cartItemSecondRowQuantityWrapper}
         >
-          <button
-            type="button"
-            className={styles.cartItemSecondRowQuantityWrapperButton}
-            disabled={quantity < 5}
-            onClick={() => {
-              changeQuantity(id, '-');
-            }}
+          <SquareButton
+            handleClick={() => decreaseQuantity(id)}
+            isDisabled={quantity <= 1}
           >
-            -
-          </button>
+            {
+              quantity === 1
+                ? <Icon type={IconType.minusDisabled} />
+                : <Icon type={IconType.minus} />
+            }
+            {/* <Icon type={IconType.minus} /> */}
+
+          </SquareButton>
           <p
             className={styles.cartItemSecondRowQuantityWrapperQuantityText}
           >
             {quantity}
           </p>
-          <button
+          {/* <button
             type="button"
             className={styles.cartItemSecondRowQuantityWrapperButton}
             onClick={() => {
-              changeQuantity(id, '+');
+              increaseQuantity(id);
             }}
           >
             +
-          </button>
+          </button> */}
+          <SquareButton
+            handleClick={() => increaseQuantity(id)}
+          >
+            <Icon type={IconType.plus} />
+          </SquareButton>
         </div>
         <div
           className={styles.cartItemSecondRowPriceWrapper}
