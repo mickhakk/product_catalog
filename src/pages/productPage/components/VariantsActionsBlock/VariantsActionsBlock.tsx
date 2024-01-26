@@ -4,20 +4,21 @@ import { useState } from 'react';
 import cn from 'classnames';
 import styles from './VariantsActionsBlock.module.scss';
 import { Button } from '../../../../components/Button';
-import { Product } from '../../../../types/Product';
+import { Product, ProductDetails } from '../../../../types/Product';
 import { useContextProvider } from '../../../../context/ProductsContext';
 import { allColors } from './allColors';
 
 interface Props {
-  productData: Product;
+  productData: ProductDetails;
 }
 
 const ADDED = 'Added';
 const NOT_ADDED = 'Add to cart';
 
-const containsProduct = (products: Product[], productId: string): boolean => {
-  return products.some((product) => product.id === productId);
-};
+const containsProduct
+  = (products: Product[], productId: string): boolean => {
+    return products.some((product) => product.itemId === productId);
+  };
 
 export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
   const {
@@ -52,7 +53,10 @@ export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
     toogleSelectFavorite,
     favourites,
     cartProducts,
+    products,
   } = useContextProvider();
+
+  const cardProduct = products?.rows.find((item) => item.itemId === id);
 
   const [productId] = useState<string | undefined>(id);
 
@@ -128,13 +132,13 @@ export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
           <div className={styles.container_buttons}>
             <Button
               text={isInCart ? ADDED : NOT_ADDED}
-              callback={() => toogleSelectCart(productData)}
+              callback={() => toogleSelectCart(cardProduct as Product)}
               isActive={isInCart}
             />
 
             <label className={styles.checkbox__favorite}>
               <input
-                onChange={() => toogleSelectFavorite(productData)}
+                onChange={() => toogleSelectFavorite(cardProduct as Product)}
                 className={cn(styles.checkbox, {
                   [styles.checkbox__selected]: isInFavorites,
                 })}
