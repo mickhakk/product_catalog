@@ -10,7 +10,9 @@ import {
 } from 'react';
 import { DataFromServer, GetParams, Product } from '../types/Product';
 import { getProducts } from '../api/products';
-import { useLocalFavoritesStorage } from '../utils/favouritesHandlers';
+import {
+  useLocalFavoritesStorage,
+} from '../CustomHooks/useLocalFavoritesStorage';
 
 interface ProductsContextType {
   products: DataFromServer | null,
