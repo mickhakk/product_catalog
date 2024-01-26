@@ -1,0 +1,48 @@
+@import './../../styles';
+
+.product_page {
+  @include pageGrid;
+}
+
+.fw {
+  grid-column: span 4;
+
+  @include onTablet {
+    grid-column: span 12;
+  }
+
+  @include onDesktop {
+    grid-column: span 24;
+  }
+}
+
+.hw {
+  grid-column: span 4;
+
+  @include onTablet {
+    grid-column: span 6;
+  }
+
+  @include onDesktop {
+    grid-column: span 12;
+  }
+}
+
+.detailsContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 0 auto -30px;
+
+  @include onTablet {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 16px;
+    margin: 0 auto;
+  }
+
+  @include onDesktop {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-gap: 16px;
+  }
+}

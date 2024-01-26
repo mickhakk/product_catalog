@@ -1,21 +1,24 @@
-import { Link } from 'react-router-dom';
 import cn from 'classnames';
+import { Link } from 'react-router-dom';
 import style from './ProductCard.module.scss';
 import { Product } from '../../types/Product';
 import { useContextProvider } from '../../context/ProductsContext';
 
 interface Props {
   product: Product,
+  simpleHoverEffect?: boolean,
 }
 
 const ADDED = 'Added';
 const NOT_ADDED = 'Add to cart';
 
-const hasProduct = (products: Product[], productId: number): boolean => {
+const containsProduct = (products: Product[], productId: number): boolean => {
   return products.some((product) => product.id === productId);
 };
 
-export const ProductCard: React.FC<Props> = (({ product }) => {
+export const ProductCard: React.FC<Props> = (props) => {
+  const { product, simpleHoverEffect = false } = props;
+
   const {
     id,
     itemId,
@@ -37,13 +40,16 @@ export const ProductCard: React.FC<Props> = (({ product }) => {
   } = useContextProvider();
 
   const hasLowPrice = price && fullPrice;
-
-  const isInCart = hasProduct(cartProducts, id);
-
-  const isInFavorites = hasProduct(favourites, id);
+  const isInFavorites = containsProduct(favourites, id);
+  const isInCart = containsProduct(cartProducts, id);
 
   return (
-    <div className={style.card}>
+    <div className={cn(style.card,
+      {
+        [style.card__simple_hover]: simpleHoverEffect,
+        [style.card__default_hover]: !simpleHoverEffect,
+      })}
+    >
       <Link to={`../${category}/${itemId}`}>
         <div className={style.card__image_wrapper}>
           <img
@@ -52,6 +58,7 @@ export const ProductCard: React.FC<Props> = (({ product }) => {
             src={`${image}`}
           />
         </div>
+
         <h3
           className={style.card__product_name}
         >
@@ -115,4 +122,4 @@ export const ProductCard: React.FC<Props> = (({ product }) => {
       </div>
     </div>
   );
-});
+};

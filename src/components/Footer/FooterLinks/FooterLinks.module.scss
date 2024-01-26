@@ -12,8 +12,13 @@
     gap: 13.5px;
   }
 
+  @include onDesktop {
+    gap: 106px;
+  }
+
   &__item {
     display: flex;
     align-items: center;
+    @include hover(color, $primary-color);
   }
 }
