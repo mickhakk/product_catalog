@@ -82,7 +82,7 @@ export const Menu: React.FC<Props> = ({ onHide, show }) => {
           className={getButtonClass}
           onClick={onHide}
         >
-          <Icon iconType="Heart" color="#313237" />
+          <Icon type="Heart" color="Main" />
           {!!favouritesProductsQuantity
             && <ProductsCounter quantity={favouritesProductsQuantity} />}
         </NavLink>
@@ -92,7 +92,7 @@ export const Menu: React.FC<Props> = ({ onHide, show }) => {
           className={getButtonClass}
           onClick={onHide}
         >
-          <Icon iconType="Cart" color="#313237" />
+          <Icon type="Cart" color="Main" />
           {!!cartProductsQuantity
             && <ProductsCounter quantity={cartProductsQuantity} />}
         </NavLink>

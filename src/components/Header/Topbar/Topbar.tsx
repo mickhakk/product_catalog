@@ -57,18 +57,18 @@ export const Topbar: React.FC<Props> = (props) => {
             onClick={toggleMenu}
           >
             {isMenuActive
-              ? <Icon iconType="Close" color="#313237" />
-              : <Icon iconType="BurgerMenu" color="#313237" />}
+              ? <Icon type="Close" color="Main" />
+              : <Icon type="BurgerMenu" color="Main" />}
           </button>
 
           <NavLink to="favourites" className={getButtonClass('favourites')}>
-            <Icon iconType="Heart" color="#313237" />
+            <Icon type="Heart" color="Main" />
             {!!favouritesProductsQuantity
               && <ProductsCounter quantity={favouritesProductsQuantity} />}
           </NavLink>
 
           <NavLink to="cart" className={getButtonClass('cart')}>
-            <Icon iconType="Cart" color="#313237" />
+            <Icon type="Cart" color="Main" />
             {!!cartProductsQuantity
               && <ProductsCounter quantity={cartProductsQuantity} />}
           </NavLink>

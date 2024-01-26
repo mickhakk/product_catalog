@@ -35,7 +35,7 @@ export const Footer = () => {
           >
             Back to top
             <div className={styles.footer__arrow_button}>
-              <Icon iconType="ArrowUp" color="#313237" />
+              <Icon type="ArrowUp" color="Main" />
             </div>
           </button>
         </div>
