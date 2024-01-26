@@ -6,16 +6,16 @@ import { RecommendedGoods } from './components/RecommendedGoods';
 import { TechSpecs } from './components/TechSpecs';
 import { VariantsActionsBlock } from './components/VariantsActionsBlock';
 import styles from './productPage.module.scss';
-import { PhoneData } from './phoneTypes';
 import { getProduct } from '../../api/products';
+import { Product } from '../../types/Product';
 
 export const ProductPage = () => {
-  const [phoneData, setPhoneData] = useState<PhoneData | null>(null);
+  const [productData, setProductData] = useState<Product | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await getProduct().then(setPhoneData);
+        await getProduct().then(setProductData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -24,7 +24,7 @@ export const ProductPage = () => {
     fetchData();
   }, []);
 
-  console.log(phoneData);
+  console.log(productData);
 
   return (
     <div className={styles.product_page}>
@@ -34,12 +34,12 @@ export const ProductPage = () => {
       </div>
 
       <div className={`${styles.hw}`}>
-        {phoneData && <VariantsActionsBlock phoneData={phoneData} />}
+        {productData && <VariantsActionsBlock productData={productData} />}
       </div>
 
-      <About />
+      {productData && <About productData={productData} />}
 
-      <TechSpecs />
+      {productData && <TechSpecs productData={productData} />}
 
       <RecommendedGoods />
     </div>

@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
-import styles from './Menu.module.scss';
+import { useContext } from 'react';
 import { Icon } from '../../Icon/Icon';
-// import { IconType } from '../../../types/IconType';
+import { ProductsCounter } from '../ProductsCounter/ProductsCounter';
+import { ProductsContext } from '../../../context/ProductsContext';
+import styles from './Menu.module.scss';
 
 function getLinkClass({ isActive }: { isActive: boolean }): string {
   return cn(styles.menu__link, { [styles['menu__link--active']]: isActive });
@@ -22,6 +24,10 @@ interface Props {
 }
 
 export const Menu: React.FC<Props> = ({ onHide, show }) => {
+  const { cartProducts, favourites } = useContext(ProductsContext);
+  const cartProductsQuantity = cartProducts.length;
+  const favouritesProductsQuantity = favourites.length;
+
   return (
     <aside
       className={cn(styles.menu, { [`${styles['menu--active']}`]: show })}
@@ -77,6 +83,8 @@ export const Menu: React.FC<Props> = ({ onHide, show }) => {
           onClick={onHide}
         >
           <Icon iconType="Heart" color="#313237" />
+          {!!favouritesProductsQuantity
+            && <ProductsCounter quantity={favouritesProductsQuantity} />}
         </NavLink>
 
         <NavLink
@@ -85,6 +93,8 @@ export const Menu: React.FC<Props> = ({ onHide, show }) => {
           onClick={onHide}
         >
           <Icon iconType="Cart" color="#313237" />
+          {!!cartProductsQuantity
+            && <ProductsCounter quantity={cartProductsQuantity} />}
         </NavLink>
       </div>
     </aside>

@@ -1,12 +1,11 @@
 @import '../../mixins/typography.scss';
 @import '../../mixins/mixinLayout.scss';
 @import '../../variables.scss/colors.scss';
+@import '../../styles/';
 
 .cartItem {
   display: flex;
-  // min-width: 100%;
   padding: 16px;
-  // width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
@@ -22,9 +21,7 @@
 
   @include onTablet {
     flex-direction: row;
-    // width: 592px;
     padding: 24px;
-    // justify-content: center;
     align-items: center;
     gap: 24px;
   }
@@ -83,9 +80,25 @@
       width: 96px;
 
       &Button {
+        box-sizing: border-box;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+
+        justify-self: center;
         display: flex;
-        justify-content: center;
+        gap: 16px;
         align-items: center;
+      
+        cursor: pointer;
+        // @include typographySmallText;
+        color: $secondary-color;
+      
+        @include hover(color, $primary-color);
+      
+        &:hover * {
+          border-color: $primary-color;
+        }
 
         width: 32px;
         height: 32px;
@@ -94,9 +107,12 @@
 
         cursor: pointer;
 
-        :disabled {
-          // border: 1px solid $elements-color;
-          border: 3px solid green($color: #000000);
+        &:disabled {
+          border: 1px solid $elements-color;
+          color: $elements-color;
+          cursor: default;
+          // border: 3px solid green;
+          // border: 2px solid #ff0303;
         }
       }
 

@@ -1,0 +1,38 @@
+@import '../../../styles/';
+
+.counter {
+  box-sizing: border-box;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transform: translate(5px, -5px);
+
+  @include onTablet {
+    top: 10px;
+    right: 10px;
+  }
+
+  @include onDesktop {
+    top: 18px;
+    right: 18px;
+  }
+
+
+  width: 14px;
+  height: 14px;
+
+  border-radius: 100%;
+  border: 1px solid $gray-white;
+
+  background-color: $heart-color;
+
+  color: $gray-white;
+  text-align: center;
+  font-family: 'MontRegular';
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}

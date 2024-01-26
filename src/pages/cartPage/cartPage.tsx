@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import styles from './cartPage.module.scss';
 import { CartItem } from '../../components/CartItem/CartItem';
+import { BackLink } from '../../components/BackLink/BackLink';
 
 const productsFromServer = [
   {
@@ -42,19 +43,43 @@ export const CartPage: React.FC = () => {
       .filter(product => product.id !== id));
   };
 
-  const changeQuantity = (id: number, type: '-' | '+') => {
+  // const changeQuantity = (id: number, type: '-' | '+') => {
+  //   const indexOfProduct = products.findIndex(product => product.id === id);
+
+  //   setProducts(prevProducts => {
+  //     const newProducts = [...prevProducts];
+
+  //     if (type === '-') {
+  //       newProducts[indexOfProduct].quantity -= 1;
+  //     }
+
+  //     if (type === '+') {
+  //       newProducts[indexOfProduct].quantity += 1;
+  //     }
+
+  //     return newProducts;
+  //   });
+  // };
+
+  const increaseQuantity = (id: number) => {
     const indexOfProduct = products.findIndex(product => product.id === id);
 
     setProducts(prevProducts => {
       const newProducts = [...prevProducts];
 
-      if (type === '-') {
-        newProducts[indexOfProduct].quantity -= 1;
-      }
+      newProducts[indexOfProduct].quantity += 1;
 
-      if (type === '+') {
-        newProducts[indexOfProduct].quantity += 1;
-      }
+      return newProducts;
+    });
+  };
+
+  const decreaseQuantity = (id: number) => {
+    const indexOfProduct = products.findIndex(product => product.id === id);
+
+    setProducts(prevProducts => {
+      const newProducts = [...prevProducts];
+
+      newProducts[indexOfProduct].quantity -= 1;
 
       return newProducts;
     });
@@ -62,7 +87,8 @@ export const CartPage: React.FC = () => {
 
   return (
     <>
-      <Link to="..">Back</Link>
+      {/* <Link to="..">Back</Link> */}
+      <BackLink link=".." />
       <h1 className={styles.title}>Cart</h1>
       <div className={styles.wrapper}>
         <div
@@ -86,7 +112,8 @@ export const CartPage: React.FC = () => {
                   quantity={quantity}
                   image={image}
                   deleteProduct={deleteProduct}
-                  changeQuantity={changeQuantity}
+                  increaseQuantity={increaseQuantity}
+                  decreaseQuantity={decreaseQuantity}
                 />
               ))
           }

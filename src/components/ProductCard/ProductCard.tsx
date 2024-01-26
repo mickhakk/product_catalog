@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { Link } from 'react-router-dom';
 import style from './ProductCard.module.scss';
 import { Product } from '../../types/Product';
 import { useContextProvider } from '../../context/ProductsContext';
@@ -20,6 +21,8 @@ export const ProductCard: React.FC<Props> = (props) => {
 
   const {
     id,
+    itemId,
+    category,
     image,
     name,
     fullPrice,
@@ -47,19 +50,21 @@ export const ProductCard: React.FC<Props> = (props) => {
         [style.card__default_hover]: !simpleHoverEffect,
       })}
     >
-      <div className={style.card__image_wrapper}>
-        <img
-          className={style.card__product_image}
-          alt={`${name}`}
-          src={`${image}`}
-        />
-      </div>
+      <Link to={`../${category}/${itemId}`}>
+        <div className={style.card__image_wrapper}>
+          <img
+            className={style.card__product_image}
+            alt={`${name}`}
+            src={`${image}`}
+          />
+        </div>
 
-      <h3
-        className={style.card__product_name}
-      >
-        {name}
-      </h3>
+        <h3
+          className={style.card__product_name}
+        >
+          {name}
+        </h3>
+      </Link>
 
       <div className={style.card__price_wrapper}>
         {hasLowPrice
