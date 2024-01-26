@@ -2,7 +2,7 @@ import React from 'react';
 // import { Product } from '../../types/Product';
 import styles from './CartItem.module.scss';
 import { Icon } from '../Icon';
-import { IconType } from '../../types/IconType';
+// import { IconType } from '../../types/IconType';
 
 interface Props {
   id: number,
@@ -32,7 +32,7 @@ export const CartItem: React.FC<Props> = ({
           className={styles.cartItemFirstRowDeleteItemButton}
           onClick={() => deleteProduct(id)}
         >
-          <Icon type={IconType.close} />
+          <Icon iconType="Close" color="#313237" />
         </button>
         <img
           src={`${image}`}

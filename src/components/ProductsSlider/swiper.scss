@@ -18,9 +18,9 @@
 
 .swiper-slide {
   width: fit-content;
+
   &:last-child {
     padding-right: 16px;
-
 
     @include onTablet {
       padding-right: 24px;

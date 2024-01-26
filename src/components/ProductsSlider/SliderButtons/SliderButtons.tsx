@@ -9,14 +9,14 @@ export const SliderButtons = () => {
       <button
         type="button"
         onClick={() => swiper.slidePrev()}
-        className={styles.slider_button}
+        className={styles.slider_buttons__button}
       >
         {'<'}
       </button>
       <button
         type="button"
         onClick={() => swiper.slideNext()}
-        className={styles.slider_button}
+        className={styles.slider_buttons__button}
       >
         {'>'}
       </button>

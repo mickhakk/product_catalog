@@ -10,4 +10,9 @@
     margin-bottom: 24px;
     grid-column: 1/-1;
   }
+
+  &__title {
+    color: $primary-color;
+    @include typographyH2
+  }
 }

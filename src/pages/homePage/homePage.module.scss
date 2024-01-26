@@ -17,6 +17,7 @@
   &__title {
     padding-block: 24px;
     @include typographyH1;
+    color: $primary-color;
 
     @include onTablet {
       padding-block: 32px;

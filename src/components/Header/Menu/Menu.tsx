@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import styles from './Menu.module.scss';
 import { Icon } from '../../Icon/Icon';
-import { IconType } from '../../../types/IconType';
+// import { IconType } from '../../../types/IconType';
 
 function getLinkClass({ isActive }: { isActive: boolean }): string {
   return cn(styles.menu__link, { [styles['menu__link--active']]: isActive });
@@ -76,7 +76,7 @@ export const Menu: React.FC<Props> = ({ onHide, show }) => {
           className={getButtonClass}
           onClick={onHide}
         >
-          <Icon type={IconType.heart} />
+          <Icon iconType="Heart" color="#313237" />
         </NavLink>
 
         <NavLink
@@ -84,7 +84,7 @@ export const Menu: React.FC<Props> = ({ onHide, show }) => {
           className={getButtonClass}
           onClick={onHide}
         >
-          <Icon type={IconType.cart} />
+          <Icon iconType="Cart" color="#313237" />
         </NavLink>
       </div>
     </aside>

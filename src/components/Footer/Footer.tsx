@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { FooterLinks } from './FooterLinks/FooterLinks';
 import styles from './Footer.module.scss';
 import { Icon } from '../Icon';
-import { IconType } from '../../types/IconType';
+// import { IconType } from '../../types/IconType';
 
 export const Footer = () => {
   const onGoToTop = () => {
@@ -35,7 +35,7 @@ export const Footer = () => {
           >
             Back to top
             <div className={styles.footer__arrow_button}>
-              <Icon type={IconType.arrowUp} />
+              <Icon iconType="ArrowUp" color="#313237" />
             </div>
           </button>
         </div>

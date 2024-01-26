@@ -4,7 +4,6 @@ import cn from 'classnames';
 import styles from './Topbar.module.scss';
 import { Navigation } from '../Navigation/Navigation';
 import { Icon } from '../../Icon';
-import { IconType } from '../../../types/IconType';
 
 function getButtonClass(type: string) {
   return ({ isActive }: { isActive: boolean }) => cn(
@@ -51,16 +50,16 @@ export const Topbar: React.FC<Props> = (props) => {
             onClick={toggleMenu}
           >
             {isMenuActive
-              ? <Icon type={IconType.close} />
-              : <Icon type={IconType.menu} />}
+              ? <Icon iconType="Close" color="#313237" />
+              : <Icon iconType="Cart" color="#313237" />}
           </button>
 
           <NavLink to="favourites" className={getButtonClass('favourites')}>
-            <Icon type={IconType.heart} />
+            <Icon iconType="Heart" color="#313237" />
           </NavLink>
 
           <NavLink to="cart" className={getButtonClass('cart')}>
-            <Icon type={IconType.cart} />
+            <Icon iconType="Cart" color="#313237" />
           </NavLink>
         </div>
       </div>
