@@ -1,8 +1,8 @@
-import { Product } from '../../../../types/Product';
+import { ProductDetails } from '../../../../types/Product';
 import styles from '../../productPage.module.scss';
 
 interface Props {
-  productData: Product;
+  productData: ProductDetails;
 }
 
 export const TechSpecs: React.FC<Props> = ({ productData }) => {

@@ -7,10 +7,10 @@ import { TechSpecs } from './components/TechSpecs';
 import { VariantsActionsBlock } from './components/VariantsActionsBlock';
 import styles from './productPage.module.scss';
 import { getProduct } from '../../api/products';
-import { Product } from '../../types/Product';
+import { ProductDetails } from '../../types/Product';
 
 export const ProductPage = () => {
-  const [productData, setProductData] = useState<Product | null>(null);
+  const [productData, setProductData] = useState<ProductDetails | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
