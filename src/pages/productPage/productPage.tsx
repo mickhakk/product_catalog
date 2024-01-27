@@ -2,12 +2,12 @@
 import { useEffect, useState } from 'react';
 import { About } from './components/About';
 import { Photos } from './components/Photos';
-import { RecommendedGoods } from './components/RecommendedGoods';
 import { TechSpecs } from './components/TechSpecs';
 import { VariantsActionsBlock } from './components/VariantsActionsBlock';
 import styles from './productPage.module.scss';
 import { getProduct } from '../../api/products';
 import { ProductDetails } from '../../types/Product';
+import { ProductsSlider } from '../../components';
 
 export const ProductPage = () => {
   const [productData, setProductData] = useState<ProductDetails | null>(null);
@@ -41,7 +41,11 @@ export const ProductPage = () => {
 
       {productData && <TechSpecs productData={productData} />}
 
-      <RecommendedGoods />
+      <div className={styles.recommended}>
+        <ProductsSlider>
+          You may also like
+        </ProductsSlider>
+      </div>
     </div>
   );
 };

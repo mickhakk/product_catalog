@@ -1,6 +1,4 @@
 import { ReactNode } from 'react';
-// import { IconType } from '../../types/IconType';
-// import { Icon } from '../Icon';
 import styles from './SquareButton.module.scss';
 import { IconType } from '../../types/IconType';
 
