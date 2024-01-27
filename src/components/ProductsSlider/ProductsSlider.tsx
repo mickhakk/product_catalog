@@ -1,13 +1,12 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/navigation';
 
 import './swiper.scss';
 import styles from './ProductsSlider.module.scss';
 
-import { ProductCard } from '../ProductCard/ProductCard';
-import { SliderButtons } from './SliderButtons/SliderButtons';
+import { ProductCard } from '../ProductCard';
+import { SliderButtons } from './SliderButtons';
 import type { Product } from '../../types/Product';
 
 interface Props {
