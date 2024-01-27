@@ -1,21 +1,29 @@
 import { FC } from 'react';
-import { SetURLSearchParams } from 'react-router-dom';
 
 interface Props {
-  setSearchParams: SetURLSearchParams;
+  handleSelectChange: (value:React.ChangeEvent<HTMLSelectElement>,
+    limit:string) => void;
+  order: string;
 }
 export const SortByOptions: FC<Props> = (props) => {
-  const { setSearchParams } = props;
-  const sortByParams = ['price', 'age', 'title'];
+  const { handleSelectChange, order } = props;
+  const sortByParams = ['price', 'year'];
 
   return (
     <select
       name=""
       id=""
-      onChange={(event) => setSearchParams({ order: event.target.value })}
+      value={order}
+      onChange={(event) => handleSelectChange(event, 'order')}
     >
       {sortByParams.map(param => (
-        <option value={param}>{param}</option>
+        <option
+          key={param}
+          value={param}
+          selected={param === 'price'}
+        >
+          {param}
+        </option>
       ))}
     </select>
   );

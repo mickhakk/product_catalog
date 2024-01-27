@@ -7,24 +7,21 @@ import { getSearchWith } from '../../utils/searchHelper';
 
 interface Props {
   totalCount: number,
-  pageSize: number,
+  limit: string,
   siblingCount: number,
   page: string,
   searchParams: URLSearchParams,
 }
 export const Pagination: FC<Props> = (props) => {
-  // const [searchParams] = useSearchParams();
-  // const page = searchParams.get('page') || '';
-
   const {
     totalCount,
-    pageSize,
+    limit,
     siblingCount = 1,
     page,
     searchParams,
   } = props;
   const currentPage = Number(page);
-
+  const pageSize = Number(limit) || totalCount;
   const setSearchPage = (param: number | string) => {
     const searchPage = param.toString();
 

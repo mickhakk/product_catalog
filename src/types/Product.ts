@@ -17,7 +17,7 @@ export interface GetParams {
   page: number,
   limit: string,
   order: string,
-  direction: 'ASC' | 'DESC'
+  direction: string,
 }
 
 export interface DataFromServer {
