@@ -88,8 +88,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
         setProducts(data);
       });
   }, [params]);
- console.log(params);
- 
+
   const value: ProductsContextType = useMemo(() => ({
     products,
     favourites,

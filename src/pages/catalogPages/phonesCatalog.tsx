@@ -32,9 +32,9 @@ export const PhonesCatalog = () => {
     setSearchParams(search);
   }, [searchParams, setSearchParams]);
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>,
+  const handleSelectChange = (event: string,
     value:string) => {
-    setSearchWith({ [value]: event.target.value || null });
+    setSearchWith({ [value]: event || null });
   };
 
   const checkPageValue = useCallback(() => {
@@ -70,10 +70,10 @@ export const PhonesCatalog = () => {
       <div className={styles.catalog__sort}>
         <div className={styles['catalog__sort--by']}>
           <p className={styles['catalog__sort--label']}>Sort by</p>
-          <SortByOptions
+          {/* <SortByOptions
             handleSelectChange={handleSelectChange}
             order={order}
-          />
+          /> */}
         </div>
         <div className={styles['catalog__sort--limit']}>
           <p className={styles['catalog__sort--label']}>Items on page</p>
@@ -85,7 +85,7 @@ export const PhonesCatalog = () => {
         <div>
           <p className={styles['catalog__sort--label']}>Sort direction</p>
           <SortByDirecton
-            handleSelectChange={handleSelectChange}
+            // handleSelectChange={handleSelectChange}
             direction={direction}
           />
         </div>
