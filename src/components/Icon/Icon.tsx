@@ -1,13 +1,15 @@
 import React from 'react';
-import { IconPaths } from './IconPaths';
+import { iconPaths } from './IconPaths';
 import { IconColor } from './IconColor';
 
 interface Props {
-  type: keyof typeof IconPaths,
+  type: keyof typeof iconPaths,
   color: keyof typeof IconColor,
 }
 
 export const Icon: React.FC<Props> = ({ type, color }) => {
+  const { clipRule, fillRule, d } = iconPaths[type];
+
   return (
     <svg
       width="16"
@@ -16,7 +18,7 @@ export const Icon: React.FC<Props> = ({ type, color }) => {
       xmlns="http://www.w3.org/2000/svg"
       fill={IconColor[color]}
     >
-      <path {...IconPaths[type]} />
+      <path clipRule={clipRule} fillRule={fillRule} d={d} />
     </svg>
   );
 };
