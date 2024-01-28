@@ -13,7 +13,7 @@ export interface Product {
   image: string,
 }
 export interface GetParams {
-  type?: 'phones' | 'tablets' | 'accessories',
+  type?: string,
   page: number,
   limit: string,
   order: string,

@@ -1,38 +1,36 @@
 import { FC } from 'react';
-import Select, {
-  GroupBase,
-  OptionProps,
-  StylesConfig,
-} from 'react-select';
+import Select from 'react-select';
 import styles from './SortBy.module.scss';
+import { Option, customStyles } from './customStyles';
 
 interface Props {
   handleSelectChange: (value:string,
     limit:string) => void;
 }
 
+const optionsPageLimit: Option[] = [
+  { value: '4', label: '4' },
+  { value: '8', label: '8' },
+  { value: '16', label: '16' },
+  { value: 'All', label: 'All' },
+];
+const optionsSortDirection: Option[] = [
+  { value: 'ASC', label: 'Up' },
+  { value: 'DESC', label: 'Down' },
+];
+
+const optionsSortParams = [
+  { value: 'price', label: 'price' },
+  { value: 'year', label: 'year' },
+];
+
+const limitDefaultValue = optionsPageLimit[optionsPageLimit.length - 1];
+const directionDefalultValue = optionsSortDirection[optionsSortDirection
+  .length - 1];
+const sortDefaultValue = optionsSortParams[0];
+
 export const SortParams: FC<Props> = (props) => {
   const { handleSelectChange } = props;
-
-  interface Option {
-    value:string,
-    label:string,
-  }
-  const optionsPageLimit: Option[] = [
-    { value: '4', label: '4' },
-    { value: '8', label: '8' },
-    { value: '16', label: '16' },
-    { value: 'All', label: 'All' },
-  ];
-  const optionsSortDirection: Option[] = [
-    { value: 'ASC', label: 'Up' },
-    { value: 'DESC', label: 'Down' },
-  ];
-
-  const optionsSortParams = [
-    { value: 'price', label: 'price' },
-    { value: 'year', label: 'year' },
-  ];
 
   const handleChange = (selectedOption: Option | null) => {
     const pagelimitValues = optionsPageLimit.map(({ value }) => value);
@@ -52,74 +50,6 @@ export const SortParams: FC<Props> = (props) => {
     }
   };
 
-  const getBackgroundColor = (state: OptionProps<Option, boolean>) => {
-    if (state.isFocused && !state.isSelected) {
-      return '#FAFBFC';
-    }
-
-    if (state.isSelected) {
-      return '#313237';
-    }
-
-    return '#FFFFFF';
-  };
-
-  const getColor = (state:OptionProps<Option, boolean>) => {
-    if (state.isSelected) {
-      return '#ffffff';
-    }
-
-    if (state.isFocused) {
-      return '#313237';
-    }
-
-    return '#89939A';
-  };
-
-  const customStyles:StylesConfig<Option, false, GroupBase<Option>> = {
-    control: (base, state) => ({
-      ...base,
-      border: '1px solid #B4BDC3',
-      font: 'Mont',
-      fontSize: '14px',
-      fontStyle: 'normal',
-      fontWeight: 600,
-      lineHeight: '21px',
-      borderRadius: 0,
-      borderColor: state.isFocused ? '#313237' : '#B4BDC3',
-      boxShadow: 'none',
-      '&:hover': {
-        borderColor: '#89939A',
-      },
-    }),
-    menu: (base) => ({
-      ...base,
-      borderRadius: 0,
-    }),
-    indicatorSeparator: (base) => ({
-      ...base,
-      height: 0,
-    }),
-    option: (base, state) => ({
-      ...base,
-      backgroundColor: getBackgroundColor(state),
-      color: getColor(state),
-      font: 'Mont',
-      fontSize: '14px',
-      fontStyle: 'normal',
-      fontWeight: 500,
-      lineHeight: '21px',
-      ':active': {
-        background: 'none',
-      },
-    }),
-    dropdownIndicator: (base, state) => ({
-      ...base,
-      transition: 'transform 0.5 ease',
-      transform: state.isFocused ? 'rotate(180deg)' : 'rotate(0)',
-    }),
-  };
-
   return (
     <div className={styles.catalog__sort}>
       <div className={styles['catalog__sort--by']}>
@@ -128,7 +58,7 @@ export const SortParams: FC<Props> = (props) => {
           options={optionsSortParams}
           styles={customStyles}
           onChange={handleChange}
-          defaultValue={optionsSortParams[0]}
+          defaultValue={sortDefaultValue}
         />
       </div>
       <div className={styles['catalog__sort--limit']}>
@@ -137,7 +67,7 @@ export const SortParams: FC<Props> = (props) => {
           options={optionsPageLimit}
           styles={customStyles}
           onChange={handleChange}
-          defaultValue={optionsPageLimit[optionsPageLimit.length - 1]}
+          defaultValue={limitDefaultValue}
         />
       </div>
       <div className={styles['catalog__sort--direction']}>
@@ -146,7 +76,7 @@ export const SortParams: FC<Props> = (props) => {
           options={optionsSortDirection}
           styles={customStyles}
           onChange={handleChange}
-          defaultValue={optionsSortDirection[optionsSortDirection.length - 1]}
+          defaultValue={directionDefalultValue}
         />
       </div>
     </div>

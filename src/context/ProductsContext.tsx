@@ -27,11 +27,11 @@ const ProductsContext = createContext<ProductsContextType>({
   toogleSelectCart: () => {},
   cartProducts: [],
   params: {
-    type: 'phones',
+    type: '',
     page: 0,
-    limit: 'all',
-    order: 'price',
-    direction: 'DESC',
+    limit: '',
+    order: '',
+    direction: '',
   },
   setParams: () => {},
 });
@@ -43,7 +43,7 @@ type Props = {
 };
 
 const defaultValue:GetParams = {
-  type: 'phones',
+  type: '',
   page: 0,
   limit: 'All',
   order: 'price',
