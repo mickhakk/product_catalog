@@ -7,7 +7,7 @@ import { VariantsActionsBlock } from './components/VariantsActionsBlock';
 import styles from './productPage.module.scss';
 import { getProduct } from '../../api/products';
 import { ProductDetails } from '../../types/Product';
-import { ProductsSlider } from '../../components';
+// import { ProductsSlider } from '../../components';
 
 export const ProductPage = () => {
   const [productData, setProductData] = useState<ProductDetails | null>(null);
@@ -42,9 +42,9 @@ export const ProductPage = () => {
       {productData && <TechSpecs productData={productData} />}
 
       <div className={styles.recommended}>
-        <ProductsSlider>
+        {/*         <ProductsSlider>
           You may also like
-        </ProductsSlider>
+        </ProductsSlider> */}
       </div>
     </div>
   );
