@@ -13,31 +13,16 @@
     color: $secondary-color;
     margin-bottom: 40px;
   }
-  &__sort {
-    @include pageGrid;
-
-    &--label {
-      @include typographySmallText;
-      color: $secondary-color;
-    }
-
-    &--by {
-     grid-column: span 2;
-     @include onDesktop {
-      grid-column: span 4;
-     }
-     
-    }
-    &--limit {
-     grid-column: span 2;
-     @include onDesktop {
-      grid-column: span 3;
-     }
-    }
-  }
+  
   &__container {
     @include pageGrid;
     row-gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  &__pagination-container {
+    display: flex;
+    justify-content: center;
   }
 
 }

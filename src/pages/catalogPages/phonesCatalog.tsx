@@ -4,14 +4,8 @@ import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { useContextProvider } from '../../context/ProductsContext';
 import styles from './catalog.module.scss';
-import {
-  PaginationButton,
-} from
-  '../../components/SortBy/PaginationButtons/PaginationButton';
-import { SortByOptions } from '../../components/SortBy/SortByOptions';
-import { SortByDirecton }
-  from '../../components/SortBy/SortByDirection/SortByDirection';
 import { SearchParams, getSearchWith } from '../../utils/searchHelper';
+import { SortParams } from '../../components/SortParams/SortParams';
 
 const siblingCount = 1;
 
@@ -21,6 +15,7 @@ export const PhonesCatalog = () => {
   const limit = searchParams.get('limit') || 'all';
   const order = searchParams.get('order') || '';
   const direction = searchParams.get('direction') || '';
+
   const {
     products,
     setParams,
@@ -67,41 +62,35 @@ export const PhonesCatalog = () => {
       <p className={styles.catalog__count}>
         {`${products?.count} modeles`}
       </p>
-      <div className={styles.catalog__sort}>
+      <SortParams handleSelectChange={handleSelectChange} />
+      {/* <div className={styles.catalog__sort}>
         <div className={styles['catalog__sort--by']}>
           <p className={styles['catalog__sort--label']}>Sort by</p>
-          {/* <SortByOptions
-            handleSelectChange={handleSelectChange}
-            order={order}
-          /> */}
         </div>
         <div className={styles['catalog__sort--limit']}>
           <p className={styles['catalog__sort--label']}>Items on page</p>
           <PaginationButton
             handleSelectChange={handleSelectChange}
-            limit={limit}
           />
         </div>
         <div>
           <p className={styles['catalog__sort--label']}>Sort direction</p>
-          <SortByDirecton
-            // handleSelectChange={handleSelectChange}
-            direction={direction}
-          />
         </div>
-      </div>
+      </div> */}
       <div className={styles.catalog__container}>
         {products?.rows.map(currentProduct => (
           <ProductCard product={currentProduct} />
         ))}
       </div>
-      <Pagination
-        totalCount={products?.count || 0}
-        limit={limit}
-        siblingCount={siblingCount}
-        page={page}
-        searchParams={searchParams}
-      />
+      <div className={styles['catalog__pagination-container']}>
+        <Pagination
+          totalCount={products?.count || 0}
+          limit={limit}
+          siblingCount={siblingCount}
+          page={page}
+          searchParams={searchParams}
+        />
+      </div>
     </section>
   );
 };
