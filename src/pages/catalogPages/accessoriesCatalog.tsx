@@ -13,6 +13,7 @@ export const AccessoriesCatalog = () => {
     limit,
     page,
     searchParams,
+    handleLimitChange,
   } = useCatalogParams();
 
   return (
@@ -21,7 +22,10 @@ export const AccessoriesCatalog = () => {
       <p className={styles.catalog__count}>
         {`${productsCount} modeles`}
       </p>
-      <SortParams handleSelectChange={handleSelectChange} />
+      <SortParams
+        handleSelectChange={handleSelectChange}
+        handleLimitChange={handleLimitChange}
+      />
       <div className={styles.catalog__container}>
         {productsCatalog?.map(currentProduct => (
           <ProductCard product={currentProduct} />

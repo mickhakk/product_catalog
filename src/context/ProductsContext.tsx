@@ -58,6 +58,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
   const [params, setParams] = useState<GetParams>(defaultValue);
   const [isLoading, setIsLoading] = useState(false);
+
   const toogleSelectCart = useCallback((product:Product) => {
     const cartIds = cartProducts.map(({ id }) => id);
 

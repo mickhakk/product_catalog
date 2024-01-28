@@ -3,7 +3,9 @@ import { useCallback, useEffect } from 'react';
 import { useContextProvider } from '../context/ProductsContext';
 
 import { SearchParams, getSearchWith } from '../utils/searchHelper';
+import { GetParams } from '../types/Product';
 
+export type SelectValue = Pick<GetParams, 'order' | 'direction'>;
 export const useCatalogParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page') || '';
@@ -25,9 +27,13 @@ export const useCatalogParams = () => {
     setSearchParams(search);
   }, [searchParams, setSearchParams]);
 
-  const handleSelectChange = (event: string,
+  const handleLimitChange = (event: string,
     value:string) => {
     setSearchWith({ [value]: event || null });
+  };
+
+  const handleSelectChange = (value:SelectValue) => {
+    setSearchWith({ ...value });
   };
 
   const checkPageValue = useCallback(() => {
@@ -63,5 +69,6 @@ export const useCatalogParams = () => {
     limit,
     page,
     searchParams,
+    handleLimitChange,
   };
 };

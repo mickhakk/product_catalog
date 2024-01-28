@@ -1,10 +1,17 @@
 import { GroupBase, OptionProps, StylesConfig } from 'react-select';
 
 export interface Option {
+  value:{ order:string, direction:string },
+  label:string,
+}
+
+export interface OptionLimit {
   value:string,
   label:string,
 }
-const getBackgroundColor = (state: OptionProps<Option, boolean>) => {
+export type CombinedOption = Option | OptionLimit;
+
+const getBackgroundColor = (state: OptionProps<CombinedOption, boolean>) => {
   if (state.isFocused && !state.isSelected) {
     return '#FAFBFC';
   }
@@ -16,7 +23,7 @@ const getBackgroundColor = (state: OptionProps<Option, boolean>) => {
   return '#FFFFFF';
 };
 
-const getColor = (state:OptionProps<Option, boolean>) => {
+const getColor = (state:OptionProps<CombinedOption, boolean>) => {
   if (state.isSelected) {
     return '#ffffff';
   }
@@ -28,7 +35,8 @@ const getColor = (state:OptionProps<Option, boolean>) => {
   return '#89939A';
 };
 
-export const customStyles:StylesConfig<Option, false, GroupBase<Option>> = {
+export const customStyles:StylesConfig<CombinedOption,
+false, GroupBase<CombinedOption>> = {
   control: (base, state) => ({
     ...base,
     border: '1px solid #B4BDC3',

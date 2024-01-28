@@ -1,53 +1,52 @@
 import { FC } from 'react';
 import Select from 'react-select';
 import styles from './SortBy.module.scss';
-import { Option, customStyles } from './customStyles';
+import {
+  CombinedOption,
+  Option,
+  OptionLimit,
+  customStyles,
+} from './customStyles';
 import { useContextProvider } from '../../context/ProductsContext';
+import { SelectValue } from '../../CustomHooks/UseCatalogParams';
 
 interface Props {
-  handleSelectChange: (value:string,
-    limit:string) => void;
+  handleSelectChange: (value:SelectValue) => void;
+  handleLimitChange: (event: string, value: string) => void;
 }
 
-const optionsPageLimit: Option[] = [
+const optionsPageLimit: OptionLimit[] = [
   { value: '4', label: '4' },
   { value: '8', label: '8' },
   { value: '16', label: '16' },
   { value: 'All', label: 'All' },
 ];
-const optionsSortDirection: Option[] = [
-  { value: 'ASC', label: 'Up' },
-  { value: 'DESC', label: 'Down' },
-];
 
-const optionsSortParams = [
-  { value: 'price', label: 'price' },
-  { value: 'year', label: 'year' },
+const optionsSortParams:Option[] = [
+  { value: { order: 'price', direction: 'desc' }, label: 'Price: High to low' },
+  { value: { order: 'price', direction: 'asc' }, label: 'Price: Low to High' },
+  { value: { order: 'year', direction: 'desc' }, label: 'Newest' },
+  { value: { order: 'year', direction: 'asc' }, label: 'Old(but fashion)' },
+
 ];
 
 const limitDefaultValue = optionsPageLimit[optionsPageLimit.length - 1];
-const directionDefalultValue = optionsSortDirection[optionsSortDirection
-  .length - 1];
 const sortDefaultValue = optionsSortParams[0];
 
 export const SortParams: FC<Props> = (props) => {
-  const { handleSelectChange } = props;
+  const { handleSelectChange, handleLimitChange } = props;
   const { isLoading } = useContextProvider();
-  const handleChange = (selectedOption: Option | null) => {
-    const pagelimitValues = optionsPageLimit.map(({ value }) => value);
-    const sortByValues = optionsSortDirection.map(({ value }) => value);
-    const sortParamsValues = optionsSortParams.map(({ value }) => value);
-
-    if (selectedOption && pagelimitValues.includes(selectedOption.value)) {
-      handleSelectChange(selectedOption.value, 'limit');
+  const handleChange = (selectedOption: CombinedOption | null) => {
+    if (selectedOption && typeof selectedOption.value === 'string') {
+      handleLimitChange(selectedOption.value, 'limit');
     }
+  };
 
-    if (selectedOption && sortByValues.includes(selectedOption.value)) {
-      handleSelectChange(selectedOption.value, 'direction');
-    }
+  const handleSortChange = (selectedOption: CombinedOption | null) => {
+    if (selectedOption && typeof selectedOption.value === 'object') {
+      const { direction, order } = selectedOption.value;
 
-    if (selectedOption && sortParamsValues.includes(selectedOption.value)) {
-      handleSelectChange(selectedOption.value, 'order');
+      handleSelectChange({ order, direction });
     }
   };
 
@@ -55,17 +54,17 @@ export const SortParams: FC<Props> = (props) => {
     <div className={styles.catalog__sort}>
       <div className={styles['catalog__sort--by']}>
         <p className={styles['catalog__sort--label']}>Sort by</p>
-        <Select<Option, false>
+        <Select<CombinedOption, false>
           options={optionsSortParams}
           styles={customStyles}
-          onChange={handleChange}
+          onChange={handleSortChange}
           defaultValue={sortDefaultValue}
           isLoading={isLoading}
         />
       </div>
       <div className={styles['catalog__sort--limit']}>
         <p className={styles['catalog__sort--label']}>Items on page</p>
-        <Select<Option, false>
+        <Select<CombinedOption, false>
           options={optionsPageLimit}
           styles={customStyles}
           onChange={handleChange}
@@ -73,7 +72,7 @@ export const SortParams: FC<Props> = (props) => {
           isLoading={isLoading}
         />
       </div>
-      <div className={styles['catalog__sort--direction']}>
+      {/* <div className={styles['catalog__sort--direction']}>
         <p className={styles['catalog__sort--label']}>Sort direction</p>
         <Select<Option, false>
           options={optionsSortDirection}
@@ -82,7 +81,7 @@ export const SortParams: FC<Props> = (props) => {
           defaultValue={directionDefalultValue}
           isLoading={isLoading}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
