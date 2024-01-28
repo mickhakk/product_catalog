@@ -20,14 +20,16 @@ interface ProductsContextType {
   toogleSelectFavorite: (product: Product) => void;
   toogleSelectCart: (product: Product) => void;
   cartProducts: Product[];
+  setCartProducts: React.Dispatch<React.SetStateAction<Product[]>>;
 
 }
 export const ProductsContext = createContext<ProductsContextType>({
   products: { count: 0, rows: [] },
   favourites: [],
-  toogleSelectFavorite: () => {},
-  toogleSelectCart: () => {},
+  toogleSelectFavorite: () => { },
+  toogleSelectCart: () => { },
   cartProducts: [],
+  setCartProducts: () => { },
 });
 
 export const useContextProvider = () => useContext(ProductsContext);
@@ -42,7 +44,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     = useLocalFavoritesStorage('favourites', []);
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
 
-  const toogleSelectCart = useCallback((product:Product) => {
+  const toogleSelectCart = useCallback((product: Product) => {
     const cartIds = cartProducts.map(({ id }) => id);
 
     if (cartIds.includes(product.id)) {
@@ -63,7 +65,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     setFavourites(favourites);
   }, [favourites]);
 
-  const defaultValue:GetParams = useMemo(() => ({
+  const defaultValue: GetParams = useMemo(() => ({
     type: 'phones',
     page: 0,
     limit: 16,
@@ -82,12 +84,13 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     toogleSelectFavorite,
     toogleSelectCart,
     cartProducts,
+    setCartProducts,
   }), [products, favourites,
     toogleSelectFavorite, toogleSelectCart, cartProducts]);
 
   return (
     <ProductsContext.Provider value={value}>
-      { children }
+      {children}
     </ProductsContext.Provider>
   );
 };
