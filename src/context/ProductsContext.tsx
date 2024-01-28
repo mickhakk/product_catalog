@@ -18,6 +18,7 @@ interface ProductsContextType {
   cartProducts: Product[];
   params: GetParams;
   setParams: React.Dispatch<React.SetStateAction<GetParams>>;
+  isLoading:boolean;
 
 }
 const ProductsContext = createContext<ProductsContextType>({
@@ -34,6 +35,7 @@ const ProductsContext = createContext<ProductsContextType>({
     direction: '',
   },
   setParams: () => {},
+  isLoading: false,
 });
 
 export const useContextProvider = () => useContext(ProductsContext);
@@ -55,7 +57,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   const [favourites, setFavoriets] = useState<Product[]>([]);
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
   const [params, setParams] = useState<GetParams>(defaultValue);
-
+  const [isLoading, setIsLoading] = useState(false);
   const toogleSelectCart = useCallback((product:Product) => {
     const cartIds = cartProducts.map(({ id }) => id);
 
@@ -83,10 +85,12 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   }, [favourites]);
 
   useEffect(() => {
+    setIsLoading(true);
     getProducts(params)
       .then(data => {
         setProducts(data);
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, [params]);
 
   const value: ProductsContextType = useMemo(() => ({
@@ -97,9 +101,10 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     cartProducts,
     params,
     setParams,
+    isLoading,
   }), [products, favourites,
     toogleSelectFavorite, toogleSelectCart,
-    cartProducts, params]);
+    cartProducts, params, isLoading]);
 
   return (
     <ProductsContext.Provider value={value}>

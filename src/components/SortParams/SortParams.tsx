@@ -2,6 +2,7 @@ import { FC } from 'react';
 import Select from 'react-select';
 import styles from './SortBy.module.scss';
 import { Option, customStyles } from './customStyles';
+import { useContextProvider } from '../../context/ProductsContext';
 
 interface Props {
   handleSelectChange: (value:string,
@@ -31,7 +32,7 @@ const sortDefaultValue = optionsSortParams[0];
 
 export const SortParams: FC<Props> = (props) => {
   const { handleSelectChange } = props;
-
+  const { isLoading } = useContextProvider();
   const handleChange = (selectedOption: Option | null) => {
     const pagelimitValues = optionsPageLimit.map(({ value }) => value);
     const sortByValues = optionsSortDirection.map(({ value }) => value);
@@ -59,6 +60,7 @@ export const SortParams: FC<Props> = (props) => {
           styles={customStyles}
           onChange={handleChange}
           defaultValue={sortDefaultValue}
+          isLoading={isLoading}
         />
       </div>
       <div className={styles['catalog__sort--limit']}>
@@ -68,6 +70,7 @@ export const SortParams: FC<Props> = (props) => {
           styles={customStyles}
           onChange={handleChange}
           defaultValue={limitDefaultValue}
+          isLoading={isLoading}
         />
       </div>
       <div className={styles['catalog__sort--direction']}>
@@ -77,6 +80,7 @@ export const SortParams: FC<Props> = (props) => {
           styles={customStyles}
           onChange={handleChange}
           defaultValue={directionDefalultValue}
+          isLoading={isLoading}
         />
       </div>
     </div>
