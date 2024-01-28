@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { DataFromServer, GetParams, ProductDetails } from '../types/Product';
+import {
+  DataFromServer,
+  GetParams,
+  Product,
+  ProductDetails,
+} from '../types/Product';
 
 const apiURL = 'https://product-catalog-api-r8lb.onrender.com/products/';
 
@@ -20,4 +25,16 @@ export const getProduct = async (): Promise<ProductDetails> => {
   );
 
   return product.data;
+};
+
+export const getNewProducts = async (): Promise<DataFromServer> => {
+  const products = await axios.get(`${apiURL}new`);
+
+  return products.data;
+};
+
+export const getDiscountProducts = async (): Promise<Product[]> => {
+  const products = await axios.get(`${apiURL}discount`);
+
+  return products.data;
 };

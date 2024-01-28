@@ -8,27 +8,17 @@ import styles from './ProductsSlider.module.scss';
 import { ProductCard } from '../ProductCard';
 import { SliderButtons } from './SliderButtons';
 import type { Product } from '../../types/Product';
+import { LoadingCard } from '../LoadingCard';
 
 interface Props {
   children: string;
+  products: Product[];
+  areLoading: boolean;
 }
 
-const product: Product = {
-  id: 1,
-  category: 'phones',
-  itemId: 'apple-iphone-11-pro-max-256gb-silver',
-  name: 'Apple iPhone 11 Pro Max 256GB Silver',
-  fullPrice: 999,
-  price: 700,
-  screen: '6.1” OLED',
-  capacity: '256GB',
-  color: 'silver',
-  ram: '6GB',
-  year: 2020,
-  image: 'img/phones/apple-iphone-7/black/00.jpg',
-};
+export const ProductsSlider: React.FC<Props> = (props) => {
+  const { children, products, areLoading } = props;
 
-export const ProductsSlider: React.FC<Props> = ({ children }) => {
   return (
     <section className={styles.products_slider}>
       <div className={styles.products_slider__top}>
@@ -49,33 +39,35 @@ export const ProductsSlider: React.FC<Props> = ({ children }) => {
       >
         <SliderButtons />
 
-        <SwiperSlide>
-          <ProductCard product={product} simpleHoverEffect />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard product={product} simpleHoverEffect />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard product={product} simpleHoverEffect />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard product={product} simpleHoverEffect />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard product={product} simpleHoverEffect />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard product={product} simpleHoverEffect />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard product={product} simpleHoverEffect />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard product={product} simpleHoverEffect />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard product={product} simpleHoverEffect />
-        </SwiperSlide>
+        {areLoading
+          ? (
+            <>
+              <SwiperSlide>
+                <LoadingCard />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <LoadingCard />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <LoadingCard />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <LoadingCard />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <LoadingCard />
+              </SwiperSlide>
+            </>
+          )
+          : products.map(product => (
+            <SwiperSlide key={product.itemId}>
+              <ProductCard product={product} simpleHoverEffect />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </section>
   );
