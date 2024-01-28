@@ -3,7 +3,9 @@ import { iconPaths } from './IconPaths';
 import { IconColor } from './IconColor';
 
 interface Props {
-  type: keyof typeof iconPaths,
+  type: 'ArrowLeft' | 'ArrowRight' | 'BurgerMenu' | 'Close' |
+  'ArrowUp' | 'ArrowDown' | 'Plus' | 'Minus' | 'Home' | 'Search' |
+  'Heart' | 'HeartFilled' | 'Cart',
   color: keyof typeof IconColor,
 }
 

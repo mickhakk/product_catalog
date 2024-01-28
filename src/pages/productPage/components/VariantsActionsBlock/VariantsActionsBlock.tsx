@@ -132,8 +132,8 @@ export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
           <div className={styles.container_buttons}>
             <Button
               text={isInCart ? ADDED : NOT_ADDED}
-              callback={() => toogleSelectCart(cardProduct as Product)}
-              isActive={isInCart}
+              onClick={() => toogleSelectCart(cardProduct as Product)}
+              isSelected={isInCart}
             />
 
             <label className={styles.checkbox__favorite}>
@@ -158,7 +158,6 @@ export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
           ))}
         </section>
       </div>
-
     </>
   );
 };
