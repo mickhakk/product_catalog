@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
 import styles from './Navigation.module.scss';
+import { scrollToTop } from '../../../utils/scrollToTop';
 
 function getLinkClass({ isActive }: { isActive: boolean }): string {
   return cn(styles.nav__link, { [styles['nav__link--active']]: isActive });
@@ -15,6 +16,7 @@ export const Navigation = () => {
           <NavLink
             to="/"
             className={getLinkClass}
+            onClick={scrollToTop}
           >
             Home
           </NavLink>
@@ -24,6 +26,7 @@ export const Navigation = () => {
           <NavLink
             to="/phones"
             className={getLinkClass}
+            onClick={scrollToTop}
           >
             Phones
           </NavLink>
@@ -33,6 +36,7 @@ export const Navigation = () => {
           <NavLink
             to="/tablets"
             className={getLinkClass}
+            onClick={scrollToTop}
           >
             Tablets
           </NavLink>
@@ -42,6 +46,7 @@ export const Navigation = () => {
           <NavLink
             to="/accessories"
             className={getLinkClass}
+            onClick={scrollToTop}
           >
             Accessories
           </NavLink>

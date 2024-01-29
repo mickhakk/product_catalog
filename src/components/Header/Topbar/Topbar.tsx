@@ -7,6 +7,7 @@ import { Navigation } from '../Navigation/Navigation';
 import { Icon } from '../../Icon';
 import { ProductsCounter } from '../ProductsCounter/ProductsCounter';
 import { ProductsContext } from '../../../context/ProductsContext';
+import { scrollToTop } from '../../../utils/scrollToTop';
 
 function getButtonClass(type: string) {
   return ({ isActive }: { isActive: boolean }) => cn(
@@ -29,6 +30,11 @@ export const Topbar: React.FC<Props> = (props) => {
   const cartProductsQuantity = cartProducts.length;
   const favouritesProductsQuantity = favourites.length;
 
+  const handleLogoClick = () => {
+    hideMenu();
+    scrollToTop();
+  };
+
   return (
     <>
       <div className={styles.topbar}>
@@ -36,7 +42,7 @@ export const Topbar: React.FC<Props> = (props) => {
           <Link
             to="/"
             className={styles.topbar__logo}
-            onClick={hideMenu}
+            onClick={handleLogoClick}
           >
             <img
               src="img/Logo.svg"
@@ -61,13 +67,21 @@ export const Topbar: React.FC<Props> = (props) => {
               : <Icon type="BurgerMenu" color="Main" />}
           </button>
 
-          <NavLink to="favourites" className={getButtonClass('favourites')}>
+          <NavLink
+            to="favourites"
+            className={getButtonClass('favourites')}
+            onClick={scrollToTop}
+          >
             <Icon type="Heart" color="Main" />
             {!!favouritesProductsQuantity
               && <ProductsCounter quantity={favouritesProductsQuantity} />}
           </NavLink>
 
-          <NavLink to="cart" className={getButtonClass('cart')}>
+          <NavLink
+            to="cart"
+            className={getButtonClass('cart')}
+            onClick={scrollToTop}
+          >
             <Icon type="Cart" color="Main" />
             {!!cartProductsQuantity
               && <ProductsCounter quantity={cartProductsQuantity} />}
