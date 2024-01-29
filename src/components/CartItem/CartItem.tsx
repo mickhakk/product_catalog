@@ -1,15 +1,19 @@
 import React from 'react';
 // import { Product } from '../../types/Product';
+import { Link } from 'react-router-dom';
 import styles from './CartItem.module.scss';
 import { Icon } from '../Icon';
 import { SquareButton } from '../SquareButton/SquareButton';
 
 interface Props {
+  // key: number
   id: number,
-  title: string,
+  name: string,
   price: number,
   quantity: number,
   image: string,
+  category: string,
+  itemId: string,
   deleteProduct: (id: number) => void,
   // changeQuantity: (id: number, type: '-' | '+') => void;
   increaseQuantity: (id: number) => void,
@@ -18,15 +22,19 @@ interface Props {
 
 export const CartItem: React.FC<Props> = ({
   id,
-  title,
+  name,
   price,
   quantity,
   image,
+  category,
+  itemId,
   deleteProduct,
   // changeQuantity,
   increaseQuantity,
   decreaseQuantity,
 }) => {
+  const fullItemPrice = price * quantity;
+
   return (
     <div className={styles.cartItem}>
       <div className={styles.cartItemFirstRow}>
@@ -38,14 +46,20 @@ export const CartItem: React.FC<Props> = ({
         >
           <Icon type="Close" color="Main" />
         </button>
-        <img
-          src={`${image}`}
-          alt={`${title}`}
-          className={styles.cartItemFirstRowImage}
-        />
-        <p className={styles.cartItemFirstRowTitle}>
-          {title}
-        </p>
+
+        <div className={styles.cartItemFirstRowImageWrapper}>
+          <img
+            src={`${image}`}
+            alt={`${name}`}
+            className={styles.cartItemFirstRowImageWrapperImage}
+          />
+        </div>
+        <Link
+          className={styles.cartItemFirstRowTitle}
+          to={`/${category}/${itemId}`}
+        >
+          {name}
+        </Link>
       </div>
       <div className={styles.cartItemSecondRow}>
         <div
@@ -60,23 +74,12 @@ export const CartItem: React.FC<Props> = ({
                 ? <Icon type="Minus" color="Disabled" />
                 : <Icon type="Minus" color="Main" />
             }
-            {/* <Icon type={IconType.minus} /> */}
-
           </SquareButton>
           <p
             className={styles.cartItemSecondRowQuantityWrapperQuantityText}
           >
             {quantity}
           </p>
-          {/* <button
-            type="button"
-            className={styles.cartItemSecondRowQuantityWrapperButton}
-            onClick={() => {
-              increaseQuantity(id);
-            }}
-          >
-            +
-          </button> */}
           <SquareButton
             handleClick={() => increaseQuantity(id)}
           >
@@ -89,7 +92,7 @@ export const CartItem: React.FC<Props> = ({
           <p
             className={styles.cartItemSecondRowPriceWrapperPrice}
           >
-            {`$${price * quantity}`}
+            {`$${fullItemPrice}`}
           </p>
         </div>
       </div>

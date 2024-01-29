@@ -51,12 +51,22 @@
       cursor: pointer;
     }
 
-    &Image {
+    &ImageWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       width: 80px;
       height: 80px;
-      // @include onTablet {
 
-      // }
+      // padding: 7px;
+
+      &Image {
+        height: 66px;
+        // @include onTablet {
+
+        // }
+      }
     }
 
     &Title {
@@ -89,13 +99,13 @@
         display: flex;
         gap: 16px;
         align-items: center;
-      
+
         cursor: pointer;
         // @include typographySmallText;
         color: $secondary-color;
-      
+
         @include hover(color, $primary-color);
-      
+
         &:hover * {
           border-color: $primary-color;
         }
@@ -145,4 +155,8 @@
       }
     }
   }
+}
+
+.link {
+  display: flex;
 }
