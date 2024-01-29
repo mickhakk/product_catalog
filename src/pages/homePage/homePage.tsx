@@ -4,6 +4,7 @@ import * as productsService from '../../api/products';
 import { BannerSlider, ProductsSlider } from '../../components';
 import styles from './homePage.module.scss';
 import { Product } from '../../types/Product';
+import { CategoriesSection } from '../../components/CategoriesSection';
 
 export const HomePage = () => {
   const [newProducts, setNewProducts] = useState<Product[]>([]);
@@ -43,7 +44,7 @@ export const HomePage = () => {
       </ProductsSlider>
 
       <section>
-        Shop by category
+        <CategoriesSection />
       </section>
 
       <ProductsSlider

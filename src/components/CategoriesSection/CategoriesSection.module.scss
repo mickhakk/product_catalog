@@ -1,0 +1,88 @@
+@import '../../styles/index.scss';
+
+$grid-columns-mobile: repeat(1, 1fr);
+$grid-columns-tablet-desktop: repeat(3, 1fr);
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.category {
+  &__container {
+    margin: 0 auto;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    @include typographyH2;
+    margin-bottom: 24px;
+  }
+
+  &__products {
+    display: grid;
+    column-gap: 16px;
+    grid-template-columns: $grid-columns-mobile;
+    justify-items: center;
+    align-items: start;
+
+    @include onTablet {
+      grid-template-columns: $grid-columns-tablet-desktop;
+    }
+  }
+
+  .product {
+    width: 100%;
+
+    &__title {
+      @include typographyH4;
+    }
+
+    &__photo {
+      margin-bottom: 24px;
+      width: 100%;
+      height: 288px;
+      transition: transform 0.4s ease;
+
+      &__phones {
+        background: #6D6474;
+        background: url("../../../public/img/category-phones.png"), #6D6474 50% / cover no-repeat;
+        background-position: 33% 23%;
+        background-size: 130%;
+      }
+
+      &__tablets {
+        background: url("../../../public/img/category-tablets.png"), #8D8D92 50% / cover no-repeat;
+        background-position: 12% 12%;
+        background-size: 180%;
+      }
+
+      &__accessories {
+        background: url("../../../public/img/category-accessories.png"), #973D5F 50% / cover no-repeat;
+        background-position: 1% 0%;
+        background-size: 230%;
+      }
+
+      &:hover {
+        transform: scale(1.04);
+      }
+
+      @include onTablet {
+        height: 187px;
+      }
+
+      @include onDesktop {
+        height: 368px;
+      }
+    }
+
+    &__category {
+      margin-bottom: 31px;
+      font-family: Mont;
+      font-size: 14px;
+      color: $secondary-color;
+      line-height: 21px;
+      text-align: left;
+    }
+  }
+}
