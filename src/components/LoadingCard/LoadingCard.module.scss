@@ -1,0 +1,17 @@
+@import './../../styles';
+
+.loading_card {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 272px;
+  height: 440px;
+  padding: 31px;
+  background-color: $gray-white;
+  border: 1px solid $elements-color;
+
+  @include onTablet {
+    height: 506px;
+  }
+}
