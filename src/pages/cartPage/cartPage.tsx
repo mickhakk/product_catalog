@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 import styles from './cartPage.module.scss';
 import { CartItem } from '../../components/CartItem/CartItem';
@@ -39,8 +40,10 @@ export const CartPage: React.FC = () => {
   }));
 
   const [products, setProducts] = useState(productsWithQuantity);
-
+  const navigate = useNavigate();
   // console.log(cartProducts);
+  // let isCheckoutLoading = false;
+  const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
 
   const totalPrice = products.reduce((acc, product) => acc
     + product.price
@@ -81,6 +84,17 @@ export const CartPage: React.FC = () => {
     });
   };
 
+  const goCheckout = () => {
+    if (cartProducts.length) {
+      setIsCheckoutLoading(true);
+
+      setTimeout(() => {
+        setIsCheckoutLoading(false);
+        navigate('/checkout');
+      }, 1000);
+    }
+  };
+
   return (
     <>
       <BackLink link=".." />
@@ -119,6 +133,12 @@ export const CartPage: React.FC = () => {
         </div>
 
         <div className={styles.totalPrice}>
+          {isCheckoutLoading
+            && (
+              <div className={styles.loader}>
+                <img src="img/loading-spinner.gif" alt="Product is loading" />
+              </div>
+            )}
           <div className={styles.totalPriceTextWrapper}>
             <p className={styles.totalPriceTextWrapperValue}>
               {`$${totalPrice}`}
@@ -132,6 +152,7 @@ export const CartPage: React.FC = () => {
             className={styles.totalPriceButton}
             type="button"
             disabled={products.length === 0}
+            onClick={goCheckout}
           >
             Checkout
           </button>
