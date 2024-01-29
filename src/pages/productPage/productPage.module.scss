@@ -149,4 +149,13 @@
 
 .recommended {
   grid-column: 1/-1;
+  margin-bottom: 56px;
+
+  @include onTablet {
+    margin-bottom: 64px;
+  }
+
+  @include onDesktop {
+    margin-bottom: 80px;
+  }
 }

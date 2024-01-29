@@ -2,14 +2,9 @@ import { Link } from 'react-router-dom';
 import { FooterLinks } from './FooterLinks/FooterLinks';
 import styles from './Footer.module.scss';
 import { Icon } from '../Icon';
-// import { IconType } from '../../types/IconType';
+import { scrollToTop } from '../../utils/scrollToTop';
 
 export const Footer = () => {
-  const onGoToTop = () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  };
-
   return (
     <>
       <footer className={styles.footer}>
@@ -17,7 +12,7 @@ export const Footer = () => {
           <Link
             to="/"
             className={styles.footer__logo}
-            onClick={onGoToTop}
+            onClick={scrollToTop}
           >
             <img
               src="img/Logo.svg"
@@ -31,7 +26,7 @@ export const Footer = () => {
           <button
             className={styles.footer__go_top}
             type="button"
-            onClick={onGoToTop}
+            onClick={scrollToTop}
           >
             Back to top
             <div className={styles.footer__arrow_button}>

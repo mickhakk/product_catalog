@@ -40,6 +40,14 @@ export const getDiscountProducts = async (): Promise<Product[]> => {
   return products.data;
 };
 
+export const getRecommendedProducts = async (
+  productId: string,
+): Promise<DataFromServer> => {
+  const products = await axios.get(`${apiURL}${productId}/recomended`);
+
+  return products.data;
+};
+
 export const getAllProducts = async (): Promise<DataFromServer> => {
   const product = await axios.get(
     'https://product-catalog-api-r8lb.onrender.com/products',

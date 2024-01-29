@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import style from './ProductCard.module.scss';
 import { Product } from '../../types/Product';
 import { useContextProvider } from '../../context/ProductsContext';
+import { scrollToTop } from '../../utils/scrollToTop';
 
 interface Props {
   product: Product,
@@ -50,7 +51,7 @@ export const ProductCard: React.FC<Props> = (props) => {
         [style.card__default_hover]: !simpleHoverEffect,
       })}
     >
-      <Link to={`../${category}/${itemId}`}>
+      <Link to={`/${category}/${itemId}`} onClick={scrollToTop}>
         <div className={style.card__image_wrapper}>
           <img
             className={style.card__product_image}
