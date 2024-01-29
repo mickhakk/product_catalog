@@ -38,3 +38,11 @@ export const getDiscountProducts = async (): Promise<Product[]> => {
 
   return products.data;
 };
+
+export const getAllProducts = async (): Promise<DataFromServer> => {
+  const product = await axios.get(
+    'https://product-catalog-api-r8lb.onrender.com/products',
+  );
+
+  return product.data;
+};
