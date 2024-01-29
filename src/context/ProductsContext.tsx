@@ -20,7 +20,12 @@ interface ProductsContextType {
   toogleSelectFavorite: (product: Product) => void;
   toogleSelectCart: (product: Product) => void;
   cartProducts: Product[];
-
+  params: GetParams;
+  setParams: React.Dispatch<React.SetStateAction<GetParams>>;
+  isLoadingLimit:boolean;
+  setIsLoadingLimit:(value: boolean) => void;
+  isLoadingSort:boolean;
+  setIsLoadingSort:(value: boolean) => void;
 }
 export const ProductsContext = createContext<ProductsContextType>({
   products: { count: 0, rows: [] },
@@ -28,6 +33,18 @@ export const ProductsContext = createContext<ProductsContextType>({
   toogleSelectFavorite: () => {},
   toogleSelectCart: () => {},
   cartProducts: [],
+  params: {
+    type: '',
+    page: 0,
+    limit: '',
+    order: '',
+    direction: '',
+  },
+  setParams: () => {},
+  isLoadingLimit: false,
+  setIsLoadingLimit: () => {},
+  isLoadingSort: false,
+  setIsLoadingSort: () => {},
 });
 
 export const useContextProvider = () => useContext(ProductsContext);
@@ -36,11 +53,22 @@ type Props = {
   children: React.ReactNode;
 };
 
+const defaultValue:GetParams = {
+  type: '',
+  page: 0,
+  limit: 'All',
+  order: 'price',
+  direction: 'DESC',
+};
+
 export const ProductsContextProvider: FC<Props> = ({ children }) => {
   const [products, setProducts] = useState<DataFromServer | null>(null);
   const [favourites, setFavourites, toggleFavourites]
     = useLocalFavoritesStorage('favourites', []);
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const [params, setParams] = useState<GetParams>(defaultValue);
+  const [isLoadingLimit, setIsLoadingLimit] = useState(false);
+  const [isLoadingSort, setIsLoadingSort] = useState(false);
 
   const toogleSelectCart = useCallback((product:Product) => {
     const cartIds = cartProducts.map(({ id }) => id);
@@ -63,18 +91,16 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     setFavourites(favourites);
   }, [favourites]);
 
-  const defaultValue:GetParams = useMemo(() => ({
-    type: 'phones',
-    page: 0,
-    limit: 16,
-    order: 'price',
-    direction: 'DESC',
-  }), []);
-
   useEffect(() => {
-    getProducts(defaultValue)
-      .then(setProducts);
-  }, [defaultValue]);
+    getProducts(params)
+      .then(data => {
+        setProducts(data);
+      })
+      .finally(() => {
+        setIsLoadingLimit(false);
+        setIsLoadingSort(false);
+      });
+  }, [params]);
 
   const value: ProductsContextType = useMemo(() => ({
     products,
@@ -82,8 +108,16 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     toogleSelectFavorite,
     toogleSelectCart,
     cartProducts,
+    params,
+    setParams,
+    isLoadingLimit,
+    setIsLoadingLimit,
+    isLoadingSort,
+    setIsLoadingSort,
   }), [products, favourites,
-    toogleSelectFavorite, toogleSelectCart, cartProducts]);
+    toogleSelectFavorite, toogleSelectCart,
+    cartProducts, params,
+    isLoadingLimit, setIsLoadingLimit, isLoadingSort, setIsLoadingSort]);
 
   return (
     <ProductsContext.Provider value={value}>

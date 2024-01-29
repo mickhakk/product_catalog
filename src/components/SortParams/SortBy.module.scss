@@ -1,0 +1,35 @@
+@import './../../styles';
+.catalog__sort {
+  @include pageGrid;
+  margin-bottom: 24px;
+
+  &--label {
+    @include typographySmallText;
+    color: $secondary-color;
+  }
+
+  &--by {
+   grid-column: span 2;
+   @include onDesktop {
+    grid-column: span 4;
+   }
+   
+  }
+  &--limit {
+   grid-column: span 2;
+   @include onDesktop {
+    grid-column: span 3;
+   }
+  }
+
+  &--direction {
+    grid-column: span 2;
+    @include onDesktop {
+     grid-column: span 3;
+    }
+   }
+}
+
+.react-select-container {
+  font-family: 'MontSemiBold';
+}

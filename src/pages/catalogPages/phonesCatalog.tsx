@@ -1,78 +1,45 @@
-import { Product } from '../../types/Product';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { Pagination } from '../../components/Pagination/Pagination';
+import styles from './catalog.module.scss';
+import { SortParams } from '../../components/SortParams/SortParams';
+import { useCatalogParams } from '../../CustomHooks/UseCatalogParams';
 
-const products: Product [] = [{
-  id: 1,
-  category: 'phones',
-  itemId: 'apple-iphone-11-pro-max-256gb-silver',
-  name: 'Apple iPhone 11 Pro Max 256GB Silver',
-  fullPrice: 999,
-  price: 700,
-  screen: '6.1” OLED',
-  capacity: '256GB',
-  color: 'silver',
-  ram: '6GB',
-  year: 2020,
-  image: 'img/phones/apple-iphone-7/black/00.jpg',
-},
-{
-  id: 2,
-  category: 'phones',
-  itemId: 'apple-iphone-11-pro-max-256gb-silver',
-  name: 'Apple iPhone 11 Pro Max 256GB Silver',
-  fullPrice: 999,
-  price: 700,
-  screen: '6.1” OLED',
-  capacity: '256GB',
-  color: 'silver',
-  ram: '6GB',
-  year: 2020,
-  image: 'img/phones/apple-iphone-7/black/00.jpg',
-},
-{
-  id: 3,
-  category: 'phones',
-  itemId: 'apple-iphone-11-pro-max-256gb-silver',
-  name: 'Apple iPhone 11 Pro Max 256GB Silver',
-  fullPrice: 999,
-  price: 700,
-  screen: '6.1” OLED',
-  capacity: '256GB',
-  color: 'silver',
-  ram: '6GB',
-  year: 2020,
-  image: 'img/phones/apple-iphone-7/black/00.jpg',
-},
-{
-  id: 4,
-  category: 'phones',
-  itemId: 'apple-iphone-11-pro-max-256gb-silver',
-  name: 'Apple iPhone 11 Pro Max 256GB Silver',
-  fullPrice: 999,
-  price: 700,
-  screen: '6.1” OLED',
-  capacity: '256GB',
-  color: 'silver',
-  ram: '6GB',
-  year: 2020,
-  image: 'img/phones/apple-iphone-7/black/00.jpg',
-},
-];
+export const PhonesCatalog = () => {
+  const {
+    handleSelectChange,
+    siblingCount,
+    productsCount,
+    productsCatalog,
+    limit,
+    page,
+    searchParams,
+    handleLimitChange,
+  } = useCatalogParams();
 
-// console.log(`productss: ${productss}`);
-
-export const PhonesCatalog = () => (
-  <>
-    <h1>Phones Catalog Page</h1>
-    {products.map(product => (
-      <ProductCard product={product} />
-    ))}
-
-    <Pagination
-      totalCount={200}
-      pageSize={16}
-      siblingCount={1}
-    />
-  </>
-);
+  return (
+    <section className={styles.catalog}>
+      <h1 className={styles.catalog__header}>Mobile phones</h1>
+      <p className={styles.catalog__count}>
+        {`${productsCount} modeles`}
+      </p>
+      <SortParams
+        handleSelectChange={handleSelectChange}
+        handleLimitChange={handleLimitChange}
+      />
+      <div className={styles.catalog__container}>
+        {productsCatalog?.map(currentProduct => (
+          <ProductCard product={currentProduct} />
+        ))}
+      </div>
+      <div className={styles['catalog__pagination-container']}>
+        <Pagination
+          totalCount={productsCount || 0}
+          limit={limit}
+          siblingCount={siblingCount}
+          page={page}
+          searchParams={searchParams}
+        />
+      </div>
+    </section>
+  );
+};

@@ -39,11 +39,11 @@ export interface ProductDetails {
 }
 
 export interface GetParams {
-  type?: 'phones' | 'tablets' | 'accessories',
+  type?: string,
   page: number,
-  limit: number,
-  order: 'year' | 'price',
-  direction: 'ASC' | 'DESC'
+  limit: string,
+  order: string,
+  direction: string,
 }
 
 export interface DataFromServer {
