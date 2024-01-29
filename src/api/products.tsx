@@ -18,14 +18,15 @@ GetParams): Promise<DataFromServer> => {
   return products.data;
 };
 
-export const getProduct = async (): Promise<ProductDetails> => {
-  const product = await axios.get(
-    'https://product-catalog-api-r8lb.onrender.com/'
-    + 'products/apple-iphone-7-32gb-black',
-  );
+export const getProduct
+  = async (productId: string): Promise<ProductDetails> => {
+    const product = await axios.get(
+      `https://product-catalog-api-r8lb.onrender.com/products/${
+        productId}`,
+    );
 
-  return product.data;
-};
+    return product.data;
+  };
 
 export const getNewProducts = async (): Promise<DataFromServer> => {
   const products = await axios.get(`${apiURL}new`);
