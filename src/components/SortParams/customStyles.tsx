@@ -1,13 +1,14 @@
 import { GroupBase, OptionProps, StylesConfig } from 'react-select';
 
 export interface Option {
-  value:{ order:string, direction:string },
+  value:{ order:string, direction:string, isDisabled?: boolean },
   label:string,
 }
 
 export interface OptionLimit {
   value:string,
   label:string,
+  isDisabled?: boolean,
 }
 export type CombinedOption = Option | OptionLimit;
 

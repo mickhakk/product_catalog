@@ -45,7 +45,7 @@ input {
   background-color: $gray-white;
   border: 1px solid $elements-color;
   transition: transform 0.5s ease;
-  grid-column: span 4;
+  grid-column: span 6;
   @include onTablet {
     grid-column: span 4;
   }
