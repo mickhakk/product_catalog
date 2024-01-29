@@ -6,7 +6,6 @@ import { Icon } from '../Icon';
 import { SquareButton } from '../SquareButton/SquareButton';
 
 interface Props {
-  // key: number
   id: number,
   name: string,
   price: number,
@@ -15,7 +14,6 @@ interface Props {
   category: string,
   itemId: string,
   deleteProduct: (id: number) => void,
-  // changeQuantity: (id: number, type: '-' | '+') => void;
   increaseQuantity: (id: number) => void,
   decreaseQuantity: (id: number) => void,
 }
@@ -29,7 +27,6 @@ export const CartItem: React.FC<Props> = ({
   category,
   itemId,
   deleteProduct,
-  // changeQuantity,
   increaseQuantity,
   decreaseQuantity,
 }) => {
@@ -48,11 +45,16 @@ export const CartItem: React.FC<Props> = ({
         </button>
 
         <div className={styles.cartItemFirstRowImageWrapper}>
-          <img
-            src={`${image}`}
-            alt={`${name}`}
-            className={styles.cartItemFirstRowImageWrapperImage}
-          />
+          <Link
+            className={styles.cartItemFirstRowTitle}
+            to={`/${category}/${itemId}`}
+          >
+            <img
+              src={`${image}`}
+              alt={`${name}`}
+              className={styles.cartItemFirstRowImageWrapperImage}
+            />
+          </Link>
         </div>
         <Link
           className={styles.cartItemFirstRowTitle}
