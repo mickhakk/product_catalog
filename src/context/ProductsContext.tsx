@@ -18,9 +18,10 @@ interface ProductsContextType {
   cartProducts: Product[];
   params: GetParams;
   setParams: React.Dispatch<React.SetStateAction<GetParams>>;
-  isLoading:boolean;
-  setIsLoading:(value:boolean) => void;
-
+  isLoadingLimit:boolean;
+  setIsLoadingLimit:(value: boolean) => void;
+  isLoadingSort:boolean;
+  setIsLoadingSort:(value: boolean) => void;
 }
 const ProductsContext = createContext<ProductsContextType>({
   products: { count: 0, rows: [] },
@@ -36,8 +37,10 @@ const ProductsContext = createContext<ProductsContextType>({
     direction: '',
   },
   setParams: () => {},
-  isLoading: false,
-  setIsLoading: () => {},
+  isLoadingLimit: false,
+  setIsLoadingLimit: () => {},
+  isLoadingSort: false,
+  setIsLoadingSort: () => {},
 });
 
 export const useContextProvider = () => useContext(ProductsContext);
@@ -59,7 +62,8 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   const [favourites, setFavoriets] = useState<Product[]>([]);
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
   const [params, setParams] = useState<GetParams>(defaultValue);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingLimit, setIsLoadingLimit] = useState(false);
+  const [isLoadingSort, setIsLoadingSort] = useState(false);
 
   const toogleSelectCart = useCallback((product:Product) => {
     const cartIds = cartProducts.map(({ id }) => id);
@@ -92,7 +96,10 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
       .then(data => {
         setProducts(data);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoadingLimit(false);
+        setIsLoadingSort(false);
+      });
   }, [params]);
 
   const value: ProductsContextType = useMemo(() => ({
@@ -103,11 +110,14 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     cartProducts,
     params,
     setParams,
-    isLoading,
-    setIsLoading,
+    isLoadingLimit,
+    setIsLoadingLimit,
+    isLoadingSort,
+    setIsLoadingSort,
   }), [products, favourites,
     toogleSelectFavorite, toogleSelectCart,
-    cartProducts, params, isLoading]);
+    cartProducts, params,
+    isLoadingLimit, setIsLoadingLimit, isLoadingSort, setIsLoadingSort]);
 
   return (
     <ProductsContext.Provider value={value}>
