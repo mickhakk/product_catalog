@@ -26,12 +26,14 @@ interface ProductsContextType {
   setIsLoadingLimit:(value: boolean) => void;
   isLoadingSort:boolean;
   setIsLoadingSort:(value: boolean) => void;
+  setCartProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+
 }
 export const ProductsContext = createContext<ProductsContextType>({
   products: { count: 0, rows: [] },
   favourites: [],
-  toogleSelectFavorite: () => {},
-  toogleSelectCart: () => {},
+  toogleSelectFavorite: () => { },
+  toogleSelectCart: () => { },
   cartProducts: [],
   params: {
     type: '',
@@ -45,6 +47,7 @@ export const ProductsContext = createContext<ProductsContextType>({
   setIsLoadingLimit: () => {},
   isLoadingSort: false,
   setIsLoadingSort: () => {},
+  setCartProducts: () => { },
 });
 
 export const useContextProvider = () => useContext(ProductsContext);
@@ -70,7 +73,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   const [isLoadingLimit, setIsLoadingLimit] = useState(false);
   const [isLoadingSort, setIsLoadingSort] = useState(false);
 
-  const toogleSelectCart = useCallback((product:Product) => {
+  const toogleSelectCart = useCallback((product: Product) => {
     const cartIds = cartProducts.map(({ id }) => id);
 
     if (cartIds.includes(product.id)) {
@@ -114,6 +117,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     setIsLoadingLimit,
     isLoadingSort,
     setIsLoadingSort,
+    setCartProducts,
   }), [products, favourites,
     toogleSelectFavorite, toogleSelectCart,
     cartProducts, params,
@@ -121,7 +125,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
 
   return (
     <ProductsContext.Provider value={value}>
-      { children }
+      {children}
     </ProductsContext.Provider>
   );
 };
