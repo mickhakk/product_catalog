@@ -6,8 +6,9 @@ import { Photos } from './components/Photos';
 import { TechSpecs } from './components/TechSpecs';
 import { VariantsActionsBlock } from './components/VariantsActionsBlock';
 import styles from './productPage.module.scss';
-import { getProduct } from '../../api/products';
+import { getProduct, getRecommendedProducts } from '../../api/products';
 import { DataFromServer, Product, ProductDetails } from '../../types/Product';
+import { ProductsSlider } from '../../components';
 
 const getAllProducts = async (): Promise<DataFromServer> => {
   const product = await axios.get(
@@ -21,6 +22,9 @@ export const ProductPage = () => {
   const { productId } = useParams();
   const [productData, setProductData] = useState<ProductDetails | null>(null);
   const [cardProduct, setCardProduct] = useState<Product | null>(null);
+
+  const [recommended, setRecommended] = useState<Product[]>([]);
+  const [areRecommendedLoading, setAreRecommendedLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +47,15 @@ export const ProductPage = () => {
         console.error('Error fetching data:', error);
       }
     };
+
+    if (productId) {
+      getRecommendedProducts(productId)
+        .then((data => {
+          setRecommended(data.rows);
+        }))
+        .catch(() => { })
+        .finally(() => setAreRecommendedLoading(false));
+    }
 
     fetchData();
   }, [productId]);
@@ -75,9 +88,12 @@ export const ProductPage = () => {
       {productData && <TechSpecs productData={productData} />}
 
       <div className={styles.recommended}>
-        {/*         <ProductsSlider>
+        <ProductsSlider
+          products={recommended}
+          areLoading={areRecommendedLoading}
+        >
           You may also like
-        </ProductsSlider> */}
+        </ProductsSlider>
       </div>
     </div>
   );
