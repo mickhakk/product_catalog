@@ -35,7 +35,7 @@ const sortDefaultValue = optionsSortParams[0];
 
 export const SortParams: FC<Props> = (props) => {
   const { handleSelectChange, handleLimitChange } = props;
-  const { isLoading } = useContextProvider();
+  const { isLoading, setIsLoading } = useContextProvider();
   const handleChange = (selectedOption: CombinedOption | null) => {
     if (selectedOption && typeof selectedOption.value === 'string') {
       handleLimitChange(selectedOption.value, 'limit');
@@ -46,6 +46,7 @@ export const SortParams: FC<Props> = (props) => {
     if (selectedOption && typeof selectedOption.value === 'object') {
       const { direction, order } = selectedOption.value;
 
+      setIsLoading(true);
       handleSelectChange({ order, direction });
     }
   };
@@ -60,6 +61,7 @@ export const SortParams: FC<Props> = (props) => {
           onChange={handleSortChange}
           defaultValue={sortDefaultValue}
           isLoading={isLoading}
+          className={styles['react-select-container']}
         />
       </div>
       <div className={styles['catalog__sort--limit']}>
@@ -70,6 +72,7 @@ export const SortParams: FC<Props> = (props) => {
           onChange={handleChange}
           defaultValue={limitDefaultValue}
           isLoading={isLoading}
+          className={styles['react-select-container']}
         />
       </div>
       {/* <div className={styles['catalog__sort--direction']}>

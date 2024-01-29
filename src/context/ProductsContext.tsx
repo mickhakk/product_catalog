@@ -19,6 +19,7 @@ interface ProductsContextType {
   params: GetParams;
   setParams: React.Dispatch<React.SetStateAction<GetParams>>;
   isLoading:boolean;
+  setIsLoading:(value:boolean) => void;
 
 }
 const ProductsContext = createContext<ProductsContextType>({
@@ -36,6 +37,7 @@ const ProductsContext = createContext<ProductsContextType>({
   },
   setParams: () => {},
   isLoading: false,
+  setIsLoading: () => {},
 });
 
 export const useContextProvider = () => useContext(ProductsContext);
@@ -86,7 +88,6 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   }, [favourites]);
 
   useEffect(() => {
-    setIsLoading(true);
     getProducts(params)
       .then(data => {
         setProducts(data);
@@ -103,6 +104,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     params,
     setParams,
     isLoading,
+    setIsLoading,
   }), [products, favourites,
     toogleSelectFavorite, toogleSelectCart,
     cartProducts, params, isLoading]);

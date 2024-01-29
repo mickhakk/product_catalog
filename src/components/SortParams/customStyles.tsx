@@ -40,7 +40,7 @@ false, GroupBase<CombinedOption>> = {
   control: (base, state) => ({
     ...base,
     border: '1px solid #B4BDC3',
-    font: 'Mont',
+    font: 'MontSemiBold',
     fontSize: '14px',
     fontStyle: 'normal',
     fontWeight: 600,
