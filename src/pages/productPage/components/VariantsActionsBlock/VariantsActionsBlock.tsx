@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './VariantsActionsBlock.module.scss';
 import { Button } from '../../../../components/Button';
@@ -10,6 +10,7 @@ import { allColors } from './allColors';
 
 interface Props {
   productData: ProductDetails;
+  cardProduct: Product;
 }
 
 const ADDED = 'Added';
@@ -20,9 +21,13 @@ const containsProduct
     return products.some((product) => product.itemId === productId);
   };
 
-export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
+export const VariantsActionsBlock: React.FC<Props> = ({
+  productData,
+  cardProduct,
+}) => {
   const {
     capacityAvailable,
+    capacity,
     colorsAvailable,
     screen,
     resolution,
@@ -38,14 +43,30 @@ export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
     processor,
     ram,
   };
-
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const capacities = Object.values(capacityAvailable);
 
-  const [currentCapacity, setCapacity] = useState<string>(capacityAvailable[0]);
+  const [currentCapacity, setCapacity] = useState<string>(capacity);
+  const location = useLocation();
 
   const handleColorClick = (c: string) => {
     setSelectedColor(c);
+    const parts = location.pathname.split('-');
+
+    parts[parts.length - 1] = c;
+    const newUrl = `#${parts.join('-')}`;
+
+    window.location.href = newUrl;
+  };
+
+  const handleCapacityClick = (cap: string) => {
+    setCapacity(cap);
+    const parts = location.pathname.split('-');
+
+    parts[parts.length - 2] = cap.toLowerCase();
+    const newUrl = `#${parts.join('-')}`;
+
+    window.location.href = newUrl;
   };
 
   const {
@@ -53,10 +74,7 @@ export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
     toogleSelectFavorite,
     favourites,
     cartProducts,
-    products,
   } = useContextProvider();
-
-  const cardProduct = products?.rows.find((item) => item.itemId === id);
 
   const [productId] = useState<string | undefined>(id);
 
@@ -64,6 +82,10 @@ export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
     && containsProduct(favourites, productId);
   const isInCart = productId !== undefined
     && containsProduct(cartProducts, productId);
+
+  if (!cardProduct) {
+    return <div>No product available</div>;
+  }
 
   return (
     <>
@@ -110,7 +132,7 @@ export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
                 currentCapacity === cap ? styles.selectedCapacity : ''
               }`}
               key={cap}
-              onClick={() => setCapacity(cap)}
+              onClick={() => handleCapacityClick(cap)}
             >
               {cap}
             </button>
@@ -132,13 +154,13 @@ export const VariantsActionsBlock: React.FC<Props> = ({ productData }) => {
           <div className={styles.container_buttons}>
             <Button
               text={isInCart ? ADDED : NOT_ADDED}
-              onClick={() => toogleSelectCart(cardProduct as Product)}
+              onClick={() => toogleSelectCart(cardProduct)}
               isSelected={isInCart}
             />
 
             <label className={styles.checkbox__favorite}>
               <input
-                onChange={() => toogleSelectFavorite(cardProduct as Product)}
+                onChange={() => toogleSelectFavorite(cardProduct)}
                 className={cn(styles.checkbox, {
                   [styles.checkbox__selected]: isInFavorites,
                 })}
