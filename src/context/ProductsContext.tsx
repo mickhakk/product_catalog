@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   FC,
   createContext,
@@ -9,6 +10,9 @@ import {
 } from 'react';
 import { DataFromServer, GetParams, Product } from '../types/Product';
 import { getProducts } from '../api/products';
+import {
+  useLocalFavoritesStorage,
+} from '../CustomHooks/useLocalFavoritesStorage';
 
 interface ProductsContextType {
   products: DataFromServer | null,
@@ -23,7 +27,7 @@ interface ProductsContextType {
   isLoadingSort:boolean;
   setIsLoadingSort:(value: boolean) => void;
 }
-const ProductsContext = createContext<ProductsContextType>({
+export const ProductsContext = createContext<ProductsContextType>({
   products: { count: 0, rows: [] },
   favourites: [],
   toogleSelectFavorite: () => {},
@@ -59,7 +63,8 @@ const defaultValue:GetParams = {
 
 export const ProductsContextProvider: FC<Props> = ({ children }) => {
   const [products, setProducts] = useState<DataFromServer | null>(null);
-  const [favourites, setFavoriets] = useState<Product[]>([]);
+  const [favourites, setFavourites, toggleFavourites]
+    = useLocalFavoritesStorage('favourites', []);
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
   const [params, setParams] = useState<GetParams>(defaultValue);
   const [isLoadingLimit, setIsLoadingLimit] = useState(false);
@@ -79,16 +84,11 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   }, [cartProducts]);
 
   const toogleSelectFavorite = useCallback((product: Product) => {
-    const favouritesIds = favourites.map(({ id }) => id);
+    toggleFavourites(product);
+  }, [favourites]);
 
-    if (favouritesIds.includes(product.id)) {
-      setFavoriets(newFavourites => newFavourites
-        .filter(({ id }) => id !== product.id));
-
-      return;
-    }
-
-    setFavoriets(currentProducts => ([...currentProducts, product]));
+  useEffect(() => {
+    setFavourites(favourites);
   }, [favourites]);
 
   useEffect(() => {

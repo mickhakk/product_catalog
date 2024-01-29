@@ -1,20 +1,35 @@
 import cn from 'classnames';
-import style from './Button.module.scss';
+import styles from './Button.module.scss';
 
 interface Props {
   text: string;
-  callback: () => void;
-  isActive?: boolean;
+  onClick: () => void;
+  height?: number;
+  width?: number;
+  isSelected?: boolean;
+  isDisabled?: boolean;
 }
 
-export const Button: React.FC<Props> = ({ text, callback, isActive }) => {
+export const Button: React.FC<Props> = (props) => {
+  const {
+    text,
+    onClick,
+    height = 40,
+    width,
+    isSelected,
+    isDisabled,
+  } = props;
+
   return (
     <button
       type="button"
-      className={cn(style.button_add, {
-        [style.button_add_done]: isActive,
-      })}
-      onClick={callback}
+      disabled={isDisabled}
+      className={cn(
+        styles.button,
+        { [styles['button--selected']]: isSelected },
+      )}
+      onClick={onClick}
+      style={{ height: `${height}px`, width: width ? `${width}px` : '100%' }}
     >
       {text}
     </button>

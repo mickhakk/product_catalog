@@ -1,48 +1,27 @@
-@import "../../styles/mixins/typography";
-@import "../../styles/variables/colors";
-@import "../../styles/normalize";
-
-$button-transition: 0.5s ease;
-$button-hover-shadow: 0px 3px 13px 0px #17203133;
-$button-padding: 8px 16px;
-$margin-top-button: 20px;
-$transition-duration: 0.15s;
-$transition-style: ease-in-out;
-
-input {
-  all: initial;
-}
+@import './../../styles';
 
 .button {
-  &_add,
-  &_add_done {
-    display: flex;
-    flex-grow: 1;
-    max-width: 300px;
-    justify-content: center;
-    align-items: center;
-    height: 48px;
-    width: 160px;
-    font-family: "Mont-Semibold";
-    font-weight: 700;
-    cursor: pointer;
-    user-select: none;
-    transition: border-radius $button-transition;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: $primary-color;
 
-    &:hover {
-      box-shadow: 0px 3px 13px 0px #17203133;
-    }
-  }
+  @include typographyButtons;
+  color: $gray-white;
 
-  &_add {
-    color: $gray-white;
-    background-color: $primary-color;
-  }
+  @include hover(box-shadow, 0px 3px 13px 0px #17203133);
 
-  &_add_done {
+  &--selected {
     color: $selected-button;
     background-color: $gray-white;
     border: 1px solid $elements-color;
   }
-}
 
+  &:disabled {
+    background-color: $elements-color;
+    cursor: not-allowed;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}

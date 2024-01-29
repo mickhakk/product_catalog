@@ -1,0 +1,25 @@
+@import '../../styles';
+
+.icon {
+  background-image: url('../../');
+}
+
+.link {
+  margin-block: 24px;
+
+  @include typographySmallText;
+
+  display: flex;
+  width: 66px;
+  height: 16px;
+  align-items: flex-start;
+  gap: 4px;
+  flex-shrink: 0;
+  align-items: center;
+
+  color: $secondary-color;
+
+  @include onTablet {
+    margin: 40px 0 16px;
+  }
+}
