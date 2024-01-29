@@ -21,13 +21,6 @@
     grid-column: span 3;
    }
   }
-
-  &--direction {
-    grid-column: span 2;
-    @include onDesktop {
-     grid-column: span 3;
-    }
-   }
 }
 
 .react-select-container {
