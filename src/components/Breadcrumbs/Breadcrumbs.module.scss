@@ -33,11 +33,13 @@
 
   &--location-page-name {
     color: $secondary-color;
-    font-family: "Mont";
-    font-size: 12px;
-    font-weight: 700;
     line-height: 12px;
     margin-top: 3px;
+    @include typographySmallText;
+
+    &:hover {
+      color: $primary-color;
+    }
   }
 }
 
