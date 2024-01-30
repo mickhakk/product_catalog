@@ -100,7 +100,8 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
       .then(data => {
         setProducts(data);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         setIsError(true);
       })
       .finally(() => {

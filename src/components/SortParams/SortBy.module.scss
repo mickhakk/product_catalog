@@ -10,14 +10,14 @@
 
   &--by {
    grid-column: span 2;
-   @include onDesktop {
+   @include onTablet {
     grid-column: span 4;
    }
    
   }
   &--limit {
    grid-column: span 2;
-   @include onDesktop {
+   @include onTablet {
     grid-column: span 3;
    }
   }

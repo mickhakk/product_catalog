@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import style from './favoritesPage.module.scss';
 import { useContextProvider } from '../../context/ProductsContext';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
+import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const FavouritesPage = () => {
   const { favourites } = useContextProvider();
@@ -11,7 +12,8 @@ export const FavouritesPage = () => {
   return (
     <div className={style.favorites}>
       <section className={style.favorites__page_info_wrapper}>
-        <div className={style.favorites__current_location_wrapper}>
+        <Breadcrumbs />
+        {/* <div className={style.favorites__current_location_wrapper}>
           <label htmlFor="home_link">
             <Link
               id="home_link"
@@ -22,7 +24,7 @@ export const FavouritesPage = () => {
           </label>
           <div className={style.favorites__icon_right_arrow} />
           <p className={style.favorites__location_page_name}>Favorites</p>
-        </div>
+        </div> */}
         <h1 className={style.favorites__title}>Favourites</h1>
         <span
           className={style.favorites__favorites_counter}

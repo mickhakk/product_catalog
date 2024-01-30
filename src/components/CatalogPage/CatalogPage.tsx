@@ -13,6 +13,7 @@ import { NoProducts } from './Messages/NoProducts';
 import { Loader } from './Loader/Loader';
 import { useContextProvider } from '../../context/ProductsContext';
 import { ErrorMessage } from './Messages/ErrorMesage';
+import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
 
 interface Props {
   pageHeader: string;
@@ -42,9 +43,10 @@ export const CatalogPage: FC<Props> = memo((props) => {
 
   return (
     <section className={styles.catalog}>
+      <Breadcrumbs />
       <h1 className={styles.catalog__header}>{pageHeader}</h1>
       {isLoadingPage && <Loader />}
-      {!productsCatalog?.length && !isLoadingPage
+      {!productsCatalog?.length && !isLoadingPage && !isError
       && <NoProducts product={catalogPath} />}
       {!isLoadingPage && isError && <ErrorMessage />}
       {!isLoadingPage && !isError && productsCatalog

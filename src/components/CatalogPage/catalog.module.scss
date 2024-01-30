@@ -4,22 +4,22 @@
 .catalog {
   padding-top: 25px;
   padding-bottom: 64px;
-  padding-inline: 16px;
-  min-width: 320px;
-  margin-inline: auto;
+  // padding-inline: 16px;
+  // min-width: 320px;
+  // margin-inline: auto;
 
-  @include onTablet() {
-    min-width: 640px;
-    margin-inline: auto;
-    padding-inline: 24px;
-    padding-bottom: 80px;
-  }
+  // @include onTablet() {
+  //   min-width: 640px;
+  //   margin-inline: auto;
+  //   padding-inline: 24px;
+  //   padding-bottom: 80px;
+  // }
 
-  @include onDesktop() {
-    max-width: 1200px;
-    margin-inline: auto;
-    padding-inline: 32px;
-  }
+  // @include onDesktop() {
+  //   max-width: 1200px;
+  //   margin-inline: auto;
+  //   padding-inline: 32px;
+  // }
 
 
   &__header {
