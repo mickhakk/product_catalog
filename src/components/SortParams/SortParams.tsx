@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Select from 'react-select';
 import styles from './SortBy.module.scss';
 import {
@@ -35,6 +35,11 @@ const sortDefaultValue = optionsSortParams[0];
 
 export const SortParams: FC<Props> = (props) => {
   const { handleSelectChange, handleLimitChange } = props;
+  const [selectedLimit,
+    setSelectedLimmit] = useState<CombinedOption>(limitDefaultValue);
+  const [selectedSort,
+    setSelectedSort] = useState<CombinedOption>(sortDefaultValue);
+
   const {
     isLoadingLimit,
     setIsLoadingLimit,
@@ -42,16 +47,26 @@ export const SortParams: FC<Props> = (props) => {
     setIsLoadingSort,
   } = useContextProvider();
   const handleChange = (selectedOption: CombinedOption | null) => {
+    if (selectedOption?.value === selectedLimit.value) {
+      return;
+    }
+
     if (selectedOption && typeof selectedOption.value === 'string') {
+      setSelectedLimmit(selectedOption);
       setIsLoadingLimit(true);
       handleLimitChange(selectedOption.value, 'limit');
     }
   };
 
   const handleSortChange = (selectedOption: CombinedOption | null) => {
-    if (selectedOption && typeof selectedOption.value === 'object') {
-      const { direction, order } = selectedOption.value;
+    if (selectedOption?.value === selectedSort.value) {
+      return;
+    }
 
+    if (selectedOption && typeof selectedOption.value === 'object') {
+      const { order, direction } = selectedOption.value;
+
+      setSelectedSort(selectedOption);
       setIsLoadingSort(true);
       handleSelectChange({ order, direction });
     }

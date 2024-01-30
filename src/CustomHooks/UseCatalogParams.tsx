@@ -21,6 +21,11 @@ export const useCatalogParams = () => {
   } = useContextProvider();
   const productsCount = products?.count;
   const productsCatalog = products?.rows;
+  const totalProductCount = products?.count || 1;
+  const limitToNumer = Number(limit);
+  const totalPages = !limitToNumer ? 1
+    : Math.ceil(totalProductCount / limitToNumer);
+
   const setSearchWith = useCallback((params:SearchParams) => {
     const search = getSearchWith(searchParams, params);
 
@@ -37,10 +42,6 @@ export const useCatalogParams = () => {
   };
 
   const checkPageValue = useCallback(() => {
-    const totalProductCount = products?.count || 1;
-    const limitToNumer = Number(limit) || 1;
-    const totalPages = Math.ceil(totalProductCount / limitToNumer);
-
     if (Number(page) && totalPages < Number(page)) {
       setSearchWith({ page: null });
 
@@ -48,7 +49,7 @@ export const useCatalogParams = () => {
     }
 
     return Number(page) > 1 ? Number(page) - 1 : 0;
-  }, [limit, page, products?.count, setSearchWith]);
+  }, [page, setSearchWith, totalPages]);
 
   useEffect(() => {
     setParams(newParams => ({
@@ -70,5 +71,7 @@ export const useCatalogParams = () => {
     page,
     searchParams,
     handleLimitChange,
+    catalogPath,
+    totalPages,
   };
 };

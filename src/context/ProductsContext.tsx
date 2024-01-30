@@ -22,13 +22,14 @@ interface ProductsContextType {
   cartProducts: Product[];
   params: GetParams;
   setParams: React.Dispatch<React.SetStateAction<GetParams>>;
-  isLoadingLimit:boolean;
+  isLoadingLimit: boolean;
   setIsLoadingLimit:(value: boolean) => void;
-  isLoadingSort:boolean;
+  isLoadingSort: boolean;
   setIsLoadingSort:(value: boolean) => void;
+  isError: boolean;
   setCartProducts: React.Dispatch<React.SetStateAction<Product[]>>;
-
 }
+
 export const ProductsContext = createContext<ProductsContextType>({
   products: { count: 0, rows: [] },
   favourites: [],
@@ -47,6 +48,7 @@ export const ProductsContext = createContext<ProductsContextType>({
   setIsLoadingLimit: () => {},
   isLoadingSort: false,
   setIsLoadingSort: () => {},
+  isError: false,
   setCartProducts: () => { },
 });
 
@@ -72,6 +74,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   const [params, setParams] = useState<GetParams>(defaultValue);
   const [isLoadingLimit, setIsLoadingLimit] = useState(false);
   const [isLoadingSort, setIsLoadingSort] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const toogleSelectCart = useCallback((product: Product) => {
     const cartIds = cartProducts.map(({ id }) => id);
@@ -99,6 +102,9 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
       .then(data => {
         setProducts(data);
       })
+      .catch(() => {
+        setIsError(true);
+      })
       .finally(() => {
         setIsLoadingLimit(false);
         setIsLoadingSort(false);
@@ -117,10 +123,11 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     setIsLoadingLimit,
     isLoadingSort,
     setIsLoadingSort,
+    isError,
     setCartProducts,
   }), [products, favourites,
     toogleSelectFavorite, toogleSelectCart,
-    cartProducts, params,
+    cartProducts, params, isError,
     isLoadingLimit, setIsLoadingLimit, isLoadingSort, setIsLoadingSort]);
 
   return (

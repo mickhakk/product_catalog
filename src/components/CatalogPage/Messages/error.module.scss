@@ -1,0 +1,5 @@
+@import './../../../styles';
+.message {
+  @include typographyH4;
+  color:$secondary-color;
+}

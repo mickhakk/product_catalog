@@ -5,6 +5,10 @@
   list-style-type: none;
   gap: 8px;
   box-sizing: border-box;
+  
+  &--hidden {
+    visibility: hidden;
+  }
 
   @include onTablet() {
     li {
