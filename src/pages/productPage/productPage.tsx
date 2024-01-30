@@ -9,7 +9,6 @@ import styles from './productPage.module.scss';
 import { getProduct, getRecommendedProducts } from '../../api/products';
 import { DataFromServer, Product, ProductDetails } from '../../types/Product';
 import { ProductsSlider, BackLink } from '../../components';
-import { RecommendedGoods } from './components/RecommendedGoods';
 
 const getAllProducts = async (): Promise<DataFromServer> => {
   const product = await axios.get(
@@ -116,7 +115,12 @@ export const ProductPage = () => {
         {productData && <TechSpecs productData={productData} />}
 
         <div className={styles.recommended}>
-          <RecommendedGoods />
+          <ProductsSlider
+            products={recommended}
+            areLoading={areRecommendedLoading}
+          >
+            You may also like
+          </ProductsSlider>
         </div>
       </div>
     );
