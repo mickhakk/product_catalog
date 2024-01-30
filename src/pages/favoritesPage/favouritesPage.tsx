@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import style from './favoritesPage.module.scss';
-import { useContextProvider } from '../../context/ProductsContext';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
+import { useContextProvider } from '../../context/ProductsContext';
 
 export const FavouritesPage = () => {
   const { favourites } = useContextProvider();
@@ -32,8 +32,9 @@ export const FavouritesPage = () => {
       </section>
 
       <section className={style.favorites__products_container}>
-        {favourites.map(product => (
-          <ProductCard key={product.id} product={product} />))}
+        {favourites.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </section>
     </div>
   );

@@ -1,0 +1,27 @@
+@import '../../styles/';
+
+.button {
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  border: 1px solid $icons-placeholders;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+
+  @include hover(border-color, $primary-color);
+
+  &:disabled {
+    border: 1px solid $elements-color;
+    color: $elements-color;
+    cursor: default;
+  }
+
+  // &:disabled div {
+  //   // filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(500%) hue-rotate(90deg);
+  // }
+}

@@ -2,11 +2,11 @@
 @import '../../styles/variables/colors';
 @import '../../styles/mixins/responsive';
 @import '../../styles/mixins/typography';
+@import '../../styles/mixins/grid';
 
 .favorites {
   display:flex;
   flex-direction: column;
-  margin-left: 16px;  
 
   &__page_info_wrapper {    
     display: flex;
@@ -71,14 +71,8 @@
   }
 
   &__products_container {
-    display: grid;
-    justify-content: center;
-    grid-row-gap: 40px;
-    grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-
-    @media (min-width: 640px) {
-      gap: 16px, 40px
-    }
+    @include catalogGrid;
+    margin-bottom: 40px;
   }
 }
 

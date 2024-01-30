@@ -1,13 +1,18 @@
+@import './../../styles';
+
 .products_slider {
+  @include pageGrid;
+  position: relative;
+
   &__top {
     display: flex;
     justify-content: space-between;
     margin-bottom: 24px;
+    grid-column: 1/-1;
   }
 
-  &__products {
-    background-color: black;
-    color: white;
-    height: 439px;
+  &__title {
+    color: $primary-color;
+    @include typographyH2
   }
 }

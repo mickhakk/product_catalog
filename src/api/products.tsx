@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { DataFromServer, GetParams } from '../types/Product';
+import {
+  DataFromServer,
+  GetParams,
+  Product,
+  ProductDetails,
+} from '../types/Product';
 
 const apiURL = 'https://product-catalog-api-r8lb.onrender.com/products/';
 
@@ -13,10 +18,39 @@ GetParams): Promise<DataFromServer> => {
   return products.data;
 };
 
-export const getProduct = async () => {
+export const getProduct
+  = async (productId: string): Promise<ProductDetails> => {
+    const product = await axios.get(
+      `https://product-catalog-api-r8lb.onrender.com/products/${
+        productId}`,
+    );
+
+    return product.data;
+  };
+
+export const getNewProducts = async (): Promise<DataFromServer> => {
+  const products = await axios.get(`${apiURL}new`);
+
+  return products.data;
+};
+
+export const getDiscountProducts = async (): Promise<Product[]> => {
+  const products = await axios.get(`${apiURL}discount`);
+
+  return products.data;
+};
+
+export const getRecommendedProducts = async (
+  productId: string,
+): Promise<DataFromServer> => {
+  const products = await axios.get(`${apiURL}${productId}/recomended`);
+
+  return products.data;
+};
+
+export const getAllProducts = async (): Promise<DataFromServer> => {
   const product = await axios.get(
-    'https://product-catalog-api-r8lb.onrender.com/'
-    + 'products/apple-iphone-7-32gb-black',
+    'https://product-catalog-api-r8lb.onrender.com/products',
   );
 
   return product.data;
