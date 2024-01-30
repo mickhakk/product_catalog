@@ -60,7 +60,7 @@ export const CatalogPage: FC<Props> = memo((props) => {
             handleLimitChange={handleLimitChange}
           />
           <div className={styles.catalog__container}>
-            {productsCatalog?.map(currentProduct => (
+            {productsCatalog.map(currentProduct => (
               <ProductCard product={currentProduct} />
             ))}
           </div>
