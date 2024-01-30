@@ -38,21 +38,12 @@ input {
 .card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   width: $card-width;
   height: 442px;
   padding: 31px;
   background-color: $gray-white;
   border: 1px solid $elements-color;
   transition: transform 0.5s ease;
-  
-  @include onTablet {
-    grid-column: span 4;
-  }
-  @include onDesktop {
-    grid-column: span 6;
-  }
-
 
   &__default_hover {
     &:hover {
@@ -88,6 +79,7 @@ input {
   &__product_name {
     font-family: "Mont";
     color: $primary-color;
+    height: 42px;
     font-weight: 600;
     font-size: 12px;
     margin-bottom: 8px;
