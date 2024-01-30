@@ -4,7 +4,66 @@
   @include pageGrid;
   &_title {
     @include typographyH2;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
+
+    @include onDesktop {
+      margin-bottom: 40px;
+    }
+  }
+  &__page_info_wrapper {    
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
+
+    @media (min-width: 640px) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__current_location_wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    @media (min-width: 640px) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__icon_home {
+    cursor: pointer;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url(../../components/Icon/icons/icon-home.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+
+  &__icon_right_arrow {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url(../../components/Icon/icons/icon-chevron-arrow-right--secondary-grey.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+
+  &__location_page_name {
+    color: $secondary-color;
+    font-family: "Mont";
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 12px;
+    margin-top: 3px;
   }
 }
 
@@ -79,14 +138,30 @@
   display: block;
   align-items: center;
   justify-content: center;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
+
+  @include onTablet {
+    margin-bottom: 64px;
+  }
+
+  @include onDesktop {
+    margin-bottom: 80px;
+  }
 }
 
 
 
 .about {
   font-family: Mont;
-  margin-bottom: 80px;
+  margin-bottom: 56px;
+
+  @include onTablet {
+    margin-bottom: 64px;
+  }
+
+  @include onDesktop {
+    margin-bottom: 80px;
+  }
 
 
   &_header {
@@ -118,6 +193,15 @@
 
 .tech {
   font-family: Mont;
+  margin-bottom: 56px;
+
+  @include onTablet {
+    margin-bottom: 64px;
+  }
+
+  @include onDesktop {
+    margin-bottom: 80px;
+  }
 
   &_name {
     font-size: 14px;
@@ -158,4 +242,16 @@
   @include onDesktop {
     margin-bottom: 80px;
   }
+}
+
+.loading {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 80vh;
+  padding: 31px;
+  background-color: $gray-white;
+  grid-column: 1/-1;
 }

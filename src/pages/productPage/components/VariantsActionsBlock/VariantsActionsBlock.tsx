@@ -33,7 +33,6 @@ export const VariantsActionsBlock: React.FC<Props> = ({
     resolution,
     processor,
     ram,
-    namespaceId,
     id,
   } = productData;
 
@@ -90,7 +89,7 @@ export const VariantsActionsBlock: React.FC<Props> = ({
   return (
     <>
       <div className={styles.productDetails}>
-        <h3 className={styles.id}>{`ID: ${namespaceId}`}</h3>
+        <h3 className={styles.id}>{`ID: ${productData.name}`}</h3>
         <h3 className={styles.headColors}>Available colors</h3>
         <section className={styles.colors}>
           <div className={styles.colorOptions}>
@@ -156,6 +155,7 @@ export const VariantsActionsBlock: React.FC<Props> = ({
               text={isInCart ? ADDED : NOT_ADDED}
               onClick={() => toogleSelectCart(cardProduct)}
               isSelected={isInCart}
+              height={48}
             />
 
             <label className={styles.checkbox__favorite}>

@@ -29,7 +29,7 @@ export const TechSpecs: React.FC<Props> = ({ productData }) => {
   ];
 
   return (
-    <div className={`${styles.mw_r} ${styles.tech}`}>
+    <div className={`${styles.mw_r} ${styles.mw} ${styles.tech}`}>
       <div className={styles.tech_header}>
         <h2>Tech specs </h2>
       </div>
