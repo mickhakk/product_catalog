@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable no-console */
+import { useEffect, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
@@ -15,13 +16,28 @@ interface Props {
 
 export const Photos: React.FC<Props> = ({ photosData }) => {
   const [activeTumb, setActiveThumb] = useState<SwiperClass | null>(null);
+  const [swiperDirection, setSwiperDirection]
+    = useState<'horizontal' | 'vertical'>('horizontal');
+  const [spaceB, setSpaceb] = useState<number>(8);
+
+  useEffect(() => {
+    const checkWindowSize = () => {
+      setSwiperDirection(window.innerWidth < 640 ? 'horizontal' : 'vertical');
+      setSpaceb(window.innerWidth < 640 ? 8 : 16);
+    };
+
+    checkWindowSize();
+    window.addEventListener('resize', checkWindowSize);
+
+    return () => window.removeEventListener('resize', checkWindowSize);
+  }, []);
 
   return (
     <div className={swiperStyles.photosSwiperContainer}>
       <div className={swiperStyles.photosMainGrid}>
         <Swiper
           loop
-          spaceBetween={10}
+          spaceBetween={0}
           modules={[Navigation, Thumbs]}
           grabCursor
           thumbs={{ swiper: activeTumb }}
@@ -47,8 +63,8 @@ export const Photos: React.FC<Props> = ({ photosData }) => {
         <Swiper
           onSwiper={(swiper: SwiperClass) => setActiveThumb(swiper)}
           loop
-          direction="vertical"
-          spaceBetween={10}
+          direction={swiperDirection}
+          spaceBetween={spaceB}
           slidesPerView={5}
           modules={[Navigation, Thumbs]}
           className={swiperStyles.photosGaleryProducts}
