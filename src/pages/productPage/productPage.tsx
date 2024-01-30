@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { About } from './components/About';
@@ -8,6 +8,8 @@ import { VariantsActionsBlock } from './components/VariantsActionsBlock';
 import styles from './productPage.module.scss';
 import { getProduct } from '../../api/products';
 import { DataFromServer, Product, ProductDetails } from '../../types/Product';
+import { RecommendedGoods } from './components/RecommendedGoods';
+import { BackLink } from '../../components';
 
 const getAllProducts = async (): Promise<DataFromServer> => {
   const product = await axios.get(
@@ -47,38 +49,70 @@ export const ProductPage = () => {
     fetchData();
   }, [productId]);
 
+  if (productData && cardProduct) {
+    return (
+      <div className={styles.product_page}>
+        <div className={`${styles.fw} ${styles.product_page__current_location_wrapper}`}>
+          <label htmlFor="home_link">
+            <Link
+              id="home_link"
+              className={styles.product_page__icon_home}
+              to="/"
+              aria-label="go home icon"
+            />
+          </label>
+          <div className={styles.product_page__icon_right_arrow} />
+          <Link
+            id="home_link"
+            to={`/${cardProduct?.category}`}
+          >
+            <p className={styles.product_page__location_page_name}>
+              {`${cardProduct?.category}`}
+            </p>
+          </Link>
+          <div className={styles.product_page__icon_right_arrow} />
+          <p className={styles.product_page__location_page_name}>
+            {`${productData?.id}`}
+          </p>
+        </div>
+        <div style={{ marginTop: '-40px' }} className={`${styles.fw}`}>
+          <BackLink link=".." />
+        </div>
+        <h1 className={`${styles.fw} ${styles.product_page_title}`}>
+          {productData?.name}
+        </h1>
+
+        <div className={`${styles.hw_l} ${styles.photosContainer}`}>
+          {productData && (
+            <Photos
+              photosData={productData?.images}
+            />
+          )}
+        </div>
+
+        <div className={`${styles.hw_r}`}>
+          {productData && cardProduct && (
+            <VariantsActionsBlock
+              productData={productData}
+              cardProduct={cardProduct}
+            />
+          )}
+        </div>
+
+        {productData && <About productData={productData} />}
+
+        {productData && <TechSpecs productData={productData} />}
+
+        <div className={styles.recommended}>
+          <RecommendedGoods />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={styles.product_page}>
-      <h1 className={`${styles.fw} ${styles.product_page_title}`}>
-        {productData?.name}
-      </h1>
-
-      <div className={`${styles.hw_l} ${styles.photosContainer}`}>
-        {productData && (
-          <Photos
-            photosData={productData?.images}
-          />
-        )}
-      </div>
-
-      <div className={`${styles.hw_r}`}>
-        {productData && cardProduct && (
-          <VariantsActionsBlock
-            productData={productData}
-            cardProduct={cardProduct}
-          />
-        )}
-      </div>
-
-      {productData && <About productData={productData} />}
-
-      {productData && <TechSpecs productData={productData} />}
-
-      <div className={styles.recommended}>
-        {/*         <ProductsSlider>
-          You may also like
-        </ProductsSlider> */}
-      </div>
+    <div className={styles.loading}>
+      <img src="img/loading-spinner.gif" alt="Product is loading" />
     </div>
   );
 };
