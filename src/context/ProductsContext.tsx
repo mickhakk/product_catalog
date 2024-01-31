@@ -13,6 +13,7 @@ import { getProducts } from '../api/products';
 import {
   useLocalFavoritesStorage,
 } from '../CustomHooks/useLocalFavoritesStorage';
+import { useLocalCartStorage } from '../CustomHooks/useLocalCartStorage';
 
 interface ProductsContextType {
   products: DataFromServer | null,
@@ -28,6 +29,7 @@ interface ProductsContextType {
   setIsLoadingSort:(value: boolean) => void;
   isError: boolean;
   setCartProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+  removeCartProduct: (id: number) => Promise<void>;
 }
 
 export const ProductsContext = createContext<ProductsContextType>({
@@ -50,6 +52,7 @@ export const ProductsContext = createContext<ProductsContextType>({
   setIsLoadingSort: () => {},
   isError: false,
   setCartProducts: () => { },
+  removeCartProduct: () => new Promise<void>(() => {}),
 });
 
 export const useContextProvider = () => useContext(ProductsContext);
@@ -70,28 +73,26 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   const [products, setProducts] = useState<DataFromServer | null>(null);
   const [favourites, setFavourites, toggleFavourites]
     = useLocalFavoritesStorage('favourites', []);
-  const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const [
+    cartProducts,
+    setCartProducts,
+    toogleSelectCart,
+    update,
+    removeCartProduct,
+  ]
+    = useLocalCartStorage('cart', []);
   const [params, setParams] = useState<GetParams>(defaultValue);
   const [isLoadingLimit, setIsLoadingLimit] = useState(false);
   const [isLoadingSort, setIsLoadingSort] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const toogleSelectCart = useCallback((product: Product) => {
-    const cartIds = cartProducts.map(({ id }) => id);
-
-    if (cartIds.includes(product.id)) {
-      setCartProducts(newCartProducts => newCartProducts
-        .filter(({ id }) => id !== product.id));
-
-      return;
-    }
-
-    setCartProducts(currentProducts => ([...currentProducts, product]));
-  }, [cartProducts]);
-
   const toogleSelectFavorite = useCallback((product: Product) => {
     toggleFavourites(product);
   }, [favourites]);
+
+  useEffect(() => {
+    update(cartProducts);
+  }, [cartProducts]);
 
   useEffect(() => {
     setFavourites(favourites);
@@ -125,6 +126,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     setIsLoadingSort,
     isError,
     setCartProducts,
+    removeCartProduct,
   }), [products, favourites,
     toogleSelectFavorite, toogleSelectCart,
     cartProducts, params, isError,
