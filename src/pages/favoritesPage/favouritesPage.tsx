@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
 import style from './favoritesPage.module.scss';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
+import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
 import { useContextProvider } from '../../context/ProductsContext';
 
 export const FavouritesPage = () => {
@@ -11,18 +11,7 @@ export const FavouritesPage = () => {
   return (
     <div className={style.favorites}>
       <section className={style.favorites__page_info_wrapper}>
-        <div className={style.favorites__current_location_wrapper}>
-          <label htmlFor="home_link">
-            <Link
-              id="home_link"
-              className={style.favorites__icon_home}
-              to="/"
-              aria-label="go home icon"
-            />
-          </label>
-          <div className={style.favorites__icon_right_arrow} />
-          <p className={style.favorites__location_page_name}>Favorites</p>
-        </div>
+        <Breadcrumbs />
         <h1 className={style.favorites__title}>Favourites</h1>
         <span
           className={style.favorites__favorites_counter}

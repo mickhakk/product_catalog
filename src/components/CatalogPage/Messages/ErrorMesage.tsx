@@ -1,5 +1,11 @@
 import styles from './error.module.scss';
 
 export const ErrorMessage = () => (
-  <p className={styles.message}> Oops! Something went wrong</p>
+  <div className={styles.message}>
+    <p className={styles.message__text}>
+      Oops! Something went wrong.
+      <br />
+      Please, stay with us.
+    </p>
+  </div>
 );

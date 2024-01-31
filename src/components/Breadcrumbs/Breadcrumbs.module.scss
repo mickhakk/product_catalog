@@ -1,0 +1,49 @@
+
+@import './../../styles';
+
+.breadcrumbs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+
+  @media (min-width: 640px) {
+    margin-bottom: 40px;
+  }
+
+  &--icon-home {
+    cursor: pointer;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url(../../components/Icon/icons/icon-home.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+
+  &--icon-right-arrow {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url(../../components/Icon/icons/icon-chevron-arrow-right--secondary-grey.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+
+  &--location-page-name {
+    color: $secondary-color;
+    line-height: 12px;
+    margin-top: 3px;
+    @include typographySmallText;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+
+
+
+

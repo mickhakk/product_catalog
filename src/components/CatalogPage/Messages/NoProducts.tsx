@@ -5,5 +5,7 @@ interface Props {
   product: string;
 }
 export const NoProducts: FC<Props> = ({ product }) => (
-  <p className={styles.message}>{`There are no ${product}`}</p>
+  <div className={styles.message}>
+    <p className={styles.message__text}>{`There are no ${product}`}</p>
+  </div>
 );

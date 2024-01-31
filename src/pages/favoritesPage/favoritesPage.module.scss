@@ -7,6 +7,13 @@
 .favorites {
   display:flex;
   flex-direction: column;
+  margin-left: 16px;
+  padding-top: 25px; 
+  padding-bottom: 56px;
+
+  @media (min-width: 640px) {
+    padding-bottom: 80px;
+  }
 
   &__page_info_wrapper {    
     display: flex;
@@ -16,48 +23,6 @@
     @media (min-width: 640px) {
       margin-bottom: 40px;
     }
-  }
-
-  &__current_location_wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    margin-top: 24px;
-    margin-bottom: 24px;
-
-    @media (min-width: 640px) {
-      margin-bottom: 40px;
-    }
-  }
-
-  &__icon_home {
-    cursor: pointer;
-    display: block;
-    width: 16px;
-    height: 16px;
-    background-image: url(../../components/Icon/icons/icon-home.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-  }
-
-  &__icon_right_arrow {
-    display: block;
-    width: 16px;
-    height: 16px;
-    background-image: url(../../components/Icon/icons/icon-chevron-arrow-right--secondary-grey.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-  }
-
-  &__location_page_name {
-    color: $secondary-color;
-    font-family: "Mont";
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 12px;
-    margin-top: 3px;
   }
 
   &__title {

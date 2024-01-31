@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { DOTS, usePagination } from '../../CustomHooks/UsePagination';
 import styles from './pagination.module.scss';
 import { getSearchWith } from '../../utils/searchHelper';
+import { scrollToTop } from '../../utils/scrollToTop';
 
 interface Props {
   totalCount: number,
@@ -55,13 +56,13 @@ export const Pagination: FC<Props> = (props) => {
       <li>
         <Link
           className={cn(styles['pagination-container__arrow'], {
-            [`${styles['pagination-container__arrow--disabled']}`]: currentPage === firstPage,
+            [`${styles['pagination-container__arrow--disabled']}`]: currentPage === firstPage || !page,
           })}
           to={setSearchPage(onPrevious())}
         >
           <svg
             className={cn(styles.arrow, {
-              [`${styles['arrow--disabled']}`]: currentPage === firstPage,
+              [`${styles['arrow--disabled']}`]: currentPage === firstPage || !page,
             })}
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -101,6 +102,11 @@ export const Pagination: FC<Props> = (props) => {
               className={cn(styles['pagination-container__item'], {
                 [`${styles['pagination-container__item--is-active']}`]: currentPage === currenNumber,
               })}
+              onClick={() => {
+                setTimeout(() => {
+                  scrollToTop();
+                }, 300);
+              }}
               to={setSearchPage(currenNumber)}
             >
               {currenNumber}

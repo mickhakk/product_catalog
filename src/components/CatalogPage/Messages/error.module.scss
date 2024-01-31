@@ -1,5 +1,14 @@
 @import './../../../styles';
 .message {
-  @include typographyH4;
-  color:$secondary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  
+  &__text{
+    max-width: 288px;
+    text-align: center;
+    @include typographyH3;
+    color:$secondary-color;
+  }
 }

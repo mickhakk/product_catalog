@@ -99,6 +99,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
   }, [favourites]);
 
   useEffect(() => {
+    setIsError(false);
     getProducts(params)
       .then(data => {
         setProducts(data);
