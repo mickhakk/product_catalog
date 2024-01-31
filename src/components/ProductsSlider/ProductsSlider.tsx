@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-import './swiper.scss';
 import styles from './ProductsSlider.module.scss';
 
 import { ProductCard } from '../ProductCard';
@@ -33,6 +32,7 @@ export const ProductsSlider: React.FC<Props> = React.memo(
         </div>
 
         <Swiper
+          className={styles.swiper}
           speed={1000}
           spaceBetween={16}
           slidesPerView="auto"
@@ -48,29 +48,29 @@ export const ProductsSlider: React.FC<Props> = React.memo(
           {areLoading
             ? (
               <>
-                <SwiperSlide>
+                <SwiperSlide className={styles.swiper_slide}>
                   <LoadingCard />
                 </SwiperSlide>
 
-                <SwiperSlide>
+                <SwiperSlide className={styles.swiper_slide}>
                   <LoadingCard />
                 </SwiperSlide>
 
-                <SwiperSlide>
+                <SwiperSlide className={styles.swiper_slide}>
                   <LoadingCard />
                 </SwiperSlide>
 
-                <SwiperSlide>
+                <SwiperSlide className={styles.swiper_slide}>
                   <LoadingCard />
                 </SwiperSlide>
 
-                <SwiperSlide>
+                <SwiperSlide className={styles.swiper_slide}>
                   <LoadingCard />
                 </SwiperSlide>
               </>
             )
             : products.map(product => (
-              <SwiperSlide key={product.itemId}>
+              <SwiperSlide key={product.itemId} className={styles.swiper_slide}>
                 <ProductCard product={product} simpleHoverEffect />
               </SwiperSlide>
             ))}
