@@ -9,17 +9,23 @@ import {
 } from './customStyles';
 import { useContextProvider } from '../../context/ProductsContext';
 import { SelectValue } from '../../CustomHooks/UseCatalogParams';
+import { SearchParams } from '../../utils/searchHelper';
 
 interface Props {
   handleSelectChange: (value:SelectValue) => void;
   handleLimitChange: (event: string, value: string) => void;
+  sort: string;
+  directionParam: string;
+  limit: string;
+  setSearchWith: (value: SearchParams) => void,
+  page: string;
 }
 
 const optionsPageLimit: OptionLimit[] = [
   { value: '4', label: '4' },
   { value: '8', label: '8' },
   { value: '16', label: '16' },
-  { value: 'All', label: 'All' },
+  { value: '', label: 'All' },
 ];
 
 const optionsSortParams:Option[] = [
@@ -30,22 +36,34 @@ const optionsSortParams:Option[] = [
 
 ];
 
-const limitDefaultValue = optionsPageLimit[optionsPageLimit.length - 1];
-const sortDefaultValue = optionsSortParams[0];
-
 export const SortParams: FC<Props> = (props) => {
-  const { handleSelectChange, handleLimitChange } = props;
+  const {
+    handleSelectChange,
+    handleLimitChange,
+    sort,
+    directionParam,
+    limit,
+    setSearchWith,
+    page,
+  } = props;
+  const resetPage = { page: null };
+  const limitDefaultValue = optionsPageLimit
+    .find(pageLimit => pageLimit.value === limit)
+    || optionsPageLimit[optionsPageLimit.length - 1];
+  const sortDefaultValue = optionsSortParams
+    .find(sortParam => sortParam.value.order === sort
+    && sortParam.value.direction === directionParam) || optionsSortParams[0];
   const [selectedLimit,
     setSelectedLimmit] = useState<CombinedOption>(limitDefaultValue);
   const [selectedSort,
     setSelectedSort] = useState<CombinedOption>(sortDefaultValue);
-
   const {
     isLoadingLimit,
     setIsLoadingLimit,
     isLoadingSort,
     setIsLoadingSort,
   } = useContextProvider();
+
   const handleChange = (selectedOption: CombinedOption | null) => {
     if (selectedOption?.value === selectedLimit.value) {
       return;
@@ -54,7 +72,11 @@ export const SortParams: FC<Props> = (props) => {
     if (selectedOption && typeof selectedOption.value === 'string') {
       setSelectedLimmit(selectedOption);
       setIsLoadingLimit(true);
+
       handleLimitChange(selectedOption.value, 'limit');
+      if (page && Number(page) > 1) {
+        setSearchWith(resetPage);
+      }
     }
   };
 
@@ -69,6 +91,9 @@ export const SortParams: FC<Props> = (props) => {
       setSelectedSort(selectedOption);
       setIsLoadingSort(true);
       handleSelectChange({ order, direction });
+      if (page && Number(page) > 1) {
+        setSearchWith(resetPage);
+      }
     }
   };
 
@@ -83,6 +108,7 @@ export const SortParams: FC<Props> = (props) => {
           defaultValue={sortDefaultValue}
           isLoading={isLoadingSort}
           className={styles['react-select-container']}
+          isDisabled={isLoadingSort}
         />
       </div>
       <div className={styles['catalog__sort--limit']}>
@@ -94,6 +120,7 @@ export const SortParams: FC<Props> = (props) => {
           defaultValue={limitDefaultValue}
           isLoading={isLoadingLimit}
           className={styles['react-select-container']}
+          isDisabled={isLoadingLimit}
         />
       </div>
     </div>

@@ -64,7 +64,7 @@ type Props = {
 const defaultValue:GetParams = {
   type: '',
   page: 0,
-  limit: 'All',
+  limit: '',
   order: 'price',
   direction: 'DESC',
 };

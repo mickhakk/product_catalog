@@ -4,7 +4,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useCatalogParams } from '../../CustomHooks/UseCatalogParams';
 import { Pagination } from '../Pagination/Pagination';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { SortParams } from '../SortParams/SortParams';
@@ -14,6 +13,7 @@ import { Loader } from './Loader/Loader';
 import { useContextProvider } from '../../context/ProductsContext';
 import { ErrorMessage } from './Messages/ErrorMesage';
 import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
+import { useCatalogParams } from '../../CustomHooks/UseCatalogParams';
 
 interface Props {
   pageHeader: string;
@@ -33,6 +33,9 @@ export const CatalogPage: FC<Props> = memo((props) => {
     handleLimitChange,
     catalogPath,
     totalPages,
+    order,
+    direction,
+    setSearchWith,
   } = useCatalogParams();
 
   useEffect(() => {
@@ -61,6 +64,11 @@ export const CatalogPage: FC<Props> = memo((props) => {
           <SortParams
             handleSelectChange={handleSelectChange}
             handleLimitChange={handleLimitChange}
+            sort={order}
+            directionParam={direction}
+            limit={limit}
+            setSearchWith={setSearchWith}
+            page={page}
           />
           <div className={styles.catalog__container}>
             {productsCatalog.map(currentProduct => (
