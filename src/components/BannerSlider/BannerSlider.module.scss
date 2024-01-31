@@ -1,15 +1,49 @@
-@import './../../styles';
+@import '../../styles/';
 
-.banner_slider {
-  height: 352px;
-  width: 100%;
-  background-color: #1b1b1b;
-  color: white;
+// .banner_slider {
+//   height: 352px;
+//   width: 100%;
+//   background-color: #1b1b1b;
+//   color: white;
+
+//   @include onTablet {
+//     height: 221px;
+//   }
+//   @include onDesktop {
+//     height: 432px;
+//   }
+// }
+
+.banner_container {
+  @include pageGrid;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+  gap: 14px;
+  grid-column: span 4;
 
   @include onTablet {
-    height: 221px;
+    grid-column: span 12;
   }
+
   @include onDesktop {
-    height: 432px;
+    grid-column: span 24;
+  }
+
+  &__bullet {
+    width: 14px;
+    height: 4px;
+    flex-shrink: 0;
+    background: $elements-color;
+
+    &--active {
+      width: 14px;
+      height: 4px;
+      flex-shrink: 0;
+      background: $primary-color;
+    }
   }
 }

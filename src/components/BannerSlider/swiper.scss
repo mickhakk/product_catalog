@@ -1,0 +1,17 @@
+@import '../../styles/';
+
+.swiper1 {
+  @include pageGrid;
+  grid-column: span 4;
+
+  margin-inline: -16px;
+
+  @include onTablet {
+    margin-inline: 0;
+    grid-column: 2/12;
+  }
+
+  @include onDesktop {
+    grid-column: 2/-2;
+  }
+}
