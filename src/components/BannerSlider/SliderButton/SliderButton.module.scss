@@ -1,0 +1,19 @@
+@import '../../../styles/';
+
+.button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid $icons-placeholders;
+  cursor: pointer;
+
+  &Right {
+    grid-column: -2/-1;
+  }
+
+  &Left {
+    grid-column: 1/2;
+  }
+}

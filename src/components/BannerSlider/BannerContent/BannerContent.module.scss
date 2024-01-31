@@ -1,0 +1,43 @@
+// .square {
+//   width: 100%; /* или любая другая ширина */
+//   position: relative;
+// }
+
+// .square::before {
+//   content: '';
+//   display: block;
+//   padding-top: 100%; /* Соотношение сторон 1:1 */
+// }
+
+// .content {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+// }
+
+// .image {
+//   width: 100%;
+//   height: 100%;
+
+//   @media (max-width: 639px) {
+//     // margin-inline: -16px;
+//   }
+// }
+
+.image_container {
+  display: block;
+  width: inherit;
+  // width: 100%; /* Ширина контейнера равна 100% ширины экрана */
+  // overflow: hidden; /* Обрезает изображение, если оно выходит за пределы контейнера */
+}
+
+.image_container img {
+  width: inherit;
+  height: auto;
+  // width: 100%; /* Ширина изображения равна 100% ширины контейнера */
+  // height: 100%; /* Высота автоматически регулируется для сохранения пропорций изображения */
+  display: block; /* Убирает стандартные отступы изображения */
+  // object-fit: cover; /* Обрезает изображение, сохраняя его центр */
+}
