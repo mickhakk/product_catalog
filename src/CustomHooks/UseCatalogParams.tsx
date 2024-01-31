@@ -8,8 +8,8 @@ import { GetParams } from '../types/Product';
 export type SelectValue = Pick<GetParams, 'order' | 'direction'>;
 export const useCatalogParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = searchParams.get('page') || '';
-  const limit = searchParams.get('limit') || 'all';
+  const page = searchParams.get('page') || '1';
+  const limit = searchParams.get('limit') || '';
   const order = searchParams.get('order') || 'price';
   const direction = searchParams.get('direction') || 'DESC';
   const { pathname } = useLocation();
@@ -73,5 +73,8 @@ export const useCatalogParams = () => {
     handleLimitChange,
     catalogPath,
     totalPages,
+    order,
+    direction,
+    setSearchWith,
   };
 };
