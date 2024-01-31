@@ -32,7 +32,7 @@ import { ProductsContext } from '../../context/ProductsContext';
 // ];
 
 export const CartPage: React.FC = () => {
-  const { cartProducts, setCartProducts } = useContext(ProductsContext);
+  const { cartProducts, removeCartProduct } = useContext(ProductsContext);
 
   const productsWithQuantity = cartProducts.map(product => ({
     ...product,
@@ -53,8 +53,7 @@ export const CartPage: React.FC = () => {
     + product.quantity, 0);
 
   const deleteProduct = (id: number) => {
-    setCartProducts(prevProducts => prevProducts
-      .filter(product => product.id !== id));
+    removeCartProduct(id);
 
     setProducts(prevProducts => prevProducts
       .filter(product => product.id !== id));
