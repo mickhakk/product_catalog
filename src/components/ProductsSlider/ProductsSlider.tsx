@@ -33,6 +33,7 @@ export const ProductsSlider: React.FC<Props> = React.memo(
         </div>
 
         <Swiper
+          className="swiper2"
           speed={1000}
           spaceBetween={16}
           slidesPerView="auto"
