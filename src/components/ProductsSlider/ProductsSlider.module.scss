@@ -1,13 +1,51 @@
+@import './../../styles';
+
 .products_slider {
+  @include pageGrid;
+  position: relative;
+
   &__top {
     display: flex;
     justify-content: space-between;
     margin-bottom: 24px;
+    grid-column: 1/-1;
   }
 
-  &__products {
-    background-color: black;
-    color: white;
-    height: 439px;
+  &__title {
+    color: $primary-color;
+    @include typographyH2
   }
 }
+
+.swiper {
+  grid-column: 1/-1;
+  position: static;
+  width: auto;
+  margin-left: 0;
+  margin-right: -16px;
+
+  @include onTablet {
+    margin-right: -24px;
+  }
+
+  @include onDesktop {
+    margin-right: 0;
+  }
+
+  &_slide {
+    width: fit-content;
+  
+    &:last-child {
+      padding-right: 16px;
+  
+      @include onTablet {
+        padding-right: 24px;
+      }
+  
+      @include onDesktop {
+        padding-right: 0;
+      }
+    }
+  }
+}
+

@@ -1,7 +1,7 @@
 import style from './favoritesPage.module.scss';
-import { useContextProvider } from '../../context/ProductsContext';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
+import { useContextProvider } from '../../context/ProductsContext';
 
 export const FavouritesPage = () => {
   const { favourites } = useContextProvider();
@@ -21,8 +21,9 @@ export const FavouritesPage = () => {
       </section>
 
       <section className={style.favorites__products_container}>
-        {favourites.map(product => (
-          <ProductCard key={product.id} product={product} />))}
+        {favourites.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </section>
     </div>
   );

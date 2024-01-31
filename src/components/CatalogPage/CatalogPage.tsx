@@ -45,10 +45,13 @@ export const CatalogPage: FC<Props> = memo((props) => {
     <section className={styles.catalog}>
       <Breadcrumbs />
       <h1 className={styles.catalog__header}>{pageHeader}</h1>
+
       {isLoadingPage && <Loader />}
       {!productsCatalog?.length && !isLoadingPage && !isError
       && <NoProducts product={catalogPath} />}
+
       {!isLoadingPage && isError && <ErrorMessage />}
+
       {!isLoadingPage && !isError && productsCatalog
       && productsCatalog?.length > 0 && (
         <>

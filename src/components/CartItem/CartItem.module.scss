@@ -1,0 +1,162 @@
+@import '../../mixins/typography.scss';
+@import '../../mixins/mixinLayout.scss';
+@import '../../variables.scss/colors.scss';
+@import '../../styles/';
+
+.cartItem {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  box-sizing: border-box;
+  justify-content: space-between;
+
+  grid-column: span 4;
+
+  border: 1px solid var(--Gray-Elements, #E2E6E9);
+  background: #FFF;
+
+  color: $primary-color;
+
+  @include onTablet {
+    flex-direction: row;
+    padding: 24px;
+    align-items: center;
+    gap: 24px;
+  }
+
+  @include onDesktop {
+    width: 752px;
+  }
+
+  &FirstRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+
+    @include onTablet {
+      gap: 24px;
+    }
+
+    @include onDesktop {
+      gap: 24px;
+    }
+
+    &DeleteItemButton {
+      width: 16px;
+      height: 16px;
+
+      cursor: pointer;
+    }
+
+    &ImageWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 80px;
+      height: 80px;
+
+      // padding: 7px;
+
+      &Image {
+        height: 66px;
+        // @include onTablet {
+
+        // }
+      }
+    }
+
+    &Title {
+      @include typograhyBodyText;
+    }
+  }
+
+  &SecondRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+
+    @include onTablet {
+      gap: 24px;
+    }
+
+    &QuantityWrapper {
+      display: flex;
+      // flex-direction: row;
+      width: 96px;
+
+      &Button {
+        box-sizing: border-box;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+
+        justify-self: center;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+
+        cursor: pointer;
+        // @include typographySmallText;
+        color: $secondary-color;
+
+        @include hover(color, $primary-color);
+
+        &:hover * {
+          border-color: $primary-color;
+        }
+
+        width: 32px;
+        height: 32px;
+        border: 1px solid $icons-placeholders;
+        // flex-shrink: 0;
+
+        cursor: pointer;
+
+        &:disabled {
+          border: 1px solid $elements-color;
+          color: $elements-color;
+          cursor: default;
+          // border: 3px solid green;
+          // border: 2px solid #ff0303;
+        }
+      }
+
+      &QuantityText {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 32px;
+
+        @include typograhyBodyText
+      }
+    }
+
+    &PriceWrapper {
+      @include onTablet {
+        display: flex;
+        width: 80px;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+
+
+      &Price {
+        @include typograhyH3;
+
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.link {
+  display: flex;
+}

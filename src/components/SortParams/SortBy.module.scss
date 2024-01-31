@@ -1,6 +1,7 @@
 @import './../../styles';
 .catalog__sort {
-  @include pageGrid;
+  display: flex;
+  gap: 16px;
   margin-bottom: 24px;
 
   &--label {
@@ -9,17 +10,23 @@
   }
 
   &--by {
-   grid-column: span 2;
-   @include onTablet {
-    grid-column: span 4;
-   }
-   
+    width: 136px;
+
+    @include onTablet {
+      width: 187px;
+    }
+
+    @include onDesktop {
+      width: 176px;
+    }
   }
+
   &--limit {
-   grid-column: span 2;
-   @include onTablet {
-    grid-column: span 3;
-   }
+    width: 136px;
+
+    @include onDesktop {
+      width: 128px;
+    }
   }
 }
 

@@ -5,10 +5,11 @@ import { PhonesCatalog } from './pages/catalogPages/phonesCatalog';
 import { TabletsCatalog } from './pages/catalogPages/tabletsCatalog';
 import { AccessoriesCatalog } from './pages/catalogPages/accessoriesCatalog';
 import { FavouritesPage } from './pages/favoritesPage/favouritesPage';
-import { CartPage } from './pages/cartPage';
+import { CartPage } from './pages/cartPage/cartPage';
 import { ProductsContextProvider } from './context/ProductsContext';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ProductPage } from './pages/productPage/productPage';
+import { CheckoutPage } from './pages/checkoutPage/checkoutPage';
 
 export const Root = () => (
   <ProductsContextProvider>
@@ -34,6 +35,7 @@ export const Root = () => (
 
           <Route path="favourites" element={<FavouritesPage />} />
           <Route path="cart" element={<CartPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

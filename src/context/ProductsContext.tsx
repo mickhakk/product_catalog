@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   FC,
   createContext,
@@ -9,6 +10,10 @@ import {
 } from 'react';
 import { DataFromServer, GetParams, Product } from '../types/Product';
 import { getProducts } from '../api/products';
+import {
+  useLocalFavoritesStorage,
+} from '../CustomHooks/useLocalFavoritesStorage';
+import { useLocalCartStorage } from '../CustomHooks/useLocalCartStorage';
 
 interface ProductsContextType {
   products: DataFromServer | null,
@@ -23,13 +28,15 @@ interface ProductsContextType {
   isLoadingSort: boolean;
   setIsLoadingSort:(value: boolean) => void;
   isError: boolean;
+  setCartProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+  removeCartProduct: (id: number) => Promise<void>;
 }
 
-const ProductsContext = createContext<ProductsContextType>({
+export const ProductsContext = createContext<ProductsContextType>({
   products: { count: 0, rows: [] },
   favourites: [],
-  toogleSelectFavorite: () => {},
-  toogleSelectCart: () => {},
+  toogleSelectFavorite: () => { },
+  toogleSelectCart: () => { },
   cartProducts: [],
   params: {
     type: '',
@@ -44,6 +51,8 @@ const ProductsContext = createContext<ProductsContextType>({
   isLoadingSort: false,
   setIsLoadingSort: () => {},
   isError: false,
+  setCartProducts: () => { },
+  removeCartProduct: () => new Promise<void>(() => {}),
 });
 
 export const useContextProvider = () => useContext(ProductsContext);
@@ -62,37 +71,31 @@ const defaultValue:GetParams = {
 
 export const ProductsContextProvider: FC<Props> = ({ children }) => {
   const [products, setProducts] = useState<DataFromServer | null>(null);
-  const [favourites, setFavoriets] = useState<Product[]>([]);
-  const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const [favourites, setFavourites, toggleFavourites]
+    = useLocalFavoritesStorage('favourites', []);
+  const [
+    cartProducts,
+    setCartProducts,
+    toogleSelectCart,
+    update,
+    removeCartProduct,
+  ]
+    = useLocalCartStorage('cart', []);
   const [params, setParams] = useState<GetParams>(defaultValue);
   const [isLoadingLimit, setIsLoadingLimit] = useState(false);
   const [isLoadingSort, setIsLoadingSort] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const toogleSelectCart = useCallback((product:Product) => {
-    const cartIds = cartProducts.map(({ id }) => id);
+  const toogleSelectFavorite = useCallback((product: Product) => {
+    toggleFavourites(product);
+  }, [favourites]);
 
-    if (cartIds.includes(product.id)) {
-      setCartProducts(newCartProducts => newCartProducts
-        .filter(({ id }) => id !== product.id));
-
-      return;
-    }
-
-    setCartProducts(currentProducts => ([...currentProducts, product]));
+  useEffect(() => {
+    update(cartProducts);
   }, [cartProducts]);
 
-  const toogleSelectFavorite = useCallback((product: Product) => {
-    const favouritesIds = favourites.map(({ id }) => id);
-
-    if (favouritesIds.includes(product.id)) {
-      setFavoriets(newFavourites => newFavourites
-        .filter(({ id }) => id !== product.id));
-
-      return;
-    }
-
-    setFavoriets(currentProducts => ([...currentProducts, product]));
+  useEffect(() => {
+    setFavourites(favourites);
   }, [favourites]);
 
   useEffect(() => {
@@ -123,6 +126,8 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
     isLoadingSort,
     setIsLoadingSort,
     isError,
+    setCartProducts,
+    removeCartProduct,
   }), [products, favourites,
     toogleSelectFavorite, toogleSelectCart,
     cartProducts, params, isError,
@@ -130,7 +135,7 @@ export const ProductsContextProvider: FC<Props> = ({ children }) => {
 
   return (
     <ProductsContext.Provider value={value}>
-      { children }
+      {children}
     </ProductsContext.Provider>
   );
 };
