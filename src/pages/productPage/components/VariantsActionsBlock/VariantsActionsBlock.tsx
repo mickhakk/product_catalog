@@ -34,6 +34,7 @@ export const VariantsActionsBlock: React.FC<Props> = ({
     processor,
     ram,
     id,
+    color,
   } = productData;
 
   const specifications = {
@@ -42,7 +43,7 @@ export const VariantsActionsBlock: React.FC<Props> = ({
     processor,
     ram,
   };
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string>(color);
   const capacities = Object.values(capacityAvailable);
 
   const [currentCapacity, setCapacity] = useState<string>(capacity);
