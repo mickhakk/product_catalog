@@ -33,7 +33,6 @@ export const VariantsActionsBlock: React.FC<Props> = ({
     resolution,
     processor,
     ram,
-    id,
     color,
   } = productData;
 
@@ -76,12 +75,10 @@ export const VariantsActionsBlock: React.FC<Props> = ({
     cartProducts,
   } = useContextProvider();
 
-  const [productId] = useState<string | undefined>(id);
-
-  const isInFavorites = productId !== undefined
-    && containsProduct(favourites, productId);
-  const isInCart = productId !== undefined
-    && containsProduct(cartProducts, productId);
+  const isInFavorites = cardProduct
+    && containsProduct(favourites, cardProduct.itemId);
+  const isInCart = cardProduct
+    && containsProduct(cartProducts, cardProduct.itemId);
 
   if (!cardProduct) {
     return <div>No product available</div>;

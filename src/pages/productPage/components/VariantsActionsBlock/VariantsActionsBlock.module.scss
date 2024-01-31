@@ -48,7 +48,7 @@
 .capacity,
 .colors {
   border-bottom: 1px solid $elements-color;
-  padding-bottom: 24px;
+  padding-bottom: 16px;
 }
 
 .capacityButton {
@@ -57,6 +57,7 @@
   padding: 8px;
   min-width: 55px;
   margin-right: 8px;
+  margin-bottom: 8px;
   border: 1px solid $icons-placeholders;
   cursor: pointer;
   transition:
